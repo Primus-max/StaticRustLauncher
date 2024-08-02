@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace StaticRustLauncher.ViewModels.Base;
+﻿namespace StaticRustLauncher.ViewModels.Base;
 
 /// <summary>
 /// Базовая ViewModel, реализует интерфейсы INotifyPropertyChanged, IDisposable

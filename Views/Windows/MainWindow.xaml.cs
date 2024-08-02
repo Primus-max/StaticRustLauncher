@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace StaticRustLauncher.Views.Windows;
+﻿namespace StaticRustLauncher.Views.Windows;
 
 /// <summary>
 /// Главное окно приложения
@@ -10,5 +8,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        DataContext = new MainViewModel(MainFrame);
     }
 }
