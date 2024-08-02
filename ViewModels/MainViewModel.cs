@@ -5,6 +5,9 @@ namespace StaticRustLauncher.ViewModels;
 
 public  class MainViewModel : BaseViewModel
 {
+    /// <summary>
+    /// Навигация по страница внутри главного окна
+    /// </summary>
     public ICommand NavigationCommand { get; }
 
     public MainViewModel(Frame frame)
@@ -15,6 +18,7 @@ public  class MainViewModel : BaseViewModel
     }
 
     private Frame Frame { get; }
+
 
     private void OnNavigate(object viewName)
     {
@@ -27,7 +31,7 @@ public  class MainViewModel : BaseViewModel
                 Frame.Navigate(new SettingsPage());
                 break;
             default:
-                throw new ArgumentException("Invalid view name", nameof(viewName));
+               break;
         }
     }
 }

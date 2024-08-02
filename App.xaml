@@ -7,12 +7,29 @@
     StartupUri="Views/Windows/MainWindow.xaml">
 
     <Application.Resources>
-        <DataTemplate DataType="{x:Type local:HomeViewModel}">
-            <views:HomePage />
-        </DataTemplate>
+        <!--  Подключение ресурсов  -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Colors.xaml" />
+                <ResourceDictionary Source="/Resources/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <DataTemplate DataType="{x:Type local:SettingsViewModel}">
-            <views:SettingsPage />
-        </DataTemplate>
+            <!--  Определение ресурса шрифта  -->
+            <FontFamily x:Key="GlobalFontFamily">/StaticRustLauncher;component/Resources/Fonts/static/Montserrat-ExtraBold.ttf#Montserrat ExtraBold</FontFamily>
+
+            <!--  Глобальный стиль для всех текстовых элементов  -->
+            <Style TargetType="TextElement">
+                <Setter Property="FontFamily" Value="{StaticResource GlobalFontFamily}" />
+            </Style>
+
+            <!--  DataTemplates для ViewModels  -->
+            <DataTemplate DataType="{x:Type local:HomeViewModel}">
+                <views:HomePage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type local:SettingsViewModel}">
+                <views:SettingsPage />
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
