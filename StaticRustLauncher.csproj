@@ -12,7 +12,6 @@
     <Folder Include="Assests\Images\" />
     <Folder Include="Assests\Components\" />
     <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
