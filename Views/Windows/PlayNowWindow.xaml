@@ -32,19 +32,17 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!--  Кнопка "Выйти"  -->
                 <Button
                     Grid.Row="0"
                     Width="122"
                     Height="40"
-                    Command="{Binding ConfirmExitCommand}"
+                    Command="{Binding PlayCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                     Content="Играть"
                     FontFamily="{StaticResource FontMedium}"
                     FontSize="16"
                     Foreground="{StaticResource DefaultTextColorBrush}"
                     Style="{StaticResource OutlineButton}" />
-
 
                 <Button
                     Grid.Row="1"
@@ -53,7 +51,7 @@
                     Background="Gray"
                     BorderBrush="Gray"
                     BorderThickness="1"
-                    Command="{Binding CancelExitCommand}"
+                    Command="{Binding PlayWardenWiseCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                     FontFamily="{StaticResource FontMedium}"
                     FontSize="16"
@@ -67,7 +65,6 @@
                     </TextBlock>
                 </Button>
 
-
                 <Button
                     Grid.Row="2"
                     Width="118"
@@ -75,7 +72,7 @@
                     Background="Gray"
                     BorderBrush="Gray"
                     BorderThickness="1"
-                    Command="{Binding CancelExitCommand}"
+                    Command="{Binding PlayActivityACCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                     FontFamily="{StaticResource FontMedium}"
                     FontSize="16"
@@ -88,6 +85,7 @@
                         <Run Text="ActivityAC" />
                     </TextBlock>
                 </Button>
+
             </Grid>
         </Border>
     </Grid>

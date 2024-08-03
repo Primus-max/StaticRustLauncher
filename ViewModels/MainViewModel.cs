@@ -83,7 +83,6 @@ public class MainViewModel : BaseViewModel
             Owner = Application.Current.MainWindow
         };
 
-        // Эффект размытия к главному окну с анимацией
         var mainWindow = Application.Current.MainWindow;
         BlurEffectHelper.ApplyBlurEffect(mainWindow, 0, 10, 0.5);
 

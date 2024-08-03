@@ -8,6 +8,6 @@ public partial class PlayNowWindow : Window
     public PlayNowWindow()
     {
         InitializeComponent();
-        DataContext = new PlayNowViewModel();
+        DataContext = new GameModeViewModel();
     }
 }
