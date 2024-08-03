@@ -13,8 +13,8 @@ public class MainViewModel : BaseViewModel
     #endregion
 
 
-    private Frame Frame { get; }
-    private UserControl _currentPanel;
+    private Frame Frame { get; } = null!;
+    private UserControl _currentPanel = null!;
     public UserControl CurrentPanel 
     { 
         get => _currentPanel; 
@@ -29,7 +29,7 @@ public class MainViewModel : BaseViewModel
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
-        ShowInstallGamePanel();
+        ShowPlayNowPanel();
     }
 
 
@@ -57,6 +57,10 @@ public class MainViewModel : BaseViewModel
 
     private void ShowInstallGamePanel() =>
         CurrentPanel = new InstallGameControl();
+
+    private void ShowPlayNowPanel() =>
+        CurrentPanel = new PlayNowControl();
+
 
     #region Методы команд
     private void OnCloseAppCommandExecuted(object parameter) =>

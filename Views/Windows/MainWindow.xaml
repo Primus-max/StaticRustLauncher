@@ -25,8 +25,13 @@
         <DataTemplate x:Key="LoadingPanelTemplate">
             <controls:LoadingPanelControl Width="860" Height="90" />
         </DataTemplate>
-        <!--  Панель загрузки  -->
+        <!--  Панель выбора директории или скачивания  -->
         <DataTemplate x:Key="InstallGameControlTemplate">
+            <controls:InstallGameControl Width="860" Height="90" />
+        </DataTemplate>
+
+        <!--  Панель старта игры  -->
+        <DataTemplate x:Key="PlayNowControlTemplate">
             <controls:InstallGameControl Width="860" Height="90" />
         </DataTemplate>
     </Window.Resources>
