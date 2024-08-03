@@ -3,39 +3,24 @@
 class LoginViewModel
 {
     public ICommand EnterWithoutLoginCommand { get; } = null!;
-    public ICommand LoginCommand {  get; } = null!;
+    public ICommand LoginCommand { get; } = null!;
 
 
     public LoginViewModel()
     {
-        EnterWithoutLoginCommand = new LambdaCommand(OnEnterWithoutLogin);
-        LoginCommand = new LambdaCommand(OnLogin);
-    }
+        EnterWithoutLoginCommand = new LambdaCommand(param => OnLoginAction(param, false));
+        LoginCommand = new LambdaCommand( param => OnLoginAction(param, true));
+    }       
 
-    private void OnEnterWithoutLogin(object parameter)
-    {
-        // Закрытие окна без логина
+    private void OnLoginAction(object parameter, bool isLogin)
+    {        
         var window = parameter as Window;
         window?.Close();
 
         // Дополнительная логика для главного окна
         if (Application.Current.MainWindow is MainWindow mainWindow)
         {
-            mainWindow.ShowPostLoginButtons();
+            mainWindow.ShowPostLoginButtons(isLogin);
         }
     }
-
-    private void OnLogin(object parameter)
-    {
-        // Закрытие окна после логина
-        var window = parameter as Window;
-        window?.Close();
-
-        // Дополнительная логика для главного окна
-        if (Application.Current.MainWindow is MainWindow mainWindow)
-        {
-            mainWindow.ShowPostLoginButtons();
-        }
-    }
-
 }

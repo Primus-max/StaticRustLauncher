@@ -12,7 +12,7 @@ public partial class MainWindow : Window
     }
 
 
-    public void ShowPostLoginButtons()
+    public void ShowPostLoginButtons(bool isLoggined)
     {
         var asdf = "Kjslkdjf";
     }
