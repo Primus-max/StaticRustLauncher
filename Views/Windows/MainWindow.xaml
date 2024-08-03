@@ -12,13 +12,13 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowState="Normal"
-    WindowStyle="ThreeDBorderWindow"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="328" />
             <!--  Ширина бокового меню  -->
-            <ColumnDefinition />
+            <ColumnDefinition Width="*" />
             <!--  Изменяемый контент  -->
         </Grid.ColumnDefinitions>
 
@@ -215,30 +215,137 @@
                 <Border
                     Height="118"
                     Margin="0,20,0,0"
+                    Padding="16"
                     Background="{StaticResource BackgroundPanelBrush}"
                     CornerRadius="16">
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid
+                        Width="250"
+                        Height="100"
+                        VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Версия клиента  -->
                         <TextBlock
-                            FontWeight="Bold"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource FontBold}"
+                            FontSize="16"
+                            LineHeight="20">
+                            <Run Foreground="{StaticResource TextBrush}" Text="Версия клиента" />
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource FontBold}"
+                            FontSize="16"
+                            LineHeight="20">
+                            <Run Foreground="{StaticResource AccentBrush}" Text="1.2.13" />
+                        </TextBlock>
+
+                        <!--  Актуальная версия  -->
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource FontBold}"
+                            FontSize="16"
+                            LineHeight="20">
+                            <Run Foreground="{StaticResource TextBrush}" Text="Актуальная версия" />
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource FontBold}"
+                            FontSize="16"
+                            LineHeight="20">
+                            <Run Foreground="{StaticResource AccentBrush}" Text="1.4.17" />
+                        </TextBlock>
+
+                        <!--  Права защищены  -->
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource FontBold}"
                             Foreground="{StaticResource TextBrush}"
-                            Text="Версия клиента 1.2.13" />
-                        <TextBlock
-                            FontWeight="Bold"
-                            Foreground="{StaticResource AccentBrush}"
-                            Text="Актуальная версия 1.4.17" />
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            Foreground="{StaticResource GrayTextBrush}"
+                            LineHeight="20"
+                            Opacity="70"
                             Text="@ 2024 Все права защищены" />
-                    </StackPanel>
+                    </Grid>
                 </Border>
+
             </StackPanel>
         </Border>
 
-        <!--  Изменяемый контент  -->
-        <Frame
-            x:Name="MainFrame"
-            Grid.Column="1"
-            NavigationUIVisibility="Hidden" />
+        <!--  Панель закрытия и сворачивания приложения  -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Панель закрытия и сворачивания приложения  -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--  Панель закрытия и сворачивания приложения  -->
+                <Border
+                    Width="860"
+                    Height="40"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource BackgroundPanelBrush}"
+                    CornerRadius="12"
+                    Opacity="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Кнопка сворачивания  -->
+                        <Button
+                            Grid.Column="1"
+                            Width="40"
+                            Height="40"
+                            Command="{Binding MinimizeAppCommand}"
+                            Style="{StaticResource MinimizeButtonStyle}" />
+
+                        <!--  Кнопка закрытия  -->
+                        <Button
+                            Grid.Column="2"
+                            Width="40"
+                            Height="40"
+                            Command="{Binding CloseAppCommand}"
+                            Style="{StaticResource CloseButtonStyle}" />
+                    </Grid>
+                </Border>
+
+                <!--  Изменяемый контент  -->
+                <Frame
+                    x:Name="MainFrame"
+                    Grid.Row="1"
+                    NavigationUIVisibility="Hidden" />
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

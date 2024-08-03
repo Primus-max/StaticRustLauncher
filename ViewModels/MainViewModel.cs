@@ -9,10 +9,14 @@ public  class MainViewModel : BaseViewModel
     /// Навигация по страница внутри главного окна
     /// </summary>
     public ICommand NavigationCommand { get; }
-
+    public ICommand CloseAppCommand { get; }
+    public ICommand MinimizeAppCommand { get; }
     public MainViewModel(Frame frame)
     {
         NavigationCommand = new LambdaCommand(OnNavigate);
+        CloseAppCommand = new LambdaCommand(OnCloseAppCommandExecuted);
+        MinimizeAppCommand = new LambdaCommand(OnMinimizeAppCommandExecuted);
+
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
     }
@@ -34,4 +38,10 @@ public  class MainViewModel : BaseViewModel
                break;
         }
     }
+
+    private void OnCloseAppCommandExecuted(object parameter) =>    
+        App.Current.Shutdown();
+ 
+    private void OnMinimizeAppCommandExecuted(object parameter) =>
+        Application.Current.MainWindow.WindowState = WindowState.Minimized;
 }
