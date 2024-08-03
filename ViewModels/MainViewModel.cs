@@ -29,7 +29,7 @@ public class MainViewModel : BaseViewModel
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
-        ShowAvailableNewVersionPanel();
+        ShowLoadingPanel();
     }
 
 

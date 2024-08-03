@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="RoundedProgressBarStyle" TargetType="ProgressBar">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid>
+                        <Border
+                            Background="{StaticResource BackgroundPanelBrush}"
+                            BorderBrush="Transparent"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6,0,0,0">
+                            <Rectangle
+                                Fill="{TemplateBinding Background}"
+                                RadiusX="6"
+                                RadiusY="6" />
+                        </Border>
+                        <Border
+                            Margin="1,1,1,1"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6,0,0,0">
+                            <Rectangle
+                                Height="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}}"
+                                Fill="{TemplateBinding Foreground}"
+                                RadiusX="6"
+                                RadiusY="6" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

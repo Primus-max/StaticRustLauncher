@@ -13,32 +13,80 @@
         Width="860"
         Height="90"
         Background="#18181B"
-        CornerRadius="20,0,0,0">
+        CornerRadius="20">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="53*" />
+                <RowDefinition Height="37*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                Height="34"
+                Margin="16,15,16,0"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
+
+                <!--  Используем Grid для выравнивания элементов  -->
+                <Grid Width="824">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <!--  Занимает доступное пространство  -->
+                        <ColumnDefinition Width="Auto" />
+                        <!--  Ширина определяется содержимым  -->
+                        <ColumnDefinition Width="Auto" />
+                        <!--  Ширина определяется содержимым  -->
+                    </Grid.ColumnDefinitions>
+
+                    <!--  Текст с версией обновления  -->
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource DefaultTextColorBrush}">
+                            <Run
+                                FontFamily="{StaticResource FontMedium}"
+                                FontSize="20"
+                                Text="Загрузка обновления для игры" />
+                            <Run
+                                FontFamily="{StaticResource FontRegular}"
+                                FontSize="16"
+                                Text="     2.4.12" />
+                        </TextBlock>
+                    </StackPanel>
+
+
+                    <!--  Проценты загрузки  -->
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource FontMedium}"
+                        FontSize="16"
+                        Foreground="{StaticResource DefaultTextColorBrush}"
+                        Text="34%" />
+
+                    <!--  Кнопка Отмена  -->
+                    <Button
+                        Grid.Column="2"
+                        Width="128"
+                        Height="34"
+                        Margin="20,0,0,0"
+                        VerticalAlignment="Center"
+                        Content="Отмена"
+                        Style="{StaticResource GrayOutlineButton}" />
+                </Grid>
+            </StackPanel>
+
 
             <!--  Progress Bar  -->
             <ProgressBar
-                Grid.Column="0"
-                Height="30"
-                Margin="16"
+                Grid.Row="1"
+                Height="6"
+                Margin="16,0,16,0"
                 VerticalAlignment="Center"
-                Background="#FF222222"
-                Foreground="#FF00FF00"
+                Background="{StaticResource BackgroundPanelBrush}"
+                Foreground="{StaticResource AccentBrush}"
                 IsIndeterminate="True" />
 
-            <!--  Cancel Button  -->
-            <Button
-                Grid.Column="1"
-                Width="100"
-                Height="30"
-                Margin="16"
-                VerticalAlignment="Center"
-                Content="Отмена"
-                Style="{StaticResource OutlineButton}" />
         </Grid>
     </Border>
 </UserControl>
