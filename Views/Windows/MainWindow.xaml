@@ -41,7 +41,7 @@
                             Margin="30,30,30,20"
                             HorizontalAlignment="Center"
                             FontFamily="{StaticResource FontBold}"
-                            FontSize="22"
+                            FontSize="26"
                             FontWeight="ExtraBold"
                             LineHeight="32">
                             <Run Foreground="{StaticResource DefaultTextColorBrush}" Text="Name" />
@@ -139,7 +139,7 @@
 
                         <TextBlock
                             Name="FooterMenuInformation"
-                            Margin="14,20,0,0"
+                            Margin="30,20,0,0"
                             FontFamily="{StaticResource FontMedium}"
                             FontSize="18">
                             <Run Foreground="{StaticResource DefaultTextColorBrush}" Text="Вы играли всего" />
@@ -153,8 +153,8 @@
                 <Button
                     Height="40"
                     Margin="0,20,0,0"
-                    Content="Login"
-                    Style="{StaticResource MenuButtonStyle}" />
+                    Content="Авторизация"
+                    Style="{StaticResource OutlineButton}" />
 
                 <!--  Секция 3: Картинка и кнопка  -->
                 <Border
@@ -162,24 +162,54 @@
                     Margin="0,20,0,0"
                     Background="{StaticResource BackgroundPanelBrush}"
                     CornerRadius="16">
-                    <Grid>
-                        <Image Source="pack://application:,,,/Resources/your_image.png" Stretch="Fill" />
-                        <StackPanel Margin="10" VerticalAlignment="Bottom">
-                            <TextBlock
-                                FontWeight="Bold"
-                                Foreground="{StaticResource TextBrush}"
-                                Text="Добавь свой сервер" />
-                            <TextBlock
-                                FontWeight="Bold"
-                                Foreground="{StaticResource AccentBrush}"
-                                Text="будь с нами!" />
-                            <Button
-                                Margin="0,10,0,0"
-                                Content="Add"
-                                Style="{StaticResource MenuButtonStyle}" />
-                        </StackPanel>
-                    </Grid>
+                    <Canvas>
+                        <!--  Задний фон  -->
+                        <Image
+                            x:Name="BackgroundImage"
+                            Canvas.Left="170"
+                            Canvas.Top="47"
+                            Width="104"
+                            Height="161"
+                            Canvas.ZIndex="0"
+                            Source="{StaticResource AddServerBack}" />
+
+                        <Border
+                            Width="288"
+                            Height="208"
+                            Padding="16,16,16,0">
+                            <StackPanel Canvas.ZIndex="100">
+                                <TextBlock
+                                    FontFamily="{DynamicResource FontBold}"
+                                    FontSize="22"
+                                    LineHeight="27">
+                                    <Run Foreground="{StaticResource DefaultTextColorBrush}" Text="Добавь" />
+                                    <Run Foreground="{StaticResource AccentBrush}" Text="свой сервер" />
+                                    <LineBreak />
+                                    <Run Foreground="{StaticResource DefaultTextColorBrush}" Text="будь с нами!" />
+                                </TextBlock>
+                                <Button
+                                    Width="172"
+                                    Margin="0,82,82,0"
+                                    Style="{StaticResource OrangeButton}">
+                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                        <Image
+                                            Width="24"
+                                            Height="24"
+                                            Margin="0,0,10,0"
+                                            Source="{StaticResource AddServerIcon}" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            LineHeight="22"
+                                            Text="Добавить" />
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+                        </Border>
+                    </Canvas>
                 </Border>
+
 
                 <!--  Секция 4: Информация о версии  -->
                 <Border

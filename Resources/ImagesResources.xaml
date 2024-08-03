@@ -3,4 +3,6 @@
     <BitmapImage x:Key="V" UriSource="/Resources/Images/Buttons/v.png" />
     <BitmapImage x:Key="ScreenZigZag" UriSource="/Resources/Images/Buttons/screen-zig-zag.png" />
     <BitmapImage x:Key="Settings" UriSource="/Resources/Images/Buttons/settings.png" />
+    <BitmapImage x:Key="AddServerBack" UriSource="/Resources/Images/b-section.png" />
+    <BitmapImage x:Key="AddServerIcon" UriSource="/Resources/Images/Buttons/add-server.png" />
 </ResourceDictionary>

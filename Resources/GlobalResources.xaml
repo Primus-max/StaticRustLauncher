@@ -4,4 +4,7 @@
 
     <!--  Определение шрифта для веса 800  -->
     <FontFamily x:Key="FontBold">/StaticRustLauncher;component/Resources/Fonts/static/Montserrat-ExtraBold.ttf#Montserrat ExtraBold</FontFamily>
+
+    <!--  Определение шрифта для веса 300  -->
+    <FontFamily x:Key="FontRegular">/StaticRustLauncher;component/Resources/Fonts/static/Montserrat-Regular.ttf#Montserrat Regular</FontFamily>
 </ResourceDictionary>
