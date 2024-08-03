@@ -10,18 +10,21 @@
         <!--  Подключение ресурсов  -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/GlobalResources.xaml" />
                 <ResourceDictionary Source="/Resources/Colors.xaml" />
                 <ResourceDictionary Source="/Resources/MenuButtonStyle.xaml" />
                 <ResourceDictionary Source="/Resources/ImagesResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!--  Определение ресурса шрифта  -->
-            <FontFamily x:Key="GlobalFontFamily">/StaticRustLauncher;component/Resources/Fonts/static/Montserrat-ExtraBold.ttf#Montserrat ExtraBold</FontFamily>
+            <!--<FontFamily x:Key="GlobalFontFamily">/StaticRustLauncher;component/Resources/Fonts/static/Montserrat-ExtraBold.ttf#Montserrat ExtraBold</FontFamily>
 
+            -->
             <!--  Глобальный стиль для всех текстовых элементов  -->
+            <!--
             <Style TargetType="TextElement">
                 <Setter Property="FontFamily" Value="{StaticResource GlobalFontFamily}" />
-            </Style>
+            </Style>-->
 
             <!--  DataTemplates для ViewModels  -->
             <DataTemplate DataType="{x:Type local:HomeViewModel}">

@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--  Определение шрифта для веса 500  -->
+    <FontFamily x:Key="FontMedium">/StaticRustLauncher;component/Resources/Fonts/static/Montserrat-Medium.ttf#Montserrat Medium</FontFamily>
+
+    <!--  Определение шрифта для веса 800  -->
+    <FontFamily x:Key="FontBold">/StaticRustLauncher;component/Resources/Fonts/static/Montserrat-ExtraBold.ttf#Montserrat ExtraBold</FontFamily>
+</ResourceDictionary>

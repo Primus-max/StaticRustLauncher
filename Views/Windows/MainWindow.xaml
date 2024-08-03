@@ -9,7 +9,6 @@
     Width="1200"
     Height="800"
     Background="#FF111111"
-    FontFamily="{Binding Mode=OneWay, Source={StaticResource GlobalFontFamily}}"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowState="Normal"
@@ -41,6 +40,7 @@
                             Name="TitleMenuButtonsSection"
                             Margin="30,30,30,20"
                             HorizontalAlignment="Center"
+                            FontFamily="{StaticResource FontBold}"
                             FontSize="22"
                             FontWeight="ExtraBold"
                             LineHeight="32">
@@ -66,7 +66,10 @@
                                                 Margin="0,0,10,0"
                                                 Cursor=""
                                                 Source="{StaticResource 4Dot}" />
-                                            <TextBlock Foreground="{StaticResource TextBrush}" Text="Главная" />
+                                            <TextBlock
+                                                FontFamily="{StaticResource FontMedium}"
+                                                Foreground="{StaticResource TextBrush}"
+                                                Text="Главная" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </Button.ContentTemplate>
@@ -84,7 +87,10 @@
                                                 Margin="0,0,10,0"
                                                 Cursor="Hand"
                                                 Source="{StaticResource V}" />
-                                            <TextBlock Foreground="{StaticResource TextBrush}" Text="Новости" />
+                                            <TextBlock
+                                                FontFamily="{StaticResource FontMedium}"
+                                                Foreground="{StaticResource TextBrush}"
+                                                Text="Новости" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </Button.ContentTemplate>
@@ -101,7 +107,10 @@
                                                 Height="24"
                                                 Margin="0,0,10,0"
                                                 Source="{StaticResource ScreenZigZag}" />
-                                            <TextBlock Foreground="{StaticResource TextBrush}" Text="Хостинги" />
+                                            <TextBlock
+                                                FontFamily="{StaticResource FontMedium}"
+                                                Foreground="{StaticResource TextBrush}"
+                                                Text="Хостинги" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </Button.ContentTemplate>
@@ -118,7 +127,10 @@
                                                 Height="24"
                                                 Margin="0,0,10,0"
                                                 Source="{StaticResource Settings}" />
-                                            <TextBlock Foreground="{StaticResource TextBrush}" Text="Настройки" />
+                                            <TextBlock
+                                                FontFamily="{StaticResource FontMedium}"
+                                                Foreground="{StaticResource TextBrush}"
+                                                Text="Настройки" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </Button.ContentTemplate>
@@ -128,11 +140,9 @@
                         <TextBlock
                             Name="FooterMenuInformation"
                             Margin="14,20,0,0"
+                            FontFamily="{StaticResource FontMedium}"
                             FontSize="18">
-                            <Run
-                                FontFamily="{StaticResource GlobalFontFamily}"
-                                Foreground="{StaticResource DefaultTextColorBrush}"
-                                Text="Вы играли всего" />
+                            <Run Foreground="{StaticResource DefaultTextColorBrush}" Text="Вы играли всего" />
                             <LineBreak />
                             <Run Foreground="{StaticResource DefaultTextColorBrush}" Text="365 часов 23 минуты" />
                         </TextBlock>
