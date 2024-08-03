@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="/Resources/OrangeButton.xaml" />
                 <ResourceDictionary Source="/Resources/AppControlButtons.xaml" />
                 <ResourceDictionary Source="/Resources/LoginButton.xaml" />
+                <ResourceDictionary Source="/Resources/LogoutButton.xaml" />
                 <ResourceDictionary Source="/Resources/OutlineButtonsStyle.xaml" />
                 <ResourceDictionary Source="/Resources/GrayOutlineButtonStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Assets/RoundedProgressBar.xaml" />

@@ -9,11 +9,15 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainViewModel(MainFrame);
+
+        AuthorizationButton.Visibility = Visibility.Visible;
     }
 
 
     public void ShowPostLoginButtons(bool isLoggined)
     {
-        var asdf = "Kjslkdjf";
+        AuthorizationButton.Visibility = Visibility.Collapsed;
+        UserCabinetButton.Visibility = Visibility.Visible;
+        LogoutButton.Visibility = Visibility.Visible;
     }
 }
