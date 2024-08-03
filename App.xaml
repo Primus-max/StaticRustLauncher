@@ -11,7 +11,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Colors.xaml" />
-                <ResourceDictionary Source="/Resources/ButtonStyles.xaml" />
+                <ResourceDictionary Source="/Resources/MenuButtonStyle.xaml" />
+                <ResourceDictionary Source="/Resources/ImagesResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!--  Определение ресурса шрифта  -->

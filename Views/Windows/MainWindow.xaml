@@ -6,18 +6,20 @@
     xmlns:local="clr-namespace:StaticRustLauncher.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="STATIC RUST"
-    Width="1920"
-    Height="1080"
+    Width="1200"
+    Height="800"
     Background="#FF111111"
+    FontFamily="{Binding Mode=OneWay, Source={StaticResource GlobalFontFamily}}"
+    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    WindowState="Maximized"
+    WindowState="Normal"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="328" />
             <!--  Ширина бокового меню  -->
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition />
             <!--  Изменяемый контент  -->
         </Grid.ColumnDefinitions>
 
@@ -29,6 +31,7 @@
             <StackPanel>
                 <!--  Секция 1: Меню  -->
                 <Border
+                    Width="280"
                     Height="330"
                     Background="{StaticResource BackgroundPanelBrush}"
                     CornerRadius="16">
@@ -47,14 +50,22 @@
 
                         <StackPanel Name="MenuButtonsSet">
                             <Button
-                                HorizontalAlignment="Center"
+                                Width="248"
                                 Command="{Binding NavigationCommand}"
                                 CommandParameter="Home"
                                 Style="{StaticResource MenuButtonStyle}">
                                 <Button.ContentTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-
+                                        <StackPanel
+                                            Margin="14,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            Orientation="Horizontal">
+                                            <Image
+                                                Width="24"
+                                                Height="24"
+                                                Margin="0,0,10,0"
+                                                Cursor=""
+                                                Source="{StaticResource 4Dot}" />
                                             <TextBlock Foreground="{StaticResource TextBrush}" Text="Главная" />
                                         </StackPanel>
                                     </DataTemplate>
@@ -66,8 +77,13 @@
                                 Style="{StaticResource MenuButtonStyle}">
                                 <Button.ContentTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-
+                                        <StackPanel Margin="14,0,0,0" Orientation="Horizontal">
+                                            <Image
+                                                Width="24"
+                                                Height="24"
+                                                Margin="0,0,10,0"
+                                                Cursor="Hand"
+                                                Source="{StaticResource V}" />
                                             <TextBlock Foreground="{StaticResource TextBrush}" Text="Новости" />
                                         </StackPanel>
                                     </DataTemplate>
@@ -79,12 +95,12 @@
                                 Style="{StaticResource MenuButtonStyle}">
                                 <Button.ContentTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <!--<Image
+                                        <StackPanel Margin="14,0,0,0" Orientation="Horizontal">
+                                            <Image
                                                 Width="24"
                                                 Height="24"
                                                 Margin="0,0,10,0"
-                                                Source="pack://application:,,,/Resources/hosts_icon.png" />-->
+                                                Source="{StaticResource ScreenZigZag}" />
                                             <TextBlock Foreground="{StaticResource TextBrush}" Text="Хостинги" />
                                         </StackPanel>
                                     </DataTemplate>
@@ -96,12 +112,12 @@
                                 Style="{StaticResource MenuButtonStyle}">
                                 <Button.ContentTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <!--<Image
+                                        <StackPanel Margin="14,0,0,0" Orientation="Horizontal">
+                                            <Image
                                                 Width="24"
                                                 Height="24"
                                                 Margin="0,0,10,0"
-                                                Source="pack://application:,,,/Resources/settings_icon.png" />-->
+                                                Source="{StaticResource Settings}" />
                                             <TextBlock Foreground="{StaticResource TextBrush}" Text="Настройки" />
                                         </StackPanel>
                                     </DataTemplate>
@@ -111,14 +127,15 @@
 
                         <TextBlock
                             Name="FooterMenuInformation"
-                            Padding="30,10,0,0"
-                            FontSize="16">
-                            <Run Foreground="{StaticResource DefaultTextColorBrush}" Text="Вы играли всего" />
+                            Margin="14,20,0,0"
+                            FontSize="18">
+                            <Run
+                                FontFamily="{StaticResource GlobalFontFamily}"
+                                Foreground="{StaticResource DefaultTextColorBrush}"
+                                Text="Вы играли всего" />
                             <LineBreak />
                             <Run Foreground="{StaticResource DefaultTextColorBrush}" Text="365 часов 23 минуты" />
                         </TextBlock>
-
-
                     </StackPanel>
                 </Border>
 

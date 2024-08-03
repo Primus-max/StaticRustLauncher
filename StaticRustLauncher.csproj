@@ -9,10 +9,72 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\b-modal.png" />
+    <None Remove="Resources\Images\b-section.png" />
+    <None Remove="Resources\Images\Buttons\4dot.png" />
+    <None Remove="Resources\Images\Buttons\add-server.png" />
+    <None Remove="Resources\Images\Buttons\contact.png" />
+    <None Remove="Resources\Images\Buttons\screen-zig-zag.png" />
+    <None Remove="Resources\Images\Buttons\screnn-empty.png" />
+    <None Remove="Resources\Images\Buttons\settings.png" />
+    <None Remove="Resources\Images\Buttons\users.png" />
+    <None Remove="Resources\Images\Buttons\v.png" />
+    <None Remove="Resources\Images\s-discord.png" />
+    <None Remove="Resources\Images\s-tg.png" />
+    <None Remove="Resources\Images\s-vk.png" />
+    <None Remove="Resources\Images\steam.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Assests\Images\" />
     <Folder Include="Assests\Components\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\Fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\b-modal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\b-section.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\4dot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\add-server.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\contact.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\screen-zig-zag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\screnn-empty.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\users.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\v.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\s-discord.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\s-tg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\s-vk.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\steam.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
