@@ -5,12 +5,14 @@ namespace StaticRustLauncher.ViewModels;
 
 public  class MainViewModel : BaseViewModel
 {
-    /// <summary>
-    /// Навигация по страница внутри главного окна
-    /// </summary>
+    #region Команды
     public ICommand NavigationCommand { get; }
     public ICommand CloseAppCommand { get; }
     public ICommand MinimizeAppCommand { get; }
+    #endregion
+    private Frame Frame { get; }
+
+
     public MainViewModel(Frame frame)
     {
         NavigationCommand = new LambdaCommand(OnNavigate);
@@ -21,9 +23,7 @@ public  class MainViewModel : BaseViewModel
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
     }
 
-    private Frame Frame { get; }
-
-
+    
     private void OnNavigate(object viewName)
     {
         switch (viewName as string)
@@ -39,9 +39,12 @@ public  class MainViewModel : BaseViewModel
         }
     }
 
-    private void OnCloseAppCommandExecuted(object parameter) =>    
-        App.Current.Shutdown();
- 
+
+    #region Методы команд
+    private void OnCloseAppCommandExecuted(object parameter) =>
+    App.Current.Shutdown();
+
     private void OnMinimizeAppCommandExecuted(object parameter) =>
-        Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        Application.Current.MainWindow.WindowState = WindowState.Minimized; 
+    #endregion
 }

@@ -2,6 +2,7 @@
     x:Class="StaticRustLauncher.Views.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:StaticRustLauncher.Resources.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:StaticRustLauncher.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -298,15 +299,27 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--  Панель закрытия и сворачивания приложения  -->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
+                    <!--  Панель закрытия и сворачивания  -->
                     <RowDefinition Height="Auto" />
+
+                    <!--  Первая панель с контентом  -->
+                    <RowDefinition Height="Auto" />
+
+                    <!--  Пустая строка, которая будет скрыта, если нет контента  -->
+                    <RowDefinition Height="Auto" />
+
+                    <!--  Вторая панель с контентом  -->
+                    <RowDefinition Height="Auto" />
+
+                    <!--  Основной изменяемый контент  -->
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!--  Панель закрытия и сворачивания приложения  -->
                 <Border
+                    Grid.Row="0"
                     Width="860"
                     Height="40"
                     Margin="0,20,0,0"
@@ -340,12 +353,40 @@
                     </Grid>
                 </Border>
 
-                <!--  Изменяемый контент  -->
+                <!--  Первая панель с контентом (например, обновления/обновления)  -->
+                <controls:AvailableNewVersionControl
+                    Grid.Row="1"
+                    Width="860"
+                    Height="90"
+                    Margin="0,20,0,0" HorizontalAlignment="Left" />
+
+
+                <!--  Пустая строка, которая будет скрыта, если нет контента  -->
+                <!--<Border
+                    Grid.Row="2"
+                    Width="940"
+                    Height="90"
+                    Margin="320,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#18181B"
+                    CornerRadius="20,0,0,0">
+                    <UserControl
+                        x:Name="AnotherInfoControl"
+                        Width="860"
+                        Height="90"
+                        Visibility="Collapsed" />
+                </Border>-->
+
+
+
+                <!--  Основной изменяемый контент  -->
                 <Frame
                     x:Name="MainFrame"
-                    Grid.Row="1"
+                    Grid.Row="4"
                     NavigationUIVisibility="Hidden" />
             </Grid>
+
         </Grid>
     </Grid>
 </Window>
