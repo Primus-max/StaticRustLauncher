@@ -312,7 +312,7 @@
             </StackPanel>
         </Border>
 
-        <!--  Панель закрытия и сворачивания приложения  -->
+
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -382,45 +382,14 @@
                     Margin="0,20,0,0"
                     HorizontalAlignment="Left"
                     Content="{Binding CurrentPanel}" />
-                <!--<controls:AvailableNewVersionControl
-                    x:Name="AvailableNewVersionControl"
-                    Grid.Row="1"
-                    Width="860"
-                    Height="90"
-                    Margin="0,20,0,0"
-                    HorizontalAlignment="Left"
-                    Visibility="Collapsed" />-->
 
-                <!--  Панель загрузки  -->
-                <!--<controls:LoadingPanelControl
-                    x:Name="LoadingPanelControl"
-                    Grid.Row="1"
-                    Width="860"
-                    Height="90"
-                    Margin="0,20,0,0"
-                    HorizontalAlignment="Left" />-->
-
-
-
-
-                <!--  Пустая строка, которая будет скрыта, если нет контента  -->
-                <!--<Border
+                <!--  Вставка сатистика игроков и серверов  -->
+                <controls:StatisticsControl
                     Grid.Row="2"
-                    Width="940"
+                    Width="860"
                     Height="90"
-                    Margin="320,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Background="#18181B"
-                    CornerRadius="20,0,0,0">
-                    <UserControl
-                        x:Name="AnotherInfoControl"
-                        Width="860"
-                        Height="90"
-                        Visibility="Collapsed" />
-                </Border>-->
-
-
+                    Margin="0,16,0,0"
+                    HorizontalAlignment="Left" />
 
                 <!--  Основной изменяемый контент  -->
                 <Frame

@@ -49,8 +49,7 @@ public class MainViewModel : BaseViewModel
     }
 
     private void ShowAvailableNewVersionPanel() =>    
-        CurrentPanel = new AvailableNewVersionControl();
-    
+        CurrentPanel = new AvailableNewVersionControl();    
 
     private void ShowLoadingPanel() =>    
         CurrentPanel = new LoadingPanelControl();
