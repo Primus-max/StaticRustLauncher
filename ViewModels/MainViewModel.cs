@@ -1,17 +1,25 @@
 ﻿using StaticRustLauncher.Infrastructure.Commands;
+using StaticRustLauncher.Resources.Controls;
 using StaticRustLauncher.Views.Pages;
 
 namespace StaticRustLauncher.ViewModels;
 
-public  class MainViewModel : BaseViewModel
+public class MainViewModel : BaseViewModel
 {
     #region Команды
     public ICommand NavigationCommand { get; }
     public ICommand CloseAppCommand { get; }
     public ICommand MinimizeAppCommand { get; }
     #endregion
-    private Frame Frame { get; }
 
+
+    private Frame Frame { get; }
+    private UserControl _currentPanel;
+    public UserControl CurrentPanel 
+    { 
+        get => _currentPanel; 
+        set => Set(ref _currentPanel,  value); 
+    }
 
     public MainViewModel(Frame frame)
     {
@@ -21,9 +29,10 @@ public  class MainViewModel : BaseViewModel
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
+        ShowAvailableNewVersionPanel();
     }
 
-    
+
     private void OnNavigate(object viewName)
     {
         switch (viewName as string)
@@ -35,9 +44,17 @@ public  class MainViewModel : BaseViewModel
                 Frame.Navigate(new SettingsPage());
                 break;
             default:
-               break;
+                break;
         }
     }
+
+    private void ShowAvailableNewVersionPanel() =>    
+        CurrentPanel = new AvailableNewVersionControl();
+    
+
+    private void ShowLoadingPanel() =>    
+        CurrentPanel = new LoadingPanelControl();
+    
 
 
     #region Методы команд
@@ -45,6 +62,6 @@ public  class MainViewModel : BaseViewModel
     App.Current.Shutdown();
 
     private void OnMinimizeAppCommandExecuted(object parameter) =>
-        Application.Current.MainWindow.WindowState = WindowState.Minimized; 
+        Application.Current.MainWindow.WindowState = WindowState.Minimized;
     #endregion
 }
