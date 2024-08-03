@@ -1,4 +1,6 @@
-﻿namespace StaticRustLauncher.ViewModels;
+﻿using StaticRustLauncher.Views.Windows;
+
+namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -64,11 +66,7 @@ public class MainViewModel : BaseViewModel
     private void OnCloseAppCommandExecuted(object parameter)
     {
         ConfirmExitWindow confirmExitWindow = new ();
-        confirmExitWindow.Owner = Application.Current.MainWindow;
-        var mainWindow = Application.Current.MainWindow;
-        BlurEffectHelper.ApplyBlurEffect(mainWindow, 0, 10, 0.5);
-        confirmExitWindow.ShowDialog();
-        BlurEffectHelper.RemoveBlurEffect(mainWindow, 10, 0, 0.5);
+        WindowHelper.OpenWindowWithBlur(confirmExitWindow);
     }
     
 
@@ -83,12 +81,7 @@ public class MainViewModel : BaseViewModel
             Owner = Application.Current.MainWindow
         };
 
-        var mainWindow = Application.Current.MainWindow;
-        BlurEffectHelper.ApplyBlurEffect(mainWindow, 0, 10, 0.5);
-
-        loginWindow.ShowDialog();
-
-        BlurEffectHelper.RemoveBlurEffect(mainWindow, 10, 0, 0.5);
+        WindowHelper.OpenWindowWithBlur(loginWindow);
     }
     #endregion
 }
