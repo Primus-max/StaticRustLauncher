@@ -48,6 +48,8 @@
                     <Button
                         Width="151"
                         Height="44"
+                        Command="{Binding PlayNowCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                         Content="Играть"
                         Style="{StaticResource OutlineButton}" />
                 </StackPanel>
