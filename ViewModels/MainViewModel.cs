@@ -1,15 +1,21 @@
 ﻿using StaticRustLauncher.Infrastructure.Commands;
 using StaticRustLauncher.Resources.Controls;
+using StaticRustLauncher.ViewModels.Helpers;
 using StaticRustLauncher.Views.Pages;
+using StaticRustLauncher.Views.Windows;
+
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
     #region Команды
-    public ICommand NavigationCommand { get; }
-    public ICommand CloseAppCommand { get; }
-    public ICommand MinimizeAppCommand { get; }
+    public ICommand NavigationCommand { get; } = null!;
+    public ICommand CloseAppCommand { get; } = null!;
+    public ICommand MinimizeAppCommand { get; } = null!;
+    public ICommand LoginCommand { get; } = null!;
     #endregion
 
 
@@ -26,6 +32,7 @@ public class MainViewModel : BaseViewModel
         NavigationCommand = new LambdaCommand(OnNavigate);
         CloseAppCommand = new LambdaCommand(OnCloseAppCommandExecuted);
         MinimizeAppCommand = new LambdaCommand(OnMinimizeAppCommandExecuted);
+        LoginCommand = new LambdaCommand(OnLoginOpenWindow);
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
@@ -67,5 +74,23 @@ public class MainViewModel : BaseViewModel
 
     private void OnMinimizeAppCommandExecuted(object parameter) =>
         Application.Current.MainWindow.WindowState = WindowState.Minimized;
+
+    private void OnLoginOpenWindow(object parameter)
+    {
+        // Окно владельцем для центрирования
+        var loginWindow = new LoginWindow
+        {
+            Owner = Application.Current.MainWindow
+        };
+
+        // Эффект размытия к главному окну с анимацией
+        var mainWindow = Application.Current.MainWindow;
+        BlurEffectHelper.ApplyBlurEffect(mainWindow, 0, 10, 0.5);
+
+        loginWindow.ShowDialog();
+
+        BlurEffectHelper.RemoveBlurEffect(mainWindow, 10, 0, 0.5);
+    }
+
     #endregion
 }
