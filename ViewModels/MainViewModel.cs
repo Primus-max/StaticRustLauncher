@@ -27,10 +27,11 @@ public class MainViewModel : BaseViewModel
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
-        ShowPlayNowPanel();
+        ShowPlayNowPanel(); 
     }
 
 
+    // Методы для отображения панелей (скачать/запустить/играть)
     private void OnNavigate(object viewName)
     {
         switch (viewName as string)
@@ -60,8 +61,16 @@ public class MainViewModel : BaseViewModel
 
 
     #region Методы команд
-    private void OnCloseAppCommandExecuted(object parameter) =>
-    App.Current.Shutdown();
+    private void OnCloseAppCommandExecuted(object parameter)
+    {
+        ConfirmExitWindow confirmExitWindow = new ();
+        confirmExitWindow.Owner = Application.Current.MainWindow;
+        var mainWindow = Application.Current.MainWindow;
+        BlurEffectHelper.ApplyBlurEffect(mainWindow, 0, 10, 0.5);
+        confirmExitWindow.ShowDialog();
+        BlurEffectHelper.RemoveBlurEffect(mainWindow, 10, 0, 0.5);
+    }
+    
 
     private void OnMinimizeAppCommandExecuted(object parameter) =>
         Application.Current.MainWindow.WindowState = WindowState.Minimized;
@@ -82,11 +91,5 @@ public class MainViewModel : BaseViewModel
 
         BlurEffectHelper.RemoveBlurEffect(mainWindow, 10, 0, 0.5);
     }
-
-    public void ShowPostLoginButtons()
-    {
-        var asdf = "Kjslkdjf";
-    }
-
     #endregion
 }

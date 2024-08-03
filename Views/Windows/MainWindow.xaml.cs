@@ -14,7 +14,7 @@ public partial class MainWindow : Window
     }
 
 
-    public void ShowPostLoginButtons(bool isLoggined)
+    public void ShowPostLoginButtons(bool isLogin)
     {
         AuthorizationButton.Visibility = Visibility.Collapsed;
         UserCabinetButton.Visibility = Visibility.Visible;

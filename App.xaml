@@ -23,15 +23,6 @@
                 <ResourceDictionary Source="/Resources/ImagesResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!--  Определение ресурса шрифта  -->
-            <!--<FontFamily x:Key="GlobalFontFamily">/StaticRustLauncher;component/Resources/Fonts/static/Montserrat-ExtraBold.ttf#Montserrat ExtraBold</FontFamily>
-
-            -->
-            <!--  Глобальный стиль для всех текстовых элементов  -->
-            <!--
-            <Style TargetType="TextElement">
-                <Setter Property="FontFamily" Value="{StaticResource GlobalFontFamily}" />
-            </Style>-->
 
             <!--  DataTemplates для ViewModels  -->
             <DataTemplate DataType="{x:Type local:HomeViewModel}">
