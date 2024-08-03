@@ -25,6 +25,10 @@
         <DataTemplate x:Key="LoadingPanelTemplate">
             <controls:LoadingPanelControl Width="860" Height="90" />
         </DataTemplate>
+        <!--  Панель загрузки  -->
+        <DataTemplate x:Key="InstallGameControlTemplate">
+            <controls:InstallGameControl Width="860" Height="90" />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

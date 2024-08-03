@@ -29,7 +29,7 @@ public class MainViewModel : BaseViewModel
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
-        ShowLoadingPanel();
+        ShowInstallGamePanel();
     }
 
 
@@ -54,8 +54,9 @@ public class MainViewModel : BaseViewModel
 
     private void ShowLoadingPanel() =>    
         CurrentPanel = new LoadingPanelControl();
-    
 
+    private void ShowInstallGamePanel() =>
+        CurrentPanel = new InstallGameControl();
 
     #region Методы команд
     private void OnCloseAppCommandExecuted(object parameter) =>
