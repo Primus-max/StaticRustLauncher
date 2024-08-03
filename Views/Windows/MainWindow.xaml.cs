@@ -10,4 +10,10 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = new MainViewModel(MainFrame);
     }
+
+
+    public void ShowPostLoginButtons()
+    {
+        var asdf = "Kjslkdjf";
+    }
 }

@@ -1,13 +1,4 @@
-﻿using StaticRustLauncher.Infrastructure.Commands;
-using StaticRustLauncher.Resources.Controls;
-using StaticRustLauncher.ViewModels.Helpers;
-using StaticRustLauncher.Views.Pages;
-using StaticRustLauncher.Views.Windows;
-
-using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
-
-namespace StaticRustLauncher.ViewModels;
+﻿namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -21,10 +12,10 @@ public class MainViewModel : BaseViewModel
 
     private Frame Frame { get; } = null!;
     private UserControl _currentPanel = null!;
-    public UserControl CurrentPanel 
-    { 
-        get => _currentPanel; 
-        set => Set(ref _currentPanel,  value); 
+    public UserControl CurrentPanel
+    {
+        get => _currentPanel;
+        set => Set(ref _currentPanel, value);
     }
 
     public MainViewModel(Frame frame)
@@ -55,10 +46,10 @@ public class MainViewModel : BaseViewModel
         }
     }
 
-    private void ShowAvailableNewVersionPanel() =>    
-        CurrentPanel = new AvailableNewVersionControl();    
+    private void ShowAvailableNewVersionPanel() =>
+        CurrentPanel = new AvailableNewVersionControl();
 
-    private void ShowLoadingPanel() =>    
+    private void ShowLoadingPanel() =>
         CurrentPanel = new LoadingPanelControl();
 
     private void ShowInstallGamePanel() =>
@@ -90,6 +81,11 @@ public class MainViewModel : BaseViewModel
         loginWindow.ShowDialog();
 
         BlurEffectHelper.RemoveBlurEffect(mainWindow, 10, 0, 0.5);
+    }
+
+    public void ShowPostLoginButtons()
+    {
+        var asdf = "Kjslkdjf";
     }
 
     #endregion

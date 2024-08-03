@@ -8,22 +8,21 @@
     Width="560"
     Height="341"
     AllowsTransparency="True"
-    Background="{StaticResource BackgroundPanelBrush}"
+    Background="Transparent"
     ResizeMode="NoResize"
-    SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterOwner"
     WindowStyle="None"
     mc:Ignorable="d">
 
     <Grid>
-        <!--  Полупрозрачный черный для размытости  -->
         <Border
             Width="560"
-            Height="341"
+            Height="330"
             Padding="20"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            CornerRadius="30,0,0,0">
+            Background="{StaticResource ButtonBackgroundBrush}"
+            CornerRadius="30">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -40,9 +39,9 @@
                     Grid.Row="0"
                     Margin="0,0,0,20"
                     HorizontalAlignment="Center"
-                    FontFamily="Segoe UI"
+                    FontFamily="{DynamicResource FontBold}"
                     FontSize="24"
-                    FontWeight="Bold"
+                    Foreground="{StaticResource DefaultTextColorBrush}"
                     Text="Авторизация через Steam" />
 
                 <!--  Логин  -->
@@ -50,60 +49,74 @@
                     Grid.Row="1"
                     Margin="0,0,0,5"
                     HorizontalAlignment="Center"
-                    FontFamily="Segoe UI"
+                    FontFamily="{DynamicResource FontRegular}"
                     FontSize="18"
+                    Foreground="{StaticResource DefaultTextColorBrush}"
                     Text="Логин" />
-                <TextBox
+                <Border
                     Grid.Row="2"
-                    Height="30"
+                    Width="500"
+                    Height="40"
                     Margin="0,0,0,20"
-                    FontFamily="Segoe UI"
-                    FontSize="16" />
+                    Background="#111111"
+                    CornerRadius="12">
+                    <TextBox
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontFamily="{StaticResource FontMedium}"
+                        FontSize="16" />
+                </Border>
 
                 <!--  Пароль  -->
                 <TextBlock
                     Grid.Row="3"
                     Margin="0,0,0,5"
                     HorizontalAlignment="Center"
-                    FontFamily="Segoe UI"
+                    FontFamily="{DynamicResource FontRegular}"
                     FontSize="18"
+                    Foreground="{StaticResource DefaultTextColorBrush}"
                     Text="Пароль" />
-                <PasswordBox
+                <Border
                     Grid.Row="4"
-                    Height="30"
+                    Width="500"
+                    Height="40"
                     Margin="0,0,0,20"
-                    FontFamily="Segoe UI"
-                    FontSize="16" />
+                    Background="#111111"
+                    CornerRadius="12">
+                    <PasswordBox
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontFamily="{StaticResource FontMedium}"
+                        FontSize="16" />
+                </Border>
+
 
                 <!--  Кнопки  -->
                 <StackPanel
                     Grid.Row="5"
-                    Margin="0,20,0,0"
-                    HorizontalAlignment="Center"
+                    Margin="0,20,10,0"
+                    HorizontalAlignment="Right"
                     Orientation="Horizontal">
-                    <TextBlock
+                    <Button
+                        Grid.Row="5"
                         Margin="0,0,20,0"
-                        Padding="0,10,0,0"
+                        HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Cursor="Hand"
-                        FontFamily="Segoe UI"
-                        FontSize="16"
-                        Foreground="Blue"
-                        Text="Продолжить без авторизации"
-                        TextDecorations="Underline" />
+                        Command="{Binding EnterWithoutLoginCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                        Content="Продолжить без авторизации"
+                        FontFamily="{DynamicResource FontRegular}"
+                        FontSize="18"
+                        Style="{StaticResource TextButtonStyle}" />
 
                     <Button
-                        Width="100"
-                        Height="30"
+                        Width="110"
+                        Height="40"
                         Padding="10,5"
-                        VerticalAlignment="Center"
-                        Background="#0078D4"
-                        BorderBrush="#0078D4"
-                        BorderThickness="1"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                         Content="Войти"
-                        FontFamily="Segoe UI"
-                        FontSize="16"
-                        Foreground="White" />
+                        Style="{StaticResource OutlineButton}" />
                 </StackPanel>
             </Grid>
         </Border>

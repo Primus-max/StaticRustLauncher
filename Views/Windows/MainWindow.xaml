@@ -15,9 +15,6 @@
     WindowState="Normal"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Window.Effect>
-        <BlurEffect x:Name="mainWindowBlurEffect" Radius="0" />
-    </Window.Effect>
     <Window.Resources>
         <!--  Панель обновлений  -->
         <DataTemplate x:Key="AvailableNewVersionTemplate">
