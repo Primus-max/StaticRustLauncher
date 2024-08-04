@@ -205,8 +205,6 @@
                         Visibility="Collapsed" />
                 </StackPanel>
 
-
-
                 <!--  Секция 3: Картинка и кнопка  -->
                 <Border
                     Height="208"
@@ -260,7 +258,6 @@
                         </Border>
                     </Canvas>
                 </Border>
-
 
                 <!--  Секция 4: Информация о версии  -->
                 <Border

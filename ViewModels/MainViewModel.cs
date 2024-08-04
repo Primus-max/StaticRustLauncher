@@ -32,15 +32,17 @@ public class MainViewModel : BaseViewModel
         ShowPlayNowPanel(); 
     }
 
-
-    // Методы для отображения панелей (скачать/запустить/играть)
+        
     private void OnNavigate(object viewName)
     {
         switch (viewName as string)
         {
             case "Home":
-                Frame.Navigate(new HomePage());
-                break;
+                {
+                    Frame.Navigate(new HomePage());
+                    ShowPlayNowPanel();
+                    break;
+                }                
             case "Settings":
                 Frame.Navigate(new SettingsPage());
                 break;
