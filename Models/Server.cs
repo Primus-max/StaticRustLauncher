@@ -1,7 +1,10 @@
-﻿namespace StaticRustLauncher.Models;
+﻿using System.Net;
+
+namespace StaticRustLauncher.Models;
 
 public class Server
 {
+    public IPAddress? ServerAddress { get; set; }
     public string? Name { get; set; }
     public string? Description { get; set; }
     public int PlayerOnline { get; set; }

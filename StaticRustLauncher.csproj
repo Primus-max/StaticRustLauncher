@@ -29,8 +29,6 @@
     <None Remove="Resources\Fonts\static\Montserrat-SemiBoldItalic.ttf" />
     <None Remove="Resources\Fonts\static\Montserrat-Thin.ttf" />
     <None Remove="Resources\Fonts\static\Montserrat-ThinItalic.ttf" />
-    <None Remove="Resources\Images\b-modal.png" />
-    <None Remove="Resources\Images\b-section.png" />
     <None Remove="Resources\Images\Buttons\4dot.png" />
     <None Remove="Resources\Images\Buttons\add-server.png" />
     <None Remove="Resources\Images\Buttons\contact.png" />
@@ -141,16 +139,16 @@
     <Resource Include="Resources\Images\Buttons\v.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\s-discord.png">
+    <Resource Include="Resources\Images\Social\s-discord.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\s-tg.png">
+    <Resource Include="Resources\Images\Social\s-tg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\s-vk.png">
+    <Resource Include="Resources\Images\Social\s-vk.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\steam.png">
+    <Resource Include="Resources\Images\Social\steam.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
