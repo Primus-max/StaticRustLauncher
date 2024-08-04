@@ -12,8 +12,6 @@ public class ServerDetailViewModel
         SelectedServer = selectedServer;
     }
         
-
-
     private void OnConnectServer(object parameter)
     {
         if (parameter is Window window)

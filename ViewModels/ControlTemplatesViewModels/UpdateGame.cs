@@ -2,6 +2,6 @@
 
 class UpdateGame
 {
-    public string Version { get; set; }
-    public ICommand DownloadCommand { get; set; }
+    public string? Version { get; set; }
+    public ICommand? DownloadCommand { get; set; }
 }

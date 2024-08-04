@@ -1,5 +1,6 @@
 ﻿namespace StaticRustLauncher.ViewModels;
 
-public class HomeViewModel : BaseViewModel
+public class NewsPageViewModel
 {
+
 }

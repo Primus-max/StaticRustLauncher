@@ -7,8 +7,8 @@ namespace StaticRustLauncher.Views.Pages;
 /// </summary>
 public partial class HomePage : Page
 {
-    public ObservableCollection<Server> Servers { get; set; } = [];    
-    public Server SelectedServer { get; set; }
+    public ObservableCollection<Server> Servers { get; set; } = [];
+    public Server SelectedServer { get; set; } = null!;
     
 
     public HomePage()
@@ -28,21 +28,10 @@ public partial class HomePage : Page
                 new Server { Name = "Server 4", Description = "This is the fourth server", PlayerOnline = 25, ServerType = null, ServerCategory = "Classic", Country = "France", Status = "Maintenance", Version = 4, MapName = "Map D" }
             };
     }
-
-    //private void OpenDescriptionServer_Click(object sender, MouseButtonEventArgs e)
-    //{
-    //    var asdf = SelectedServer;
-    //}
-
-    //private void Test_Cl(object sender, MouseButtonEventArgs e)
-    //{
-    //    var asdf = SelectedServer;
-    //}
+     
 
     private void OpenDescriptionServer_Click(object sender, SelectionChangedEventArgs e)
     {
-        var asdf = SelectedServer;
-
         var serverDetailWindow = new ServerDetailWindow(SelectedServer);
         WindowHelper.OpenWindowWithBlur(serverDetailWindow);
     }

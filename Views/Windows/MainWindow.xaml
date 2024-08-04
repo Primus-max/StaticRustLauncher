@@ -111,7 +111,7 @@
                                             <TextBlock
                                                 FontFamily="{StaticResource FontMedium}"
                                                 Foreground="{StaticResource TextBrush}"
-                                                Text="Новости" />
+                                                Text="Новости"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </Button.ContentTemplate>

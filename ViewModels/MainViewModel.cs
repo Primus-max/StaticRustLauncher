@@ -43,8 +43,8 @@ public class MainViewModel : BaseViewModel
                     ShowPlayNowPanel();
                     break;
                 }                
-            case "Settings":
-                Frame.Navigate(new SettingsPage());
+            case "News":
+                Frame.Navigate(new NewsPage());
                 break;
             default:
                 break;
