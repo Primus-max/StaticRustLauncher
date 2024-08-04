@@ -6,4 +6,5 @@
     <BitmapImage x:Key="AddServerBack" UriSource="/Resources/Images/b-section.png" />
     <BitmapImage x:Key="AddServerIcon" UriSource="/Resources/Images/Buttons/add-server.png" />
     <BitmapImage x:Key="Users" UriSource="/Resources/Images/Buttons/users.png" />
+    <BitmapImage x:Key="ServerModalBack" UriSource="/Resources/Images/b-modal.png" />
 </ResourceDictionary>

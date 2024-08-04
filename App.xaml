@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="/Resources/OutlineButtonsStyle.xaml" />
                 <ResourceDictionary Source="/Resources/GrayOutlineButtonStyle.xaml" />
                 <ResourceDictionary Source="/Resources/TagTextBoxStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/ListStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Assets/RoundedProgressBar.xaml" />
                 <ResourceDictionary Source="/Resources/ImagesResources.xaml" />
             </ResourceDictionary.MergedDictionaries>

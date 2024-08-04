@@ -422,6 +422,7 @@
                 <Frame
                     x:Name="MainFrame"
                     Grid.Row="4"
+                    Margin="0"
                     NavigationUIVisibility="Hidden" />
             </Grid>
 

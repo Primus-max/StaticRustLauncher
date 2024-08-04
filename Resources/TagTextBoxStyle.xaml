@@ -34,37 +34,36 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="MinWidth" Value="101" />
         <Setter Property="Height" Value="28" />
-        <Setter Property="Opacity" Value="20" />
     </Style>
 
-    <Style x:Key="TagPremiumTextBlockStyle" TargetType="TextBlock">
+    <!--<Style x:Key="TagPremiumTextBlockStyle" TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource FontRegular}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Foreground" Value="{StaticResource DefaultTextColorBrush}" />
-    </Style>
+    </Style>-->
     <!--#endregion-->
 
     <!--#region Стили для VIP тегов-->
     <Style x:Key="TagVipStyle" TargetType="Border">
-        <Setter Property="Background" Value="#D08F0166" />
-        <Setter Property="Padding" Value="4,12,4,12" />
-        <Setter Property="CornerRadius" Value="6,0,0,0" />
+        <Setter Property="Background" Value="#67D08F01" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="CornerRadius" Value="6" />
         <Setter Property="BorderBrush" Value="#D08F01" />
-        <Setter Property="BorderThickness" Value="1,0,0,0" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="MinWidth" Value="51" />
-        <Setter Property="MinHeight" Value="28" />
+        <Setter Property="Width" Value="51" />
+        <Setter Property="Height" Value="28" />
     </Style>
 
-    <Style x:Key="TagVipTextBlockStyle" TargetType="TextBlock">
+    <!--<Style x:Key="TagVipTextBlockStyle" TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource FontRegular}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Foreground" Value="{StaticResource DefaultTextColorBrush}" />
-    </Style>
+    </Style>-->
     <!--#endregion-->
 </ResourceDictionary>
