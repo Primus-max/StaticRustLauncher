@@ -262,5 +262,21 @@
                 </StackPanel>
             </Grid>
         </Border>
+        <!--  Закрытие  -->
+        <Canvas>
+            <TextBlock
+                Canvas.Left="607"
+                Canvas.Top="-1"
+                Width="30"
+                Height="30"
+                Panel.ZIndex="100"
+                Cursor="Hand"
+                FontSize="26"
+                FontWeight="Bold"
+                Foreground="White"
+                MouseLeftButtonDown="CloseButton_Click"
+                Text="×"
+                TextAlignment="Center" />
+        </Canvas>
     </Grid>
 </Window>

@@ -31,4 +31,9 @@ public partial class ServerDetailWindow : Window
         // Копировать текст в буфер обмена
         Clipboard.SetText("255.255.255");
     }
+
+    private void CloseButton_Click(object sender, MouseButtonEventArgs e)
+    {
+        this.Close();
+    }
 }
