@@ -46,6 +46,9 @@ public class MainViewModel : BaseViewModel
             case "News":
                 Frame.Navigate(new NewsPage());
                 break;
+            case "Hosts":
+                Frame.Navigate(new HostingPage());
+                break;
             default:
                 break;
         }

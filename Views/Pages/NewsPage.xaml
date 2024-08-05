@@ -10,7 +10,7 @@
     Title="NewsPage"
     Width="900"
     Height="500"
-    Margin="-14,0,0,0"
+    Margin="-1,0,0,0"
     d:DataContext="{d:DesignInstance Type=design:DesignData,
                                      IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
@@ -23,7 +23,7 @@
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
             <ListView
-                x:Name="ServersList"
+                x:Name="NewsList"
                 Margin="0,20,0,0"
                 Background="Transparent"
                 BorderThickness="0"
@@ -31,11 +31,11 @@
                 ItemsSource="{Binding NewsCollection}"
                 SelectedItem="{Binding SelectedNews}"
                 SelectionChanged="News_SelectionChanged">
-                <!--<ListView.ItemsPanel>
+                <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel HorizontalAlignment="Left" />
                     </ItemsPanelTemplate>
-                </ListView.ItemsPanel>-->
+                </ListView.ItemsPanel>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>

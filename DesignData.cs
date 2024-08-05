@@ -7,15 +7,15 @@ namespace StaticRustLauncher.DesignData
     /// </summary>
     public class DesignData
     {
-        public ObservableCollection<Server> Servers { get; set; }
-        public ObservableCollection<News> NewsCollection { get; set; }
-        public ObservableCollection<Hosting> Hostings { get; set; }
+        public ObservableCollection<Server> Servers { get; set; } = [];
+        public ObservableCollection<News> NewsCollection { get; set; } = [];
+        public ObservableCollection<Host> Hosts { get; set; } = [];
 
         public DesignData()
         {
             LoadServers();
             LoadNews();
-            LoadHostings();
+            LoadHosts();
         }
 
         private void LoadServers()
@@ -67,40 +67,40 @@ namespace StaticRustLauncher.DesignData
         };
         }
 
-        private void LoadHostings()
+        private void LoadHosts()
         {
-            Hostings = new ObservableCollection<Hosting>
+            Hosts = new ObservableCollection<Host>
         {
-            new Hosting
+            new Host
             {
                 Name = "HostOne",
                 Description = "A reliable hosting service with excellent uptime.",
-                UsersCount = 1500,
-                ProjectsCount = 350,
+                Users = 1500,
+                Projects = 350,
                 HostingType = HostingType.Reliable
             },
-            new Hosting
+            new Host
             {
                 Name = "HostTwo",
                 Description = "Our choice for budget-friendly hosting.",
-                UsersCount = 2300,
-                ProjectsCount = 500,
+                Users = 2300,
+                Projects = 500,
                 HostingType = HostingType.OurChoice
             },
-            new Hosting
+            new Host
             {
                 Name = "HostThree",
                 Description = "Premium hosting with advanced features.",
-                UsersCount = 1200,
-                ProjectsCount = 200,
+                Users = 1200,
+                Projects = 200,
                 HostingType = HostingType.Reliable
             },
-            new Hosting
+            new Host
             {
                 Name = "HostFour",
                 Description = "Affordable and dependable hosting for small businesses.",
-                UsersCount = 1800,
-                ProjectsCount = 450,
+                Users = 1800,
+                Projects = 450,
                 HostingType = HostingType.OurChoice
             }
         };
