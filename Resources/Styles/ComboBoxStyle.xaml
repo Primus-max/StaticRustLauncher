@@ -5,7 +5,6 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
-
                     <Border
                         Background="#111111"
                         BorderBrush="Transparent"
@@ -20,16 +19,18 @@
                                 BorderBrush="Transparent"
                                 BorderThickness="0"
                                 ClickMode="Press"
-                                Focusable="False"
+                                Focusable="False"                                 
                                 IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}">
                                 <ToggleButton.Template>
                                     <ControlTemplate TargetType="ToggleButton">
                                         <Grid>
+                                            <!--  Selected Item  -->
                                             <ContentPresenter
+                                                Name="ContentSite"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Content="{TemplateBinding Content}"
-                                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                                Content="{Binding Path=SelectionBoxItem, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                IsHitTestVisible="False" />
                                             <!--  Arrow  -->
                                             <Path
                                                 Margin="0,0,10,0"
@@ -74,4 +75,5 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderThickness" Value="0" />
     </Style>
+
 </ResourceDictionary>
