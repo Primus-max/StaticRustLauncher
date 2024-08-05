@@ -21,7 +21,7 @@
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
             <ListView
                 x:Name="ServersList"
                 Margin="0,20,0,0"

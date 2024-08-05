@@ -2,14 +2,24 @@
 
 namespace StaticRustLauncher.DesignData
 {
+    /// <summary>
+    /// Класс с тестовыми наборами данных (Mock), если не надо, можно удалить
+    /// </summary>
     public class DesignData
     {
         public ObservableCollection<Server> Servers { get; set; }
         public ObservableCollection<News> NewsCollection { get; set; }
+        public ObservableCollection<Hosting> Hostings { get; set; }
 
         public DesignData()
         {
+            LoadServers();
+            LoadNews();
+            LoadHostings();
+        }
 
+        private void LoadServers()
+        {
 
             Servers = new ObservableCollection<Server>
             {
@@ -18,7 +28,10 @@ namespace StaticRustLauncher.DesignData
                 new Server { Name = "Server 3", Description = "This is the third server", PlayerOnline = 30, ServerType = ServerType.Premium, ServerCategory = "Classic", Country = "Germany", Status = "Online", Version = 3, MapName = "Map C" },
                 new Server { Name = "Server 4", Description = "This is the fourth server", PlayerOnline = 25, ServerType = null, ServerCategory = "Classic", Country = "France", Status = "Maintenance", Version = 4, MapName = "Map D" }
             };
+        }
 
+        private void LoadNews()
+        {
             NewsCollection = new ObservableCollection<News>
         {
             new News
@@ -50,6 +63,45 @@ namespace StaticRustLauncher.DesignData
                 Title = "Новость 5",
                 Description = "Описание пятой новости",
                 ReleaseDate = DateTime.Now.AddDays(-5)
+            }
+        };
+        }
+
+        private void LoadHostings()
+        {
+            Hostings = new ObservableCollection<Hosting>
+        {
+            new Hosting
+            {
+                Name = "HostOne",
+                Description = "A reliable hosting service with excellent uptime.",
+                UsersCount = 1500,
+                ProjectsCount = 350,
+                HostingType = HostingType.Reliable
+            },
+            new Hosting
+            {
+                Name = "HostTwo",
+                Description = "Our choice for budget-friendly hosting.",
+                UsersCount = 2300,
+                ProjectsCount = 500,
+                HostingType = HostingType.OurChoice
+            },
+            new Hosting
+            {
+                Name = "HostThree",
+                Description = "Premium hosting with advanced features.",
+                UsersCount = 1200,
+                ProjectsCount = 200,
+                HostingType = HostingType.Reliable
+            },
+            new Hosting
+            {
+                Name = "HostFour",
+                Description = "Affordable and dependable hosting for small businesses.",
+                UsersCount = 1800,
+                ProjectsCount = 450,
+                HostingType = HostingType.OurChoice
             }
         };
         }
