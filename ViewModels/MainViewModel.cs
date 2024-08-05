@@ -1,6 +1,4 @@
-﻿using StaticRustLauncher.Views.Windows;
-
-namespace StaticRustLauncher.ViewModels;
+﻿namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -11,14 +9,21 @@ public class MainViewModel : BaseViewModel
     public ICommand LoginCommand { get; } = null!;
     #endregion
 
-
     private Frame Frame { get; } = null!;
     private UserControl _currentPanel = null!;
+    private UserControl _statisticsPanel  = null!;
     public UserControl CurrentPanel
     {
         get => _currentPanel;
         set => Set(ref _currentPanel, value);
     }
+
+    public UserControl StatisticsPanel
+    {
+        get => _statisticsPanel;
+        set => Set(ref _statisticsPanel, value);
+    }
+
 
     public MainViewModel(Frame frame)
     {
@@ -29,10 +34,11 @@ public class MainViewModel : BaseViewModel
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
-        ShowPlayNowPanel(); 
+        ShowAvailableNewVersionPanel();
+        ShowStatisticsPanel();
     }
 
-        
+
     private void OnNavigate(object viewName)
     {
         switch (viewName as string)
@@ -41,39 +47,49 @@ public class MainViewModel : BaseViewModel
                 {
                     Frame.Navigate(new HomePage());
                     ShowPlayNowPanel();
+                    ShowStatisticsPanel();
                     break;
-                }                
+                }
             case "News":
-                Frame.Navigate(new NewsPage());
-                break;
+                {
+                    Frame.Navigate(new NewsPage());
+                    HideGamePanel();
+                    HideStatisticsPanel();
+                    break;
+                }
             case "Hosts":
-                Frame.Navigate(new HostingPage());
-                break;
+                {
+                    Frame.Navigate(new HostingPage());
+                    CurrentPanel = new UserControl();
+                    break;
+                }
+            case "Settings":
+                {
+                    Frame.Navigate(new SettingsPage());
+                    HideGamePanel();
+                    HideStatisticsPanel();
+                    break;
+                }
             default:
                 break;
         }
     }
 
-    private void ShowAvailableNewVersionPanel() =>
-        CurrentPanel = new AvailableNewVersionControl();
+    private void ShowAvailableNewVersionPanel() => CurrentPanel = new AvailableNewVersionControl();
+    private void ShowLoadingPanel() => CurrentPanel = new LoadingPanelControl();
+    private void ShowInstallGamePanel() => CurrentPanel = new InstallGameControl();
+    private void ShowPlayNowPanel() => CurrentPanel = new PlayNowControl();
+    private void HideGamePanel() => CurrentPanel = null!;
 
-    private void ShowLoadingPanel() =>
-        CurrentPanel = new LoadingPanelControl();
-
-    private void ShowInstallGamePanel() =>
-        CurrentPanel = new InstallGameControl();
-
-    private void ShowPlayNowPanel() =>
-        CurrentPanel = new PlayNowControl();
-
-
+    private void ShowStatisticsPanel() => StatisticsPanel = new StatisticsControl();
+    private void HideStatisticsPanel() => StatisticsPanel = null!;
     #region Методы команд
     private void OnCloseAppCommandExecuted(object parameter)
     {
-        ConfirmExitWindow confirmExitWindow = new ();
+        ConfirmExitWindow confirmExitWindow = new();
         WindowHelper.OpenWindowWithBlur(confirmExitWindow);
     }
-    
+
 
     private void OnMinimizeAppCommandExecuted(object parameter) =>
         Application.Current.MainWindow.WindowState = WindowState.Minimized;

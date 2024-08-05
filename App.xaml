@@ -25,6 +25,8 @@
                 <ResourceDictionary Source="/Resources/Assets/RoundedProgressBar.xaml" />
                 <ResourceDictionary Source="/Resources/ImagesResources.xaml" />
 
+                <ResourceDictionary Source="/Resources/PanelTemplates.xaml" />
+
                 <!--  SVG icons  -->
                 <ResourceDictionary Source="/Resources/Images/SvgResources.xaml" />
             </ResourceDictionary.MergedDictionaries>

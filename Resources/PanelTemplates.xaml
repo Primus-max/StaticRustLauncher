@@ -1,0 +1,34 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:StaticRustLauncher.Resources.Controls"
+    xmlns:selector="clr-namespace:StaticRustLauncher.Utils.Selectors">
+
+    <!--  Шаблоны для панелей  -->
+    <DataTemplate x:Key="AvailableNewVersionTemplate">
+        <controls:AvailableNewVersionControl />
+    </DataTemplate>
+    <DataTemplate x:Key="LoadingPanelTemplate">
+        <controls:LoadingPanelControl />
+    </DataTemplate>
+    <DataTemplate x:Key="InstallGameTemplate">
+        <controls:InstallGameControl />
+    </DataTemplate>
+    <DataTemplate x:Key="PlayNowTemplate">
+        <controls:PlayNowControl />
+    </DataTemplate>
+
+    <DataTemplate x:Key="StatisticsTemplate">
+        <controls:StatisticsControl />
+    </DataTemplate>
+
+
+    <!--  Управление выбором  -->
+    <selector:PanelTemplateSelector
+        x:Key="PanelTemplateSelector"
+        AvailableNewVersionTemplate="{StaticResource AvailableNewVersionTemplate}"
+        InstallGameTemplate="{StaticResource InstallGameTemplate}"
+        LoadingPanelTemplate="{StaticResource LoadingPanelTemplate}"
+        PlayNowTemplate="{StaticResource PlayNowTemplate}"
+        StatisticsTemplate="{StaticResource StatisticsTemplate}" />
+</ResourceDictionary>

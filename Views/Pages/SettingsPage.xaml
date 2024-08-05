@@ -2,15 +2,59 @@
     x:Class="StaticRustLauncher.Views.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:StaticRustLauncher.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:design="clr-namespace:StaticRustLauncher.DesignData"
     xmlns:local="clr-namespace:StaticRustLauncher.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Настройки"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Title="SettingsPage"
+    Width="860"
+    Height="480"
+    Margin="0,20,0,0"
+    HorizontalAlignment="Left"
     mc:Ignorable="d">
-
     <Grid>
-        <TextBlock Text="This is the Settings Page" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border
+                    Width="860"
+                    Height="480"
+                    Padding="20"
+                    Background="{StaticResource BackgroundPanelBrush}"
+                    CornerRadius="20">
+                    <!--  Первая строка  -->
+                    <StackPanel
+                        Grid.Row="0"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <TextBlock Foreground="{StaticResource DefaultTextColorBrush}">
+                            <Run Text="Смена языка" />
+                            <LineBreak />
+                            <Run Text="Выберите язык лаунчера" />
+                        </TextBlock>
+
+                        <ComboBox
+                            Width="175"
+                            Height="40"
+                            Margin="500,0,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center">
+                            <ComboBoxItem Content="Русский" IsSelected="True" />
+                        </ComboBox>
+
+                    </StackPanel>
+                    <!--  Вторая строка  -->
+                    <!--  Третья строка  -->
+                    <!--  Четвёртая строка  -->
+                </Border>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

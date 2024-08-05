@@ -19,12 +19,12 @@ public class BaseViewModel : INotifyPropertyChanged, IDisposable
     /// <param name="value"></param>
     /// <param name="PropertyName"></param>
     /// <returns></returns>
-    protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null!)
+    protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null!)
     {
         if (Equals(field, value)) return false;
 
         field = value;
-        OnPropertyChanged(nameof(field));
+        OnPropertyChanged(propertyName);
         return true;
     }
 
