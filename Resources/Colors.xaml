@@ -9,6 +9,7 @@
     <Color x:Key="HoverButtonColor">#2800DEEE</Color>
     <Color x:Key="ErrorColor">#39BD2727</Color>
     <Color x:Key="ErrorOutlineColor">#BD2727</Color>
+    <Color x:Key="DefaultMenuButtonColor">#00d6d611</Color>
 
     <!--  Конвертер цвета для использования в свойствах типа Brush  -->
     <SolidColorBrush x:Key="BackgroundPanelBrush" Color="{StaticResource BackgroundPanelColor}" />
@@ -17,6 +18,7 @@
     <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
     <SolidColorBrush x:Key="GrayTextBrush" Color="{StaticResource GrayTextColor}" />
     <SolidColorBrush x:Key="DefaultTextColorBrush" Color="{StaticResource DefaultTextColor}" />
+    <SolidColorBrush x:Key="DefaultMenuButtonBrush" Color="{StaticResource DefaultMenuButtonColor}" />
     <SolidColorBrush x:Key="HoverButtonColorBrush" Color="{StaticResource HoverButtonColor}" />
     <SolidColorBrush x:Key="ErrorColorBrush" Color="{StaticResource ErrorColor}" />
     <SolidColorBrush x:Key="ErrorOutlineColorBrush" Color="{StaticResource ErrorOutlineColor}" />

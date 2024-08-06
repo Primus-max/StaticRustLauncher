@@ -1,4 +1,6 @@
-﻿namespace StaticRustLauncher.ViewModels;
+﻿using System.Reflection.Metadata;
+
+namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -12,18 +14,22 @@ public class MainViewModel : BaseViewModel
     private Frame Frame { get; } = null!;
     private UserControl _currentPanel = null!;
     private UserControl _statisticsPanel  = null!;
+    private string? _activeButton;
     public UserControl CurrentPanel
     {
         get => _currentPanel;
         set => Set(ref _currentPanel, value);
     }
-
     public UserControl StatisticsPanel
     {
         get => _statisticsPanel;
         set => Set(ref _statisticsPanel, value);
     }
-
+    public string? ActiveButton
+    {
+        get => _activeButton;
+        set => Set(ref _activeButton, value);
+    }
 
     public MainViewModel(Frame frame)
     {
@@ -41,8 +47,13 @@ public class MainViewModel : BaseViewModel
 
     private void OnNavigate(object viewName)
     {
-        switch (viewName as string)
+        if(viewName is string destination)        
+            ActiveButton = destination;
+
+            switch (viewName as string)
         {
+            
+
             case "Home":
                 {
                     Frame.Navigate(new HomePage());

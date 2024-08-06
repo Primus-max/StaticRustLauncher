@@ -1,4 +1,6 @@
-﻿namespace StaticRustLauncher.Views.Windows;
+﻿using StaticRustLauncher.DependencyProperties;
+
+namespace StaticRustLauncher.Views.Windows;
 
 /// <summary>
 /// Главное окно приложения
@@ -10,7 +12,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = new MainViewModel(MainFrame);
 
-        AuthorizationButton.Visibility = Visibility.Visible;
+        AuthorizationButton.Visibility = Visibility.Visible;       
     }
 
 

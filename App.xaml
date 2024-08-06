@@ -2,6 +2,7 @@
     x:Class="StaticRustLauncher.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:StaticRustLauncher.Converters"
     xmlns:local="clr-namespace:StaticRustLauncher.ViewModels"
     xmlns:views="clr-namespace:StaticRustLauncher.Views.Pages"
     StartupUri="Views/Windows/MainWindow.xaml">
@@ -32,6 +33,7 @@
                 <!--  SVG icons  -->
                 <ResourceDictionary Source="/Resources/Images/SvgResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
 
 
             <!--  DataTemplates для ViewModels  -->
