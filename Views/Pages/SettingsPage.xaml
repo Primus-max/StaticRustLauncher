@@ -96,7 +96,7 @@
                     <StackPanel Grid.Row="2" HorizontalAlignment="Left">
                         <TextBlock
                             Margin="0,0,0,10"
-                            HorizontalAlignment="Center"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontFamily="{DynamicResource FontBold}"
                             FontSize="24"
@@ -112,11 +112,14 @@
                                 FontFamily="{DynamicResource FontRegular}"
                                 FontSize="18"
                                 Foreground="#65FFFFFF"
-                                Style="{StaticResource InputFileStyle}" />
+                                Style="{StaticResource InputFileStyle}"
+                                Text="{Binding LauncherFilePath}" />
                             <Button
                                 Width="157"
                                 Height="54"
                                 Margin="30,0,0,0"
+                                Command="{Binding OpenFileDialogCommand}"
+                                CommandParameter="Launcher"
                                 Style="{StaticResource OutlineButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Path
@@ -148,11 +151,14 @@
                                 FontFamily="{DynamicResource FontRegular}"
                                 FontSize="18"
                                 Foreground="#65FFFFFF"
-                                Style="{StaticResource InputFileStyle}" />
+                                Style="{StaticResource InputFileStyle}"
+                                Text="{Binding GameFilePath}" />
                             <Button
                                 Width="157"
                                 Height="54"
                                 Margin="30,0,0,0"
+                                Command="{Binding OpenFileDialogCommand}"
+                                CommandParameter="Game"
                                 Style="{StaticResource OutlineButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Path
