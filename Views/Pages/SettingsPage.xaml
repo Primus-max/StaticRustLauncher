@@ -15,34 +15,42 @@
     mc:Ignorable="d">
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
 
-                <Border
-                    Width="860"
-                    Height="696"
-                    Padding="20"
-                    Background="{StaticResource BackgroundPanelBrush}"
-                    CornerRadius="20">
+
+            <Border
+                Padding="20"
+                Background="{StaticResource BackgroundPanelBrush}"
+                CornerRadius="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="365*" />
+                    </Grid.RowDefinitions>
+
                     <!--  Первая строка  -->
                     <StackPanel
-                        Grid.Row="0"
+                        Height="57"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
                         <TextBlock Foreground="{StaticResource DefaultTextColorBrush}">
-                            <Run Text="Смена языка" />
+                            <Run
+                                FontFamily="{DynamicResource FontBold}"
+                                FontSize="24"
+                                Text="Смена языка" />
                             <LineBreak />
-                            <Run Text="Выберите язык лаунчера" />
+                            <Run
+                                FontFamily="{DynamicResource FontRegular}"
+                                FontSize="20"
+                                Foreground="#65FFFFFF"
+                                Text="Выберите язык лаунчера" />
                         </TextBlock>
 
                         <ComboBox
                             Width="175"
                             Height="54"
+                            Margin="373,0,0,0"
                             FontFamily="{DynamicResource FontRegular}"
                             FontSize="12"
                             Foreground="{StaticResource DefaultTextColorBrush}"
@@ -53,10 +61,113 @@
                         </ComboBox>
                     </StackPanel>
                     <!--  Вторая строка  -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Height="54"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <TextBlock Foreground="{StaticResource DefaultTextColorBrush}">
+                            <Run
+                                FontFamily="{DynamicResource FontBold}"
+                                FontSize="24"
+                                Text="Верссии игры" />
+                            <LineBreak />
+                            <Run
+                                FontFamily="{DynamicResource FontRegular}"
+                                FontSize="20"
+                                Foreground="#65FFFFFF"
+                                Text="Выберите версию игры, в которой хотите принять участие" />
+                        </TextBlock>
+
+                        <ComboBox
+                            Width="157"
+                            Height="54"
+                            Margin="41,0,0,0"
+                            FontFamily="{DynamicResource FontRegular}"
+                            FontSize="12"
+                            Foreground="{StaticResource DefaultTextColorBrush}"
+                            Style="{StaticResource ComboBoxStyle}">
+                            <ComboBoxItem Content="V 2564" IsSelected="True" />
+                            <ComboBoxItem Content="V 2654" />
+                            <ComboBoxItem Content="V 5264" />
+                        </ComboBox>
+                    </StackPanel>
                     <!--  Третья строка  -->
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Left">
+                        <TextBlock
+                            Margin="0,0,0,10"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource FontBold}"
+                            FontSize="24"
+                            Foreground="{StaticResource DefaultTextColorBrush}"
+                            LineHeight="30"
+                            Text="Расположение лаунчера" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox
+                                Width="620"
+                                Height="54"
+                                Padding="10"
+                                VerticalContentAlignment="Center"
+                                FontFamily="{DynamicResource FontRegular}"
+                                FontSize="18"
+                                Foreground="#65FFFFFF"
+                                Style="{StaticResource InputFileStyle}" />
+                            <Button
+                                Width="157"
+                                Height="54"
+                                Margin="30,0,0,0"
+                                Style="{StaticResource OutlineButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path
+                                        Width="18"
+                                        Height="18"
+                                        Margin="0,0,10,0"
+                                        Data="M0.511461 9.99516V4.25212C0.511461 2.3599 1.79687 0.693188 3.61272 0.190638C4.06583 0.0652371 4.53975 0 5.00974 0H5.8677C7.54894 0 9.52206 1.31117 10.2463 3.04481C11.0365 3.1006 11.8239 3.20951 12.6032 3.37155C14.8007 3.82847 16.5611 5.52447 17.1376 7.70322C17.6165 9.51298 17.6229 11.4413 17.144 13.2511C16.5585 15.464 14.779 17.1547 12.5471 17.6188L12.3918 17.6511C10.1543 18.1163 7.8457 18.1163 5.60824 17.6511L5.45287 17.6188C3.22102 17.1547 1.44153 15.464 0.855973 13.2511C0.662596 12.5203 0.548353 11.7702 0.512396 11.0164L0.511461 11.0138V10.9964C0.496167 10.6629 0.496192 10.3287 0.511461 9.99516ZM11.7132 5.14833C11.372 5.09119 11.0492 5.32281 10.9923 5.66566C10.9354 6.00852 11.166 6.33278 11.5073 6.38993L11.5499 6.39706C13.0307 6.64501 14.1161 7.93217 14.1161 9.44039C14.1161 9.78798 14.3966 10.0698 14.7426 10.0698C15.0885 10.0698 15.369 9.78798 15.369 9.44039C15.369 7.31686 13.8409 5.50457 11.7559 5.15547L11.7132 5.14833Z"
+                                        Fill="White" />
+                                    <TextBlock Text="Открыть" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
                     <!--  Четвёртая строка  -->
-                </Border>
-            </Grid>
+                    <StackPanel Grid.Row="3" HorizontalAlignment="Left">
+                        <TextBlock
+                            Margin="0,0,0,10"
+                            FontFamily="{DynamicResource FontBold}"
+                            FontSize="24"
+                            Foreground="{StaticResource DefaultTextColorBrush}"
+                            LineHeight="30"
+                            Text="Расположение игры" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox
+                                Width="620"
+                                Height="54"
+                                Padding="10"
+                                VerticalContentAlignment="Center"
+                                FontFamily="{DynamicResource FontRegular}"
+                                FontSize="18"
+                                Foreground="#65FFFFFF"
+                                Style="{StaticResource InputFileStyle}" />
+                            <Button
+                                Width="157"
+                                Height="54"
+                                Margin="30,0,0,0"
+                                Style="{StaticResource OutlineButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path
+                                        Width="18"
+                                        Height="18"
+                                        Margin="0,0,10,0"
+                                        Data="M0.511461 9.99516V4.25212C0.511461 2.3599 1.79687 0.693188 3.61272 0.190638C4.06583 0.0652371 4.53975 0 5.00974 0H5.8677C7.54894 0 9.52206 1.31117 10.2463 3.04481C11.0365 3.1006 11.8239 3.20951 12.6032 3.37155C14.8007 3.82847 16.5611 5.52447 17.1376 7.70322C17.6165 9.51298 17.6229 11.4413 17.144 13.2511C16.5585 15.464 14.779 17.1547 12.5471 17.6188L12.3918 17.6511C10.1543 18.1163 7.8457 18.1163 5.60824 17.6511L5.45287 17.6188C3.22102 17.1547 1.44153 15.464 0.855973 13.2511C0.662596 12.5203 0.548353 11.7702 0.512396 11.0164L0.511461 11.0138V10.9964C0.496167 10.6629 0.496192 10.3287 0.511461 9.99516ZM11.7132 5.14833C11.372 5.09119 11.0492 5.32281 10.9923 5.66566C10.9354 6.00852 11.166 6.33278 11.5073 6.38993L11.5499 6.39706C13.0307 6.64501 14.1161 7.93217 14.1161 9.44039C14.1161 9.78798 14.3966 10.0698 14.7426 10.0698C15.0885 10.0698 15.369 9.78798 15.369 9.44039C15.369 7.31686 13.8409 5.50457 11.7559 5.15547L11.7132 5.14833Z"
+                                        Fill="White" />
+                                    <TextBlock Text="Открыть" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
         </ScrollViewer>
     </Grid>
 </Page>
