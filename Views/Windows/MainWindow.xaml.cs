@@ -1,5 +1,7 @@
 ﻿using StaticRustLauncher.DependencyProperties;
 
+using System.Windows.Controls;
+
 namespace StaticRustLauncher.Views.Windows;
 
 /// <summary>
@@ -12,9 +14,8 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = new MainViewModel(MainFrame);
 
-        AuthorizationButton.Visibility = Visibility.Visible;       
+        AuthorizationButton.Visibility = Visibility.Visible;
     }
-
 
     public void ShowPostLoginButtons(bool isLogin)
     {

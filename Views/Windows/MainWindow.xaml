@@ -93,6 +93,7 @@
                         <StackPanel Name="MenuButtonsSet">
 
                             <Button
+                                x:Name="myButton"
                                 Width="248"
                                 Command="{Binding NavigationCommand}"
                                 CommandParameter="Home"

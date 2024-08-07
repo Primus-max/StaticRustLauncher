@@ -1,15 +1,5 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:StaticRustLauncher.Converters">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <converters:ActiveButtonBackgroundConverter
-        x:Key="ActiveButtonBackgroundConverter"
-        ActiveBrush="{StaticResource HoverButtonColorBrush}"
-        DefaultBrush="{StaticResource DefaultTextColorBrush}" />
-
-    <!--  Определение Brush для использования в анимации  -->
-    <SolidColorBrush x:Key="HoverButtonColorBrush" Color="#2800DEEE" />
 
     <!--  Кастомный стиль для кнопок  -->
     <Style x:Key="MenuButtonStyle" TargetType="Button">
@@ -67,6 +57,7 @@
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                 </ControlTemplate>
+
             </Setter.Value>
         </Setter>
 
