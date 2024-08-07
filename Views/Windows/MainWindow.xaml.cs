@@ -23,4 +23,11 @@ public partial class MainWindow : Window
         UserCabinetButton.Visibility = Visibility.Visible;
         LogoutButton.Visibility = Visibility.Visible;
     }
+
+    // Перетаскивание
+    private void Window_DragMove(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == MouseButton.Left)        
+            this.DragMove();        
+    }
 }

@@ -36,13 +36,7 @@
         <Setter Property="Height" Value="28" />
     </Style>
 
-    <!--<Style x:Key="TagPremiumTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontRegular}" />
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="Foreground" Value="{StaticResource DefaultTextColorBrush}" />
-    </Style>-->
+
     <!--#endregion-->
 
     <!--#region Стили для VIP тегов-->
@@ -58,12 +52,5 @@
         <Setter Property="Height" Value="28" />
     </Style>
 
-    <!--<Style x:Key="TagVipTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontRegular}" />
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="Foreground" Value="{StaticResource DefaultTextColorBrush}" />
-    </Style>-->
     <!--#endregion-->
 </ResourceDictionary>

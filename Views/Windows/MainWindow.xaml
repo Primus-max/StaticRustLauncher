@@ -12,50 +12,12 @@
     Width="1200"
     Height="800"
     Background="#FF111111"
+    MouseLeftButtonDown="Window_DragMove"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowState="Normal"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Window.Resources>
-        <converters:ActiveButtonBackgroundConverter
-            x:Key="ActiveButtonBackgroundConverter"
-            ActiveBrush="{StaticResource HoverButtonColorBrush}"
-            DefaultBrush="{StaticResource DefaultMenuButtonBrush}" />
-        <!--<selector:PanelTemplateSelector
-            x:Key="PanelTemplateSelector"
-            AvailableNewVersionTemplate="{StaticResource AvailableNewVersionTemplate}"
-            InstallGameTemplate="{StaticResource InstallGameTemplate}"
-            LoadingPanelTemplate="{StaticResource LoadingPanelTemplate}"
-            PlayNowTemplate="{StaticResource PlayNowTemplate}" />-->
-
-        <!--  Панель обновлений  -->
-        <!--
-        <DataTemplate x:Key="AvailableNewVersionTemplate">
-            <controls:AvailableNewVersionControl />
-        </DataTemplate>
-
-        -->
-        <!--  Панель загрузки  -->
-        <!--
-        <DataTemplate x:Key="LoadingPanelTemplate">
-            <controls:LoadingPanelControl />
-        </DataTemplate>
-        -->
-        <!--  Панель выбора директории или скачивания  -->
-        <!--
-        <DataTemplate x:Key="InstallGameControlTemplate">
-            <controls:InstallGameControl />
-        </DataTemplate>
-
-        -->
-        <!--  Панель старта игры  -->
-        <!--
-        <DataTemplate x:Key="PlayNowControlTemplate">
-            <controls:InstallGameControl />
-        </DataTemplate>-->
-    </Window.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="328" />
@@ -361,7 +323,6 @@
 
             </StackPanel>
         </Border>
-
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
