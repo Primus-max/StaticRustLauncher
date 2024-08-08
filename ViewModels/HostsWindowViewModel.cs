@@ -2,8 +2,8 @@
 
 public class HostsWindowViewModel
 {
-    public Host? SelectedHost { get; set; } = null!;
+    public Hosting? SelectedHost { get; set; } = null!;
 
-    public HostsWindowViewModel(Host selectedHost) =>
+    public HostsWindowViewModel(Hosting selectedHost) =>
         SelectedHost = selectedHost;
 }

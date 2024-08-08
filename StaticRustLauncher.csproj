@@ -46,6 +46,7 @@
   <ItemGroup>
     <Folder Include="Assests\Images\" />
     <Folder Include="Assests\Components\" />
+    <Folder Include="EventHandlers\" />
   </ItemGroup>
 
   <ItemGroup>

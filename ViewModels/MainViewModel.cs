@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace StaticRustLauncher.ViewModels;
+﻿namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -13,7 +11,7 @@ public class MainViewModel : BaseViewModel
 
     private Frame Frame { get; } = null!;
     private UserControl _currentPanel = null!;
-    private UserControl _statisticsPanel  = null!;
+    private UserControl _statisticsPanel = null!;
     private string? _activeButton;
     public UserControl CurrentPanel
     {
@@ -47,12 +45,12 @@ public class MainViewModel : BaseViewModel
 
     private void OnNavigate(object viewName)
     {
-        if(viewName is string destination)        
+        if (viewName is string destination)
             ActiveButton = destination;
 
-            switch (viewName as string)
+        switch (viewName as string)
         {
-            
+
 
             case "Home":
                 {

@@ -5,9 +5,9 @@
 /// </summary>
 public partial class HostsWindow : Window
 {
-    public Host? SelectedHost { get; set; } = null!;
+    public Hosting? SelectedHost { get; set; } = null!;
 
-    public HostsWindow(Host selectedHost)
+    public HostsWindow(Hosting selectedHost)
     {
         InitializeComponent();
         DataContext = new HostsWindowViewModel(selectedHost);

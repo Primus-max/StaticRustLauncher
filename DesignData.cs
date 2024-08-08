@@ -8,8 +8,8 @@ namespace StaticRustLauncher.DesignData
     public class DesignData
     {
         public ObservableCollection<Server> Servers { get; set; } = [];
-        public ObservableCollection<News> NewsCollection { get; set; } = [];
-        public ObservableCollection<Host> Hosts { get; set; } = [];
+        public ObservableCollection<NewsItem> NewsCollection { get; set; } = [];
+        public ObservableCollection<Hosting> Hosts { get; set; } = [];
 
         public DesignData()
         {
@@ -32,33 +32,33 @@ namespace StaticRustLauncher.DesignData
 
         private void LoadNews()
         {
-            NewsCollection = new ObservableCollection<News>
+            NewsCollection = new ObservableCollection<NewsItem>
         {
-            new News
+            new NewsItem
             {
                 Title = "Новость 1",
                 Description = "Описание первой новости",
                 ReleaseDate = DateTime.Now.AddDays(-1)
             },
-            new News
+            new NewsItem
             {
                 Title = "Новость 2",
                 Description = "Описание второй новости",
                 ReleaseDate = DateTime.Now.AddDays(-2)
             },
-            new News
+            new NewsItem
             {
                 Title = "Новость 3",
                 Description = "Описание третьей новости",
                 ReleaseDate = DateTime.Now.AddDays(-3)
             },
-            new News
+            new NewsItem
             {
                 Title = "Новость 4",
                 Description = "Описание четвертой новости",
                 ReleaseDate = DateTime.Now.AddDays(-4)
             },
-            new News
+            new NewsItem
             {
                 Title = "Новость 5",
                 Description = "Описание пятой новости",
@@ -69,9 +69,9 @@ namespace StaticRustLauncher.DesignData
 
         private void LoadHosts()
         {
-            Hosts = new ObservableCollection<Host>
+            Hosts = new ObservableCollection<Hosting>
         {
-            new Host
+            new Hosting
             {
                 Name = "HostOne",
                 Description = "A reliable hosting service with excellent uptime.",
@@ -79,7 +79,7 @@ namespace StaticRustLauncher.DesignData
                 Projects = 350,
                 HostingType = HostingType.Reliable
             },
-            new Host
+            new Hosting
             {
                 Name = "HostTwo",
                 Description = "Our choice for budget-friendly hosting.",
@@ -87,7 +87,7 @@ namespace StaticRustLauncher.DesignData
                 Projects = 500,
                 HostingType = HostingType.OurChoice
             },
-            new Host
+            new Hosting
             {
                 Name = "HostThree",
                 Description = "Premium hosting with advanced features.",
@@ -95,7 +95,7 @@ namespace StaticRustLauncher.DesignData
                 Projects = 200,
                 HostingType = HostingType.Reliable
             },
-            new Host
+            new Hosting
             {
                 Name = "HostFour",
                 Description = "Affordable and dependable hosting for small businesses.",

@@ -54,7 +54,7 @@
                             FontFamily="{DynamicResource FontRegular}"
                             FontSize="12"
                             Foreground="{x:Null}"
-                            Style="{StaticResource ComboBoxStyle}" Background="{x:Null}" BorderBrush="{x:Null}" MouseEnter="Test_MiuseOver">
+                            Style="{StaticResource ComboBoxStyle}">
                             <ComboBoxItem Content="Русский" IsSelected="True" />
                             <ComboBoxItem Content="English" />
                             <ComboBoxItem Content="Deutsch" />

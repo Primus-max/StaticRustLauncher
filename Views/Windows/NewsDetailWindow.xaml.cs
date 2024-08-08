@@ -5,7 +5,7 @@
 /// </summary>
 public partial class NewsDetailWindow : Window
 {
-    public NewsDetailWindow(News selectedNews)
+    public NewsDetailWindow(NewsItem selectedNews)
     {
         InitializeComponent();
         DataContext = new NewsDetailWindowViewModel(selectedNews);

@@ -7,8 +7,8 @@ namespace StaticRustLauncher.Views.Pages;
 /// </summary>
 public partial class NewsPage : Page
 {
-    public ObservableCollection<News> NewsCollection { get; set; } = [];
-    public News SelectedNews { get; set; } = null!;
+    public ObservableCollection<NewsItem> NewsCollection { get; set; } = [];
+    public NewsItem SelectedNews { get; set; } = null!;
 
     public NewsPage()
     {
@@ -19,33 +19,33 @@ public partial class NewsPage : Page
 
     private void LoadTestData()
     {
-        NewsCollection = new ObservableCollection<News>
+        NewsCollection = new ObservableCollection<NewsItem>
         {
-            new News
+            new NewsItem
             {
                 Title = "Новость 1",
                 Description = "Описание первой новости",
                 ReleaseDate = DateTime.Now.AddDays(-1)
             },
-            new News
+            new NewsItem
             {
                 Title = "Новость 2",
                 Description = "Описание второй новости",
                 ReleaseDate = DateTime.Now.AddDays(-2)
             },
-            new News
+            new NewsItem
             {
                 Title = "Новость 3",
                 Description = "Описание третьей новости",
                 ReleaseDate = DateTime.Now.AddDays(-3)
             },
-            new News
+            new NewsItem
             {
                 Title = "Новость 4",
                 Description = "Описание четвертой новости",
                 ReleaseDate = DateTime.Now.AddDays(-4)
             },
-            new News
+            new NewsItem
             {
                 Title = "Новость 5",
                 Description = "Описание пятой новости",

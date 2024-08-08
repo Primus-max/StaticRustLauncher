@@ -79,13 +79,13 @@
         <Setter Property="BorderThickness" Value="0" />
     </Style>
 
-    <!--  Style for ComboBoxItem  -->
+    <!--  ComboBoxItem  -->
     <Style TargetType="ComboBoxItem">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Cursor" Value="Hand" />
-        <!--  Increase text size  -->
+        <!--  Text  -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBoxItem">
@@ -95,12 +95,6 @@
                             Foreground="{TemplateBinding Foreground}"
                             Text="{TemplateBinding Content}" />
                     </Border>
-
-                    <!--<ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="Orange" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -108,17 +102,15 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="#00DEEE" />
                 <Setter Property="Background" Value="Transparent" />
-                <!--  Remove default behavior  -->
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Foreground" Value="White" />
-                <!--  White text for selected item  -->
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <!--  Style for ToggleButton within ComboBox  -->
-    <!--<Style TargetType="ToggleButton">
+    <!--  ToggleButton within ComboBox  -->
+    <Style TargetType="ToggleButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -132,8 +124,6 @@
                 <Setter Property="BorderBrush" Value="Transparent" />
             </Trigger>
         </Style.Triggers>
-    </Style>-->
-
-
+    </Style>
 
 </ResourceDictionary>

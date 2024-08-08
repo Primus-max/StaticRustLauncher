@@ -7,8 +7,8 @@ namespace StaticRustLauncher.Views.Pages;
 /// </summary>
 public partial class HostingPage : Page
 {
-    public ObservableCollection<Host> Hosts { get; set; } = [];
-    public Host SelectedHosting { get; set; } = null!;
+    public ObservableCollection<Hosting> Hosts { get; set; } = [];
+    public Hosting SelectedHosting { get; set; } = null!;
 
     public HostingPage()
     {
@@ -20,9 +20,9 @@ public partial class HostingPage : Page
 
     private void LoadHosts()
     {
-        Hosts = new ObservableCollection<Host>
+        Hosts = new ObservableCollection<Hosting>
         {
-            new Host
+            new Hosting
             {
                 Name = "HostOne",
                 Description = "A reliable hosting service with excellent uptime.",
@@ -30,7 +30,7 @@ public partial class HostingPage : Page
                 Projects = 350,
                 HostingType = HostingType.Reliable
             },
-            new Host
+            new Hosting
             {
                 Name = "HostTwo",
                 Description = "Our choice for budget-friendly hosting.",
@@ -38,7 +38,7 @@ public partial class HostingPage : Page
                 Projects = 500,
                 HostingType = HostingType.OurChoice
             },
-            new Host
+            new Hosting
             {
                 Name = "HostThree",
                 Description = "Premium hosting with advanced features.",
@@ -46,7 +46,7 @@ public partial class HostingPage : Page
                 Projects = 200,
                 HostingType = HostingType.Reliable
             },
-            new Host
+            new Hosting
             {
                 Name = "HostFour",
                 Description = "Affordable and dependable hosting for small businesses.",
