@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using StaticRustLauncher.Services;
+
+using System.Collections.ObjectModel;
+using System.Net.Http;
 
 namespace StaticRustLauncher.Views.Pages;
 
@@ -15,7 +18,22 @@ public partial class HomePage : Page
     {
         InitializeComponent();
        // LoadTestData();
-        DataContext = this;    
+        DataContext = this;       
+        Task.Run(() => LoadServers());
+    }
+
+    async Task LoadServers()
+    {
+        try
+        {
+           HttpClient httpClient = new();
+            var serverService = new ServerService(httpClient);
+            var servers = await serverService.GetDataAsync("http://194.147.90.218/launcher/serversinfo");            
+        }
+        catch (Exception ex)
+        {
+            var asdf = ex;
+        }
     }
 
     //private void LoadTestData()

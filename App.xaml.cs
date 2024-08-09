@@ -31,12 +31,14 @@ public partial class App : Application
             client.BaseAddress = new Uri("http://194.147.90.218/launcher");
             client.DefaultRequestHeaders.Add("Accept", "application/json");
         });
-       
-        services.AddScoped<IDataService<NewsCollection>, NewsService>();
-        services.AddScoped<IDataService<ServerCollection>, ServersService>();
-        services.AddScoped<IDataService<ServerCollection>, ServersService>();
-        services.AddScoped<IDataService<HostingCollection>, HostingService>();
 
+    //services.AddScoped<IDataService<NewsCollection>, NewsService>();
+    //services.AddScoped<IDataService<ServerCollection>, ServersService>();
+    //services.AddScoped<IDataService<ServerCollection>, ServersService>();
+    //services.AddScoped<IDataService<HostingCollection>, HostingService>();
+    //http://194.147.90.218/launcher/news
+    //http://194.147.90.218/launcher/hostings
+    //http://194.147.90.218/launcher/serversinfo
         services.AddTransient<MainWindow>();
     }
 }

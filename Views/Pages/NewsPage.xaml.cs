@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using StaticRustLauncher.Services;
+
+using System.Collections.ObjectModel;
 
 namespace StaticRustLauncher.Views.Pages;
 
@@ -15,44 +17,22 @@ public partial class NewsPage : Page
         InitializeComponent();
         //LoadTestData();
         DataContext = this;
+        Task.Run(() => LoadServers());
     }
 
-    //private void LoadTestData()
-    //{
-    //    NewsCollection = new ObservableCollection<NewsItem>
-    //    {
-    //        new NewsItem
-    //        {
-    //            Title = "Новость 1",
-    //            Description = "Описание первой новости",
-    //            ReleaseDate = DateTime.Now.AddDays(-1)
-    //        },
-    //        new NewsItem
-    //        {
-    //            Title = "Новость 2",
-    //            Description = "Описание второй новости",
-    //            ReleaseDate = DateTime.Now.AddDays(-2)
-    //        },
-    //        new NewsItem
-    //        {
-    //            Title = "Новость 3",
-    //            Description = "Описание третьей новости",
-    //            ReleaseDate = DateTime.Now.AddDays(-3)
-    //        },
-    //        new NewsItem
-    //        {
-    //            Title = "Новость 4",
-    //            Description = "Описание четвертой новости",
-    //            ReleaseDate = DateTime.Now.AddDays(-4)
-    //        },
-    //        new NewsItem
-    //        {
-    //            Title = "Новость 5",
-    //            Description = "Описание пятой новости",
-    //            ReleaseDate = DateTime.Now.AddDays(-5)
-    //        }
-    //    };
-    //}
+    async Task LoadServers()
+    {
+        try
+        {
+            HttpClient httpClient = new();
+            var serverService = new NewsService(httpClient);
+            var news = await serverService.GetDataAsync("http://194.147.90.218/launcher/news");
+        }
+        catch (Exception ex)
+        {
+            var asdf = ex;
+        }
+    }
 
 
     private void News_SelectionChanged(object sender, SelectionChangedEventArgs e)

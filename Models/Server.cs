@@ -1,10 +1,4 @@
 ﻿namespace StaticRustLauncher.Models;
-
-public class ServerCollection
-{
-    public List<Server>? Servers { get; set; }
-}
-
 public class Server
 {
     public string? Hostname { get; set; }

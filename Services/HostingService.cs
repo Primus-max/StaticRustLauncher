@@ -1,8 +1,9 @@
-﻿namespace StaticRustLauncher.Services;
+﻿using StaticRustLauncher.Services.Base;
 
-public class HostingService : DataService<HostingCollection>
+namespace StaticRustLauncher.Services;
+
+public class HostingService : DataService<Hosting>
 {
-    public HostingService(HttpClient httpClient) : base(httpClient)
-    {
-    }
+    public HostingService(HttpClient httpClient) : base(httpClient) { }
 }
+

@@ -1,8 +1,8 @@
-﻿namespace StaticRustLauncher.Services;
+﻿using StaticRustLauncher.Services.Base;
 
-public class NewsService : DataService<NewsCollection>
+namespace StaticRustLauncher.Services;
+public class NewsService : DataService<NewsItem>
 {
-    public NewsService(HttpClient httpClient) : base(httpClient)
-    {
-    }
+    public NewsService(HttpClient httpClient) : base(httpClient) { }
 }
+

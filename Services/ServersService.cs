@@ -1,9 +1,9 @@
 ﻿
+using StaticRustLauncher.Services.Base;
+
 namespace StaticRustLauncher.Services;
 
-public class ServersService : DataService<ServerCollection>
+public class ServerService : DataService<Server>
 {
-    public ServersService(HttpClient httpClient) : base(httpClient)
-    {
-    }
+    public ServerService(HttpClient httpClient) : base(httpClient) { }
 }

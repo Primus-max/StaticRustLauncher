@@ -8,9 +8,3 @@ public class NewsItem
     public string? DateCreate { get; set; }
     public ServerType? ServerTypeForBackGround { get; set; } = ServerType.Premium; // Значение по умолчанию, чтобы получать нужный фон
 }
-
-
-public class NewsCollection
-{    
-    public List<NewsItem>? News { get; set; }
-}

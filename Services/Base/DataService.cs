@@ -1,10 +1,15 @@
-﻿namespace StaticRustLauncher.Services.Base;
+﻿using Newtonsoft.Json;
+
+namespace StaticRustLauncher.Services.Base;
 
 public class DataService<T> : IDataService<T>
 {
     private readonly HttpClient _httpClient;
-    public DataService(HttpClient httpClient) =>
-            _httpClient = httpClient;
+
+    public DataService(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+    }
 
     public async Task<List<T>> GetDataAsync(string endpoint)
     {
@@ -12,12 +17,15 @@ public class DataService<T> : IDataService<T>
         response.EnsureSuccessStatusCode();
 
         var jsonData = await response.Content.ReadAsStringAsync();
-        var options = new JsonSerializerOptions
+        var options = new JsonSerializerSettings
         {
-            PropertyNameCaseInsensitive = true
+            NullValueHandling = NullValueHandling.Ignore,
+            MissingMemberHandling = MissingMemberHandling.Ignore
         };
-        var dataCollection = JsonSerializer.Deserialize<DataCollection<T>>(jsonData, options);
 
-        return dataCollection?.Items ?? [];
+        // Deserialize the JSON into a Root<T> object
+        var root = JsonConvert.DeserializeObject<Root<T>>(jsonData, options);
+
+        return root?.Items ?? new List<T>();
     }
 }
