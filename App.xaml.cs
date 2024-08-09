@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
+using StaticRustLauncher.Infrastructure;
+
 namespace StaticRustLauncher;
 
 /// <summary>
@@ -26,19 +28,25 @@ public partial class App : Application
 
     private void ConfigureServices(ServiceCollection services)
     {
-        services.AddHttpClient("MainClient", client =>
-        {
-            client.BaseAddress = new Uri("http://194.147.90.218/launcher");
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-        });
+        //services.AddHttpClient("MainClient", client =>
+        //{
+        //    client.BaseAddress = new Uri("http://194.147.90.218/launcher");
+        //    client.DefaultRequestHeaders.Add("Accept", "application/json");
+        //});
 
-    //services.AddScoped<IDataService<NewsCollection>, NewsService>();
-    //services.AddScoped<IDataService<ServerCollection>, ServersService>();
-    //services.AddScoped<IDataService<ServerCollection>, ServersService>();
-    //services.AddScoped<IDataService<HostingCollection>, HostingService>();
-    //http://194.147.90.218/launcher/news
-    //http://194.147.90.218/launcher/hostings
-    //http://194.147.90.218/launcher/serversinfo
+        using var loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder
+                .AddFilter("Default", LogLevel.Information)
+                .AddFile("app.log");
+        });
+        //services.AddScoped<IDataService<NewsCollection>, NewsService>();
+        //services.AddScoped<IDataService<ServerCollection>, ServersService>();
+        //services.AddScoped<IDataService<ServerCollection>, ServersService>();
+        //services.AddScoped<IDataService<HostingCollection>, HostingService>();
+        //http://194.147.90.218/launcher/news
+        //http://194.147.90.218/launcher/hostings
+        //http://194.147.90.218/launcher/serversinfo
         //services.AddTransient<MainWindow>();
     }
 }
