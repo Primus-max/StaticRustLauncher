@@ -7,13 +7,20 @@
     xmlns:design="clr-namespace:StaticRustLauncher.DesignData"
     xmlns:local="clr-namespace:StaticRustLauncher.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:StaticRustLauncher.ViewModels"
     Title="NewsPage"
     Width="900"
     Height="500"
     Margin="-1,0,0,0"
-    d:DataContext="{d:DesignInstance Type=design:DesignData,
-                                     IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:NewsViewModal />
+    </Page.DataContext>
+
+    <!--
+        d:DataContext="{d:DesignInstance Type=design:DesignData,
+        IsDesignTimeCreatable=True}"
+    -->
 
     <Page.Resources>
         <converters:ServerTypeToBackgroundConverter x:Key="ServerTypeToBackgroundConverter" />

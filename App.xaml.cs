@@ -20,8 +20,8 @@ public partial class App : Application
         ServiceProvider = serviceCollection.BuildServiceProvider();
 
         // Запуск основного окна, передача ServiceProvider в конструктор
-        var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-        mainWindow.Show();
+        //var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+        //mainWindow.Show();
     }
 
     private void ConfigureServices(ServiceCollection services)
@@ -39,6 +39,6 @@ public partial class App : Application
     //http://194.147.90.218/launcher/news
     //http://194.147.90.218/launcher/hostings
     //http://194.147.90.218/launcher/serversinfo
-        services.AddTransient<MainWindow>();
+        //services.AddTransient<MainWindow>();
     }
 }
