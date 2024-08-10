@@ -11,7 +11,6 @@
     Title="HomePage"
     Width="900"
     Height="480"
-    Margin="-9,0,0,0"
     mc:Ignorable="d">
     <Page.DataContext>
         <vm:HomeViewModel />
@@ -30,6 +29,7 @@
     <Grid>
         <ListView
             x:Name="ServersList"
+            Margin="0,8,26,0"
             Background="Transparent"
             BorderThickness="0"
             ItemContainerStyle="{StaticResource ListViewItemStyle}"
@@ -45,7 +45,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border
-                        Width="864"
+                        Width="856"
                         Height="86"
                         Margin="0,6,0,5"
                         Padding="12"

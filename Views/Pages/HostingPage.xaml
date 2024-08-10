@@ -10,8 +10,7 @@
     xmlns:vm="clr-namespace:StaticRustLauncher.ViewModels"
     Title="HomePage"
     Width="900"
-    Height="720"
-    Margin="-8,0,0,0"
+    Height="700"
     mc:Ignorable="d">
     <Page.DataContext>
         <vm:HostsViewModel />
@@ -30,7 +29,7 @@
     <Grid>
         <ListView
             x:Name="HostingsList"
-            Margin="0,16,0,0"
+            Margin="0,10,26,0"
             Background="Transparent"
             BorderThickness="0"
             ItemContainerStyle="{StaticResource ListViewItemStyle}"
@@ -46,7 +45,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border
-                        Width="864"
+                        Width="856"
                         Height="86"
                         Margin="0,10,0,5"
                         Padding="12"

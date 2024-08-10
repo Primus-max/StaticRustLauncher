@@ -10,7 +10,7 @@
     xmlns:vm="clr-namespace:StaticRustLauncher.ViewModels"
     Title="NewsPage"
     Width="890"
-    Height="698"
+    Height="700"
     mc:Ignorable="d">
     <Page.DataContext>
         <vm:NewsViewModal />
@@ -29,7 +29,7 @@
     <Grid>
         <ListView
             x:Name="NewsList"
-            Margin="0,0,10,-6"
+            Margin="0,5,20,0"
             Background="Transparent"
             BorderThickness="0"
             ItemContainerStyle="{StaticResource ListViewItemStyle}"
@@ -45,7 +45,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border
-                        Width="860"
+                        Width="856"
                         Height="86"
                         Margin="-4,8,0,10"
                         Padding="14"
