@@ -13,6 +13,8 @@ public class MainViewModel : BaseViewModel
     private UserControl _currentPanel = null!;
     private UserControl _statisticsPanel = null!;
     private string? _activeButton;
+    private StatisticsData _statisticsData = null!;
+   
     public UserControl CurrentPanel
     {
         get => _currentPanel;
@@ -29,6 +31,12 @@ public class MainViewModel : BaseViewModel
         set => Set(ref _activeButton, value);
     }
 
+    public StatisticsData StatisticsData
+    {
+        get => _statisticsData;
+        set => Set(ref _statisticsData, value);
+    }
+
     public MainViewModel(Frame frame)
     {
         NavigationCommand = new LambdaCommand(OnNavigate);
@@ -40,6 +48,13 @@ public class MainViewModel : BaseViewModel
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
         ShowAvailableNewVersionPanel();
         ShowStatisticsPanel();
+
+
+        StatisticsData = new StatisticsData
+        {
+            UsersOnline = 150,
+            ServersCount = 25
+        };
     }
 
 
@@ -50,8 +65,6 @@ public class MainViewModel : BaseViewModel
 
         switch (viewName as string)
         {
-
-
             case "Home":
                 {
                     Frame.Navigate(new HomePage());

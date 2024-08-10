@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:StaticRustLauncher.Resources.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:StaticRustLauncher.ViewModels"
     Width="860"
     Height="90"
     Margin="0,20,0,0"
@@ -20,14 +21,16 @@
             Grid.Column="0"
             Width="410"
             Height="90"
-            HorizontalAlignment="Left" />
+            HorizontalAlignment="Left"
+            ServersCount="{Binding ServersCount}" />
 
         <!--  Панель с контентом UsersOnlineControl  -->
         <local:UsersOnlineControl
             Grid.Column="1"
             Width="410"
             Height="90"
-            HorizontalAlignment="Right" />
+            HorizontalAlignment="Right"
+            UsersOnline="{Binding UsersOnline}" />
 
     </Grid>
 </UserControl>

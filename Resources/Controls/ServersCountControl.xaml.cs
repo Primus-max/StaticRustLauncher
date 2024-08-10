@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿namespace StaticRustLauncher.Resources.Controls;
 
-namespace StaticRustLauncher.Resources.Controls
+/// <summary>
+/// Логика взаимодействия для ServersCountControl.xaml
+/// </summary>
+public partial class ServersCountControl : UserControl
 {
-    /// <summary>
-    /// Логика взаимодействия для ServersCountControl.xaml
-    /// </summary>
-    public partial class ServersCountControl : UserControl
+    public static readonly DependencyProperty ServersCountProperty =
+        DependencyProperty.Register("ServersCount", typeof(int), typeof(ServersCountControl), new PropertyMetadata(0));
+
+    public int ServersCount
     {
-        public ServersCountControl()
-        {
-            InitializeComponent();
-        }
+        get => (int)GetValue(ServersCountProperty);
+        set => SetValue(ServersCountProperty, value);
+    }
+
+
+    public ServersCountControl()
+    {
+        InitializeComponent();        
     }
 }

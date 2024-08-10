@@ -10,8 +10,8 @@
     xmlns:vm="clr-namespace:StaticRustLauncher.ViewModels"
     Title="HomePage"
     Width="900"
-    Height="500"
-    Margin="-6,0,0,0"
+    Height="720"
+    Margin="-8,0,0,0"
     mc:Ignorable="d">
     <Page.DataContext>
         <vm:HostsViewModel />
@@ -28,142 +28,140 @@
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer
-            Height="500"
-            HorizontalScrollBarVisibility="Disabled"
-            VerticalScrollBarVisibility="Auto">
-            <ListView
-                x:Name="HostingsList"
-                Margin="0,20,0,0"
-                Background="Transparent"
-                BorderThickness="0"
-                ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                ItemsSource="{Binding Hosts}"
-                SelectedItem="{Binding SelectedHosting}"
-                SelectionChanged="OpenDescriptionHost_Click">
-                <!--<ListView.ItemsPanel>
+        <ListView
+            x:Name="HostingsList"
+            Margin="0,16,0,0"
+            Background="Transparent"
+            BorderThickness="0"
+            ItemContainerStyle="{StaticResource ListViewItemStyle}"
+            ItemsSource="{Binding Hosts}"
+            SelectedItem="{Binding SelectedHosting}"
+            SelectionChanged="OpenDescriptionHost_Click">
+            <!--<ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel HorizontalAlignment="Left" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>-->
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border
-                            Width="864"
-                            Height="86"
-                            Margin="0,5,0,5"
-                            Padding="12"
-                            Background="{Binding HostingType, Converter={StaticResource ServerTypeToBackgroundConverter}}"
-                            BorderThickness="1"
-                            CornerRadius="20"
-                            Cursor="Hand">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="423*" />
-                                    <ColumnDefinition Width="415*" />
-                                </Grid.ColumnDefinitions>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Width="864"
+                        Height="86"
+                        Margin="0,10,0,5"
+                        Padding="12"
+                        Background="{Binding HostingType, Converter={StaticResource ServerTypeToBackgroundConverter}}"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        Cursor="Hand">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="423*" />
+                                <ColumnDefinition Width="415*" />
+                            </Grid.ColumnDefinitions>
 
-                                <!--#region Первая строка-->
-                                <StackPanel
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    VerticalAlignment="Center">
-                                    <TextBlock
-                                        FontFamily="{DynamicResource FontMedium}"
-                                        FontSize="18"
-                                        Foreground="{StaticResource DefaultTextColorBrush}"
-                                        LineHeight="22">
-                                        <Run Text="{Binding Name}" />
-                                    </TextBlock>
-                                </StackPanel>
-                                <StackPanel
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    Orientation="Horizontal">
-                                    <!--  Тип хостинга  -->
-                                    <Border
-                                        Margin="0,0,10,0"
-                                        HorizontalAlignment="Left"
-                                        Style="{Binding HostingType, Converter={StaticResource ServerTypeTagToStyleConverter}}">
-                                        <StackPanel
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Orientation="Horizontal">
-                                            <TextBlock
-                                                FontFamily="{DynamicResource FontRegular}"
-                                                FontSize="12"
-                                                Foreground="{StaticResource DefaultTextColorBrush}"
-                                                Text="{Binding HostingType, Converter={StaticResource HostingTypeConverter}}" />
-                                        </StackPanel>
-                                    </Border>
+                            <!--#region Первая строка-->
+                            <StackPanel
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    FontFamily="{DynamicResource FontMedium}"
+                                    FontSize="18"
+                                    Foreground="{StaticResource DefaultTextColorBrush}"
+                                    LineHeight="22">
+                                    <Run Text="{Binding Name}" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                                <!--  Тип хостинга  -->
+                                <Border
+                                    Margin="0,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    Style="{Binding HostingType, Converter={StaticResource ServerTypeTagToStyleConverter}}">
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="{DynamicResource FontRegular}"
+                                            FontSize="12"
+                                            Foreground="{StaticResource DefaultTextColorBrush}"
+                                            Text="{Binding HostingType, Converter={StaticResource HostingTypeConverter}}" />
+                                    </StackPanel>
+                                </Border>
 
-                                    <Border Margin="0,0,10,0" Style="{StaticResource TagGrayStyle}">
-                                        <StackPanel
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Orientation="Horizontal">
-                                            <Canvas
-                                                Width="17"
-                                                Height="17"
-                                                Margin="0,0,10,0">
-                                                <Path Data="M3.53846 5.67143C3.53846 4.19604 4.70941 3 6.15385 3C7.59828 3 8.76923 4.19604 8.76923 5.67143C8.76923 7.14682 7.59828 8.34286 6.15385 8.34286C4.70941 8.34286 3.53846 7.14682 3.53846 5.67143Z" Fill="White" />
-                                                <Path Data="M4.50082 9.54921L4.61042 9.53135C5.6329 9.36467 6.67479 9.36467 7.69727 9.53135L7.80687 9.54921C9.24759 9.78407 10.3077 11.0534 10.3077 12.5436C10.3077 13.348 9.66933 14 8.88187 14H3.42583C2.63836 14 2 13.348 2 12.5436C2 11.0534 3.06011 9.78407 4.50082 9.54921Z" Fill="White" />
-                                                <Path Data="M9.84615 3C9.59125 3 9.38462 3.21107 9.38462 3.47143C9.38462 3.73179 9.59125 3.94286 9.84615 3.94286C10.7808 3.94286 11.5385 4.71676 11.5385 5.67143C11.5385 6.62609 10.7808 7.4 9.84615 7.4C9.59125 7.4 9.38462 7.61107 9.38462 7.87143C9.38462 8.13179 9.59125 8.34286 9.84615 8.34286C11.2906 8.34286 12.4615 7.14682 12.4615 5.67143C12.4615 4.19604 11.2906 3 9.84615 3Z" Fill="White" />
-                                                <Path Data="M10.6099 9.52546C10.355 9.52546 10.1484 9.73652 10.1484 9.99689C10.1484 10.2572 10.355 10.4683 10.6099 10.4683H11.2057C11.2553 10.4683 11.3048 10.4723 11.3537 10.4803C12.3464 10.6421 13.0769 11.5168 13.0769 12.5436C13.0769 12.8272 12.8518 13.0571 12.5742 13.0571H11.3168C11.0619 13.0571 10.8553 13.2682 10.8553 13.5286C10.8553 13.7889 11.0619 14 11.3168 14H12.5742C13.3616 14 14 13.348 14 12.5436C14 11.0534 12.9399 9.78407 11.4992 9.54921C11.4021 9.53339 11.3039 9.52546 11.2057 9.52546H10.6099Z" Fill="White" />
-                                            </Canvas>
-                                            <TextBlock Style="{StaticResource TagGrayTextBlockStyle}">
-                                                <Run Text="165" />
-                                                <Run Text="пользователей" />
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </Border>
+                                <!--  Пользователей  -->
+                                <Border Margin="0,0,10,0" Style="{StaticResource TagGrayStyle}">
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Canvas
+                                            Width="17"
+                                            Height="17"
+                                            Margin="0,0,10,0">
+                                            <Path Data="M3.53846 5.67143C3.53846 4.19604 4.70941 3 6.15385 3C7.59828 3 8.76923 4.19604 8.76923 5.67143C8.76923 7.14682 7.59828 8.34286 6.15385 8.34286C4.70941 8.34286 3.53846 7.14682 3.53846 5.67143Z" Fill="White" />
+                                            <Path Data="M4.50082 9.54921L4.61042 9.53135C5.6329 9.36467 6.67479 9.36467 7.69727 9.53135L7.80687 9.54921C9.24759 9.78407 10.3077 11.0534 10.3077 12.5436C10.3077 13.348 9.66933 14 8.88187 14H3.42583C2.63836 14 2 13.348 2 12.5436C2 11.0534 3.06011 9.78407 4.50082 9.54921Z" Fill="White" />
+                                            <Path Data="M9.84615 3C9.59125 3 9.38462 3.21107 9.38462 3.47143C9.38462 3.73179 9.59125 3.94286 9.84615 3.94286C10.7808 3.94286 11.5385 4.71676 11.5385 5.67143C11.5385 6.62609 10.7808 7.4 9.84615 7.4C9.59125 7.4 9.38462 7.61107 9.38462 7.87143C9.38462 8.13179 9.59125 8.34286 9.84615 8.34286C11.2906 8.34286 12.4615 7.14682 12.4615 5.67143C12.4615 4.19604 11.2906 3 9.84615 3Z" Fill="White" />
+                                            <Path Data="M10.6099 9.52546C10.355 9.52546 10.1484 9.73652 10.1484 9.99689C10.1484 10.2572 10.355 10.4683 10.6099 10.4683H11.2057C11.2553 10.4683 11.3048 10.4723 11.3537 10.4803C12.3464 10.6421 13.0769 11.5168 13.0769 12.5436C13.0769 12.8272 12.8518 13.0571 12.5742 13.0571H11.3168C11.0619 13.0571 10.8553 13.2682 10.8553 13.5286C10.8553 13.7889 11.0619 14 11.3168 14H12.5742C13.3616 14 14 13.348 14 12.5436C14 11.0534 12.9399 9.78407 11.4992 9.54921C11.4021 9.53339 11.3039 9.52546 11.2057 9.52546H10.6099Z" Fill="White" />
+                                        </Canvas>
+                                        <TextBlock Style="{StaticResource TagGrayTextBlockStyle}">
+                                            <Run Text="{Binding Users}" />
+                                            <Run Text="пользователей" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
 
-                                    <Border Style="{StaticResource TagGrayStyle}">
-                                        <StackPanel
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Orientation="Horizontal">
-                                            <Canvas
-                                                Width="17"
-                                                Height="17"
-                                                Margin="0,0,10,0">
-                                                <Path Data="M6.39607 2.36845C7.77991 2.04385 9.22009 2.04385 10.6039 2.36845C12.6024 2.83722 14.1628 4.39763 14.6315 6.39607C14.9562 7.77991 14.9562 9.22009 14.6315 10.6039C14.1628 12.6024 12.6024 14.1628 10.6039 14.6315C9.22009 14.9562 7.77991 14.9562 6.39607 14.6315C4.39763 14.1628 2.83723 12.6024 2.36845 10.6039C2.04385 9.22009 2.04385 7.77991 2.36845 6.39607C2.83723 4.39763 4.39763 2.83722 6.39607 2.36845ZM8.90683 6.46577C8.90683 6.24107 8.72468 6.05892 8.49998 6.05892C8.27529 6.05892 8.09314 6.24107 8.09314 6.46577L8.09314 9.85616C8.09314 10.0809 8.27529 10.263 8.49998 10.263C8.72468 10.263 8.90683 10.0809 8.90683 9.85616V6.46577ZM6.8726 7.82193C6.8726 7.59723 6.69044 7.41508 6.46575 7.41508C6.24105 7.41508 6.0589 7.59723 6.0589 7.82193V10.5342C6.0589 10.7589 6.24105 10.9411 6.46575 10.9411C6.69044 10.9411 6.8726 10.7589 6.8726 10.5342V7.82193ZM10.9411 8.5C10.9411 8.27531 10.7589 8.09316 10.5342 8.09316C10.3095 8.09316 10.1274 8.27531 10.1274 8.5V10.5342C10.1274 10.7589 10.3095 10.9411 10.5342 10.9411C10.7589 10.9411 10.9411 10.7589 10.9411 10.5342V8.5Z" Fill="White" />
-                                            </Canvas>
-                                            <TextBlock Style="{StaticResource TagGrayTextBlockStyle}">
-                                                <Run Text="{Binding Projects}" />
-                                                <Run Text="проектов" />
-                                            </TextBlock>
-                                        </StackPanel>
+                                <Border Style="{StaticResource TagGrayStyle}">
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Canvas
+                                            Width="17"
+                                            Height="17"
+                                            Margin="0,0,10,0">
+                                            <Path Data="M6.39607 2.36845C7.77991 2.04385 9.22009 2.04385 10.6039 2.36845C12.6024 2.83722 14.1628 4.39763 14.6315 6.39607C14.9562 7.77991 14.9562 9.22009 14.6315 10.6039C14.1628 12.6024 12.6024 14.1628 10.6039 14.6315C9.22009 14.9562 7.77991 14.9562 6.39607 14.6315C4.39763 14.1628 2.83723 12.6024 2.36845 10.6039C2.04385 9.22009 2.04385 7.77991 2.36845 6.39607C2.83723 4.39763 4.39763 2.83722 6.39607 2.36845ZM8.90683 6.46577C8.90683 6.24107 8.72468 6.05892 8.49998 6.05892C8.27529 6.05892 8.09314 6.24107 8.09314 6.46577L8.09314 9.85616C8.09314 10.0809 8.27529 10.263 8.49998 10.263C8.72468 10.263 8.90683 10.0809 8.90683 9.85616V6.46577ZM6.8726 7.82193C6.8726 7.59723 6.69044 7.41508 6.46575 7.41508C6.24105 7.41508 6.0589 7.59723 6.0589 7.82193V10.5342C6.0589 10.7589 6.24105 10.9411 6.46575 10.9411C6.69044 10.9411 6.8726 10.7589 6.8726 10.5342V7.82193ZM10.9411 8.5C10.9411 8.27531 10.7589 8.09316 10.5342 8.09316C10.3095 8.09316 10.1274 8.27531 10.1274 8.5V10.5342C10.1274 10.7589 10.3095 10.9411 10.5342 10.9411C10.7589 10.9411 10.9411 10.7589 10.9411 10.5342V8.5Z" Fill="White" />
+                                        </Canvas>
+                                        <TextBlock Style="{StaticResource TagGrayTextBlockStyle}">
+                                            <Run Text="{Binding Projects}" />
+                                            <Run Text="проектов" />
+                                        </TextBlock>
+                                    </StackPanel>
 
 
-                                    </Border>
-                                </StackPanel>
-                                <!--#endregion-->
+                                </Border>
+                            </StackPanel>
+                            <!--#endregion-->
 
-                                <!--#region Вторая строка-->
-                                <StackPanel
-                                    Grid.Row="1"
-                                    Grid.Column="0"
-                                    VerticalAlignment="Center">
-                                    <TextBlock
-                                        FontFamily="{DynamicResource FontRegular}"
-                                        FontSize="14"
-                                        Foreground="{StaticResource DefaultTextColorBrush}"
-                                        LineHeight="22">
-                                        <Run Text="{Binding Description}" />
-                                    </TextBlock>
-                                </StackPanel>
-                                <!--#endregion-->
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollViewer>
+                            <!--#region Вторая строка-->
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    FontFamily="{DynamicResource FontRegular}"
+                                    FontSize="14"
+                                    Foreground="{StaticResource DefaultTextColorBrush}"
+                                    LineHeight="22">
+                                    <Run Text="{Binding Description}" />
+                                </TextBlock>
+                            </StackPanel>
+                            <!--#endregion-->
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>

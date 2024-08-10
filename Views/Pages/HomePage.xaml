@@ -10,7 +10,7 @@
     xmlns:vm="clr-namespace:StaticRustLauncher.ViewModels"
     Title="HomePage"
     Width="900"
-    Height="500"
+    Height="480"
     Margin="-9,0,0,0"
     mc:Ignorable="d">
     <Page.DataContext>
@@ -32,6 +32,7 @@
             x:Name="ServersList"
             Background="Transparent"
             BorderThickness="0"
+            ItemContainerStyle="{StaticResource ListViewItemStyle}"
             ItemsSource="{Binding ServersCollection}"
             SelectedItem="{Binding SelectedServer}"
             SelectionChanged="OpenDescriptionServer_Click">
@@ -46,7 +47,7 @@
                     <Border
                         Width="864"
                         Height="86"
-                        Margin="0,5,0,5"
+                        Margin="0,6,0,5"
                         Padding="12"
                         Background="{Binding Status, Converter={StaticResource ServerTypeToBackgroundConverter}}"
                         BorderThickness="1"

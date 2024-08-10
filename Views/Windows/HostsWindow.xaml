@@ -34,7 +34,10 @@
 
                 <!--  Фон  -->
                 <Border Grid.Row="0" CornerRadius="15">
-                    <Image Source="{Binding SelectedHost.Image}" />
+                    <Image
+                        MaxWidth="600"
+                        MaxHeight="190"
+                        Source="{Binding SelectedHost.Image}" />
                 </Border>
 
                 <!--  Название  -->
@@ -53,14 +56,14 @@
                 <!--  Краткое описание  -->
                 <StackPanel Grid.Row="2">
                     <TextBlock
-                        MinHeight="1"
                         Margin="0,10,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource FontRegular}"
                         FontSize="18"
                         Foreground="{StaticResource DefaultTextColorBrush}"
-                        Text="{Binding SelectedHost.Description}" />
+                        Text="{Binding SelectedHost.Description}"
+                        TextWrapping="Wrap" />
                 </StackPanel>
 
                 <!--  Закрытие  -->

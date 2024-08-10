@@ -2,14 +2,25 @@
 
 public class HomeViewModel : BaseViewModel
 {
-    private ObservableCollection<Server> _servers = null!;
-    private Server _selectedServer = null!;
+    private ObservableCollection<Server> _servers = new ObservableCollection<Server>();
+    private Server _selectedServer;
     private string _version = string.Empty;
+    private int _usersOnline;
+    private int _serversOnline;
+
     public ObservableCollection<Server> ServersCollection
     {
         get => _servers;
-        set => Set(ref _servers, value);
+        set
+        {
+            if (Set(ref _servers, value))
+            {
+                _servers.CollectionChanged += (s, e) => UpdateOnlineCounts();
+                UpdateOnlineCounts();
+            }
+        }
     }
+
     public Server SelectedServer
     {
         get => _selectedServer;
@@ -22,12 +33,24 @@ public class HomeViewModel : BaseViewModel
         set => Set(ref _version, value);
     }
 
+    public int UsersOnline
+    {
+        get => _usersOnline;
+        private set => Set(ref _usersOnline, value);
+    }
+
+    public int ServersOnline
+    {
+        get => _serversOnline;
+        private set => Set(ref _serversOnline, value);
+    }
+
     public HomeViewModel()
     {
         Task.Run(() => LoadServersAsync());
     }
 
-    async Task LoadServersAsync()
+    private async Task LoadServersAsync()
     {
         try
         {
@@ -38,8 +61,16 @@ public class HomeViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            var asdf = ex;
+            Console.WriteLine(ex);
         }
     }
 
+    private void UpdateOnlineCounts()
+    {
+        ServersOnline = GetServersOnline();
+        UsersOnline = GetUsersOnline();
+    }
+
+    private int GetServersOnline() => ServersCollection.Count;
+    private int GetUsersOnline() => ServersCollection.Sum(u => u.Players);
 }

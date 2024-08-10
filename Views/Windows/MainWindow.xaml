@@ -393,11 +393,24 @@
                     ContentTemplateSelector="{StaticResource PanelTemplateSelector}" />
 
                 <!--  Вставка сатистика игроков и серверов  -->
-                <ContentControl
+                <!--<ContentControl
                     Grid.Row="2"
+                    Margin="0,0,0,15"
                     HorizontalAlignment="Left"
                     Content="{Binding StatisticsPanel}"
-                    ContentTemplateSelector="{StaticResource PanelTemplateSelector}" />
+                    ContentTemplateSelector="{StaticResource PanelTemplateSelector}" />-->
+                <ContentControl
+                    Grid.Row="2"
+                    Margin="0,0,0,15"
+                    HorizontalAlignment="Left"
+                    Content="{Binding StatisticsPanel}">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <controls:StatisticsControl ServersCount="{Binding StatisticsData.ServersCount}" UsersOnline="{Binding StatisticsData.UsersOnline}" />
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
                 <!--<controls:StatisticsControl
                     Grid.Row="2"
                     Width="860"

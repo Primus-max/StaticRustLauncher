@@ -1,8 +1,13 @@
 ﻿namespace StaticRustLauncher.ViewModels;
 
-public class NewsDetailWindowViewModel
+public class NewsDetailWindowViewModel : BaseViewModel
 {
-    public NewsItem? SelectedNews { get; set; }
+    private NewsItem? _selectedNews = null!;
+    public NewsItem? SelectedNews
+    {
+        get => _selectedNews;
+        set => Set(ref _selectedNews, value);
+    }
 
     public NewsDetailWindowViewModel(NewsItem selectedNews) =>    
         SelectedNews = selectedNews;
