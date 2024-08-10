@@ -26,7 +26,7 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="220" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -34,15 +34,13 @@
 
                 <!--  Фон  -->
                 <Border Grid.Row="0" CornerRadius="15">
-                    <Image
-                        Width="600"
-                        Height="190"
-                        Source="{StaticResource ServerModalBack}" />
+                    <Image Source="{Binding SelectedHost.Image}" />
                 </Border>
 
                 <!--  Название  -->
                 <StackPanel Grid.Row="1">
                     <TextBlock
+                        MinHeight="1"
                         Margin="0,10,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -55,6 +53,7 @@
                 <!--  Краткое описание  -->
                 <StackPanel Grid.Row="2">
                     <TextBlock
+                        MinHeight="1"
                         Margin="0,10,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"

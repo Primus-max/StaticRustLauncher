@@ -3,23 +3,23 @@
 class ServerTypeToBackgroundConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {     
-        
+    {             
         if (value is null)
             return new SolidColorBrush(Color.FromRgb(24, 24, 27));
 
         if (value is string serverType)        
             return GetBrushForType(serverType);
         
-        else if (value is string hostingType)
-            return GetBrushForType(hostingType);        
+        else if (value is HostingType hostType)       
+            return GetBrushForType(hostType.ToString());
 
         return new SolidColorBrush(Color.FromRgb(24, 24, 27));
     }
 
     private Brush GetBrushForType(string type)
     {
-        if (type.Equals("premium", StringComparison.OrdinalIgnoreCase) || type.Equals(HostingType.OurChoice))
+        if (type.Equals("premium", StringComparison.OrdinalIgnoreCase) 
+            || type.Equals("OurChoice", StringComparison.OrdinalIgnoreCase))
         {
             return new LinearGradientBrush(
                 new GradientStopCollection

@@ -60,27 +60,27 @@ namespace StaticRustLauncher.DesignData
         }
 
 
-        public void GenerateTestHosts()
-        {
-            var random = new Random();
-            var hostingTypes = Enum.GetValues(typeof(HostingType));
+        //public void GenerateTestHosts()
+        //{
+        //    var random = new Random();
+        //    var hostingTypes = Enum.GetValues(typeof(HostingType));
 
-            for (int i = 1; i <= 10; i++)
-            {
-                var hostingType = (HostingType)hostingTypes.GetValue(random.Next(hostingTypes.Length));
+        //    for (int i = 1; i <= 10; i++)
+        //    {
+        //        var hostingType = (HostingType)hostingTypes.GetValue(random.Next(hostingTypes.Length));
 
-                Hosts.Add(new Hosting
-                {
-                    Name = $"Hosting {i}",
-                    Description = $"Description for hosting {i}",
-                    Image = $"http://example.com/image{i}.jpg",
-                    Users = random.Next(1, 1000),
-                    Projects = random.Next(1, 500),
-                    Url = $"http://hosting{i}.com",
-                    Status = random.Next(0, 2), // Assuming Status is an int that corresponds to the enum values
-                    HostingType = hostingType
-                });
-            }
-        }
+        //        Hosts.Add(new Hosting
+        //        {
+        //            Name = $"Hosting {i}",
+        //            Description = $"Description for hosting {i}",
+        //            Image = $"http://example.com/image{i}.jpg",
+        //            Users = random.Next(1, 1000),
+        //            Projects = random.Next(1, 500),
+        //            Url = $"http://hosting{i}.com",
+        //            Status = random.Next(0, 2), // Assuming Status is an int that corresponds to the enum values
+        //            HostingType = hostingType
+        //        });
+        //    }
+        //}
     }
 }

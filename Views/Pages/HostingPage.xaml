@@ -24,10 +24,14 @@
     <Page.Resources>
         <converters:ServerTypeToBackgroundConverter x:Key="ServerTypeToBackgroundConverter" />
         <converters:ServerTypeTagToStyleConverter x:Key="ServerTypeTagToStyleConverter" />
+        <converters:HostingTypeToStringConverter x:Key="HostingTypeConverter" />
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="500">
+        <ScrollViewer
+            Height="500"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
             <ListView
                 x:Name="HostingsList"
                 Margin="0,20,0,0"
@@ -37,11 +41,11 @@
                 ItemsSource="{Binding Hosts}"
                 SelectedItem="{Binding SelectedHosting}"
                 SelectionChanged="OpenDescriptionHost_Click">
-                <ListView.ItemsPanel>
+                <!--<ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel HorizontalAlignment="Left" />
                     </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
+                </ListView.ItemsPanel>-->
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -81,7 +85,7 @@
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Orientation="Horizontal">
-
+                                    <!--  Тип хостинга  -->
                                     <Border
                                         Margin="0,0,10,0"
                                         HorizontalAlignment="Left"
@@ -94,7 +98,7 @@
                                                 FontFamily="{DynamicResource FontRegular}"
                                                 FontSize="12"
                                                 Foreground="{StaticResource DefaultTextColorBrush}"
-                                                Text="{Binding HostingType}" />
+                                                Text="{Binding HostingType, Converter={StaticResource HostingTypeConverter}}" />
                                         </StackPanel>
                                     </Border>
 

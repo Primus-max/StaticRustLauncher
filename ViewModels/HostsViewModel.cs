@@ -15,10 +15,8 @@ class HostsViewModel : BaseViewModel
         set => Set(ref _selectedHosting, value);
     }
 
-
     public HostsViewModel()=>            
-        Task.Run(() => LoadHostsAsync());
-  
+        Task.Run(() => LoadHostsAsync());  
 
     async Task LoadHostsAsync()
     {

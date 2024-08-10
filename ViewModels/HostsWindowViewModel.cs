@@ -1,9 +1,16 @@
 ﻿namespace StaticRustLauncher.ViewModels;
 
-public class HostsWindowViewModel
+public class HostsWindowViewModel: BaseViewModel
 {
-    public Hosting? SelectedHost { get; set; } = null!;
+    private Hosting? _selectedHost = null!;
+    public Hosting? SelectedHost 
+    {
+        get => _selectedHost;
+        set => Set(ref _selectedHost, value);
+    }
 
     public HostsWindowViewModel(Hosting selectedHost) =>
         SelectedHost = selectedHost;
+
+
 }

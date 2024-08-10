@@ -9,7 +9,7 @@ public class Hosting
     public int Projects { get; set; }
     public string? Url { get; set; }
     public int Status { get; set; }
-    public HostingType HostingType { get; set; }
+    public HostingType HostingType => (HostingType)Status;
 }
 
 public enum HostingType
