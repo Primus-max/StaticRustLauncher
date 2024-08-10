@@ -27,49 +27,56 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="220" />
-                    <RowDefinition Height="112" />
-                    <RowDefinition Height="201" />
+                    <RowDefinition Height="29" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="195" />
                     <RowDefinition Height="99" />
                 </Grid.RowDefinitions>
 
                 <!--  Фон  -->
                 <Border Grid.Row="0" CornerRadius="15">
                     <Image
-                        Width="600"
-                        Height="190"
-                        Source="{StaticResource ServerModalBack}" />
+                        MaxWidth="600"
+                        MaxHeight="190"
+                        Source="{Binding SelectedServer.HeaderImage}" />
                 </Border>
 
                 <!--  Описание  -->
                 <StackPanel Grid.Row="1">
                     <TextBlock
-                        Margin="0,10,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource FontMedium}"
                         FontSize="22"
                         Foreground="{StaticResource DefaultTextColorBrush}">
-                        <Run Text="{Binding SelectedServer.Country}" />
+                        <Run Text="{Binding SelectedServer.Hostname}" />
                         <Run Text="|" />
                         <Run Text="{Binding SelectedServer.ServerCategory}" />
                         <Run Text="|" />
-                        <Run Text="{Binding SelectedServer.Name}" />
+                        <Run Text="{Binding SelectedServer.Map}" />
                     </TextBlock>
-
-                    <TextBlock
-                        Padding="10"
-                        FontFamily="{DynamicResource FontRegular}"
-                        FontSize="14"
-                        Foreground="{StaticResource DefaultTextColorBrush}"
-                        LineHeight="17"
-                        Text="{Binding SelectedServer.Description}" />
                 </StackPanel>
-
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock
+                            Width="600"
+                            Height="102"
+                            Padding="10,0,0,0"
+                            FontFamily="{DynamicResource FontRegular}"
+                            FontSize="14"
+                            Foreground="{StaticResource DefaultTextColorBrush}"
+                            LineHeight="17"
+                            Text="{Binding SelectedServer.Description}" />
+                    </StackPanel>
+                </ScrollViewer>
                 <!--  Ссылки  -->
-                <StackPanel Grid.Row="2" Orientation="Vertical">
+                <StackPanel
+                    Grid.Row="3"
+                    Margin="0,20,0,0"
+                    Orientation="Vertical">
 
                     <!--  VK  -->
-                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
                         <Image
                             Width="28"
                             Height="28"
@@ -83,20 +90,20 @@
                                 Foreground="{StaticResource DefaultTextColorBrush}"
                                 Text="VK проекта: " />
                             <Hyperlink
-                                NavigateUri="https://vk.com/rust_static"
+                                NavigateUri="{Binding URLs[0].VK}"
                                 RequestNavigate="Hyperlink_RequestNavigate"
                                 TextDecorations="None">
                                 <Run
                                     FontFamily="{StaticResource FontRegular}"
                                     FontSize="18"
                                     Foreground="{StaticResource AccentBrush}"
-                                    Text="https://vk.com/rust_static" />
+                                    Text="{Binding URLs[0].VK}" />
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
 
                     <!--  Discord  -->
-                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
                         <Image
                             Width="28"
                             Height="28"
@@ -110,20 +117,20 @@
                                 Foreground="{StaticResource DefaultTextColorBrush}"
                                 Text="Discord проекта: " />
                             <Hyperlink
-                                NavigateUri="https://vk.com/rust_static"
+                                NavigateUri="{Binding URLs[0].Discord}"
                                 RequestNavigate="Hyperlink_RequestNavigate"
                                 TextDecorations="None">
                                 <Run
                                     FontFamily="{StaticResource FontRegular}"
                                     FontSize="18"
                                     Foreground="{StaticResource AccentBrush}"
-                                    Text="https://vk.com/rust_static" />
+                                    Text="{Binding URLs[0].Discord}" />
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
 
                     <!--  Telegram  -->
-                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
                         <Image
                             Width="28"
                             Height="28"
@@ -137,20 +144,20 @@
                                 Foreground="{StaticResource DefaultTextColorBrush}"
                                 Text="Telegram проекта: " />
                             <Hyperlink
-                                NavigateUri="https://vk.com/rust_static"
+                                NavigateUri="{Binding URLs[0].Telegram}"
                                 RequestNavigate="Hyperlink_RequestNavigate"
                                 TextDecorations="None">
                                 <Run
                                     FontFamily="{StaticResource FontRegular}"
                                     FontSize="18"
                                     Foreground="{StaticResource AccentBrush}"
-                                    Text="https://vk.com/rust_static" />
+                                    Text="{Binding URLs[0].Telegram}" />
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
 
                     <!--  Steam  -->
-                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
                         <Image
                             Width="28"
                             Height="28"
@@ -164,20 +171,20 @@
                                 Foreground="{StaticResource DefaultTextColorBrush}"
                                 Text="Steam проекта: " />
                             <Hyperlink
-                                NavigateUri="https://vk.com/rust_static"
+                                NavigateUri="{Binding URLs[0].Steam}"
                                 RequestNavigate="Hyperlink_RequestNavigate"
                                 TextDecorations="None">
                                 <Run
                                     FontFamily="{StaticResource FontRegular}"
                                     FontSize="18"
                                     Foreground="{StaticResource AccentBrush}"
-                                    Text="https://vk.com/rust_static" />
+                                    Text="{Binding URLs[0].Steam}" />
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
 
                     <!--  Site  -->
-                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
                         <Image
                             Width="28"
                             Height="28"
@@ -191,26 +198,27 @@
                                 Foreground="{StaticResource DefaultTextColorBrush}"
                                 Text="Сайт проекта: " />
                             <Hyperlink
-                                NavigateUri="https://vk.com/rust_static"
+                                NavigateUri="{Binding URLs[0].Site}"
                                 RequestNavigate="Hyperlink_RequestNavigate"
                                 TextDecorations="None">
                                 <Run
                                     FontFamily="{StaticResource FontRegular}"
                                     FontSize="18"
                                     Foreground="{StaticResource AccentBrush}"
-                                    Text="https://vk.com/rust_static" />
+                                    Text="{Binding URLs[0].Site}" />
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
-
                 </StackPanel>
 
                 <!--  Подключиться  -->
                 <StackPanel
-                    Grid.Row="3"
-                    Margin="0,0,0,32"
+                    Grid.Row="4"
+                    Width="406"
+                    Height="44"
+                    Margin="0,11,0,0"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     Orientation="Horizontal">
                     <Border
                         Width="190"
@@ -233,7 +241,7 @@
                                 FontSize="18"
                                 Foreground="{StaticResource DefaultTextColorBrush}"
                                 LineHeight="20"
-                                Text="255.255.255" />
+                                Text="{Binding SelectedServer.Ip}" />
 
                             <!--  SVG Icon  -->
                             <Path

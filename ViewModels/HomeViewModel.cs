@@ -4,6 +4,7 @@ public class HomeViewModel : BaseViewModel
 {
     private ObservableCollection<Server> _servers = null!;
     private Server _selectedServer = null!;
+    private string _version = string.Empty;
     public ObservableCollection<Server> ServersCollection
     {
         get => _servers;
@@ -15,23 +16,30 @@ public class HomeViewModel : BaseViewModel
         set => Set(ref _selectedServer, value);
     }
 
-    public HomeViewModel()
+    public string Version
     {
-        Task.Run(() => LoadServers());
+        get => _version;
+        set => Set(ref _version, value);
     }
 
-    async Task LoadServers()
+    public HomeViewModel()
+    {
+        Task.Run(() => LoadServersAsync());
+    }
+
+    async Task LoadServersAsync()
     {
         try
         {
-            HttpClient httpClient = new();
+            using HttpClient httpClient = new();
             var serverService = new ServerService(httpClient);
             var servers = await serverService.GetDataAsync("http://194.147.90.218/launcher/serversinfo");
-            ServersCollection = new ObservableCollection<Server>();
+            ServersCollection = new ObservableCollection<Server>(servers);
         }
         catch (Exception ex)
         {
             var asdf = ex;
         }
     }
+
 }

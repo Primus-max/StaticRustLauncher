@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace StaticRustLauncher.ViewModels;
+﻿namespace StaticRustLauncher.ViewModels;
 
 public class NewsViewModal : BaseViewModel
 {
@@ -30,7 +28,7 @@ public class NewsViewModal : BaseViewModel
         {
             using HttpClient httpClient = new();
             var newsService = new NewsService(httpClient);
-            var loadedNews = await newsService.GetDataAsync("http://194.147.90.218/launcher/news");            
+            var loadedNews = await newsService.GetDataAsync("http://194.147.90.218/launcher/news");
             NewsCollection = new ObservableCollection<NewsItem>(loadedNews);
         }
         catch (Exception ex)
@@ -39,6 +37,4 @@ public class NewsViewModal : BaseViewModel
             var asdf = ex;
         }
     }
-
-
 }

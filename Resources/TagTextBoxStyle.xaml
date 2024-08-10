@@ -7,10 +7,6 @@
         <Setter Property="CornerRadius" Value="6" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <!--  Стили для самого TextBox  -->
@@ -30,8 +26,6 @@
         <Setter Property="CornerRadius" Value="6" />
         <Setter Property="BorderBrush" Value="#00DEEE" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="MinWidth" Value="101" />
         <Setter Property="Height" Value="28" />
     </Style>

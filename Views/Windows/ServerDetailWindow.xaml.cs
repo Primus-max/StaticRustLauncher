@@ -8,10 +8,13 @@ namespace StaticRustLauncher.Views.Windows;
 /// </summary>
 public partial class ServerDetailWindow : Window
 {
+    private readonly Server _selectedServer = null!;
+
     public ServerDetailWindow(Server selectedServer)
     {
         InitializeComponent();
         DataContext = new ServerDetailViewModel(selectedServer);
+        _selectedServer = selectedServer;
     }
 
 
@@ -26,12 +29,12 @@ public partial class ServerDetailWindow : Window
         e.Handled = true;
     }
 
+    // Копировать текст в буфер обмена
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-    {
-        // Копировать текст в буфер обмена
-        Clipboard.SetText("255.255.255");
+    {        
+        Clipboard.SetText(_selectedServer.Ip);
     }
-
+        
     private void CloseButton_Click(object sender, MouseButtonEventArgs e)
     {
         this.Close();

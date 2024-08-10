@@ -1,6 +1,4 @@
-﻿using StaticRustLauncher.Services.Base;
-
-namespace StaticRustLauncher.Services;
+﻿namespace StaticRustLauncher.Services;
 
 public class HostingService : DataService<Hosting>
 {

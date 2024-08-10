@@ -7,13 +7,15 @@
     xmlns:design="clr-namespace:StaticRustLauncher.DesignData"
     xmlns:local="clr-namespace:StaticRustLauncher.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:StaticRustLauncher.ViewModels"
     Title="HomePage"
     Width="900"
     Height="500"
     Margin="-6,0,0,0"
-    d:DataContext="{d:DesignInstance Type=design:DesignData,
-                                     IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:HostsViewModel />
+    </Page.DataContext>
     <!--
         d:DataContext="{d:DesignInstance Type=design:DesignData,
         IsDesignTimeCreatable=True}"
@@ -25,7 +27,7 @@
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="500">
             <ListView
                 x:Name="HostingsList"
                 Margin="0,20,0,0"
@@ -115,7 +117,6 @@
                                                 <Run Text="пользователей" />
                                             </TextBlock>
                                         </StackPanel>
-
                                     </Border>
 
                                     <Border Style="{StaticResource TagGrayStyle}">

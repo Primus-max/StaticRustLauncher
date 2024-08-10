@@ -24,6 +24,7 @@
                 <ResourceDictionary Source="/Resources/TagTextBoxStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/ListStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/ComboBoxStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/ScrollStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/InputFilteTextBoxStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Assets/RoundedProgressBar.xaml" />
                 <ResourceDictionary Source="/Resources/ImagesResources.xaml" />
