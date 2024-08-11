@@ -157,16 +157,22 @@
 
 
                             <!--#region Вторая строка первая колонка-->
-                            <StackPanel
+                            <Border
                                 Grid.Row="1"
                                 Grid.Column="0"
-                                Orientation="Horizontal">
-                                <TextBlock
-                                    FontFamily="{DynamicResource FontRegular}"
-                                    FontSize="13"
-                                    Foreground="{StaticResource DefaultTextColorBrush}"
-                                    Text="{Binding Description, StringFormat={}}" />
-                            </StackPanel>
+                                HorizontalAlignment="Left"
+                                Style="{Binding Status, Converter={StaticResource ServerTypeTagToStyleConverter}}">
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontFamily="{DynamicResource FontRegular}"
+                                        FontSize="13"
+                                        Foreground="{StaticResource DefaultTextColorBrush}"
+                                        Text="{Binding Status}" />
+                                </StackPanel>
+                            </Border>
                             <!--#endregion-->
 
                             <!--#region Вторая строка вторая колонка-->

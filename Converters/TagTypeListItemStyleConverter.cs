@@ -8,7 +8,7 @@ public class ServerTypeTagToStyleConverter : IValueConverter
         if (value is null)
             return Application.Current.Resources[""];
 
-        if (value is ServerType serverType)        
+        if (value is string serverType)        
             return GetStyleForType(serverType);        
         else if (value is HostingType hostingType)        
             return GetStyleForType(hostingType);        
@@ -18,9 +18,10 @@ public class ServerTypeTagToStyleConverter : IValueConverter
 
     private object GetStyleForType(object type)
     {
-        if (type.Equals(ServerType.Premium) || type.Equals(HostingType.OurChoice) || type.Equals(HostingType.Reliable))        
+        if (type.ToString().Equals("premium", StringComparison.OrdinalIgnoreCase) 
+            || type.Equals(HostingType.OurChoice) || type.Equals(HostingType.Reliable))        
             return Application.Current.Resources["TagPremiumStyle"];        
-        else if (type.Equals(ServerType.Vip))        
+        else if (type.ToString().Equals("vip", StringComparison.OrdinalIgnoreCase))        
             return Application.Current.Resources["TagVipStyle"];        
         else        
             return Application.Current.Resources[""];        
