@@ -213,14 +213,14 @@
                 <!--  Подключиться  -->
                 <StackPanel
                     Grid.Row="4"
-                    Width="406"
+                    Width="530"
                     Height="44"
                     Margin="0,11,0,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Orientation="Horizontal">
                     <Border
-                        Width="190"
+                        Width="310"
                         Height="44"
                         Margin="0,0,20,0"
                         Background="#131313"
@@ -228,19 +228,25 @@
                         MouseLeftButtonDown="Border_MouseLeftButtonDown">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" MinWidth="151" />
+                                <ColumnDefinition Width="Auto" MinWidth="280" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
                             <!--  Text Block  -->
                             <TextBlock
+                                Height="22"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontFamily="{DynamicResource FontMedium}"
-                                FontSize="18"
+                                FontSize="16"
                                 Foreground="{StaticResource DefaultTextColorBrush}"
-                                LineHeight="20"
-                                Text="{Binding SelectedServer.Ip}" />
+                                LineHeight="18">
+                                <Run Text="client.connect" />
+                                <Run Text="{Binding SelectedServer.Ip}" />
+                                <Run Text=":" />
+                                <Run Text="{Binding SelectedServer.Port}" />
+
+                            </TextBlock>
 
                             <!--  SVG Icon  -->
                             <Path

@@ -32,7 +32,7 @@ public partial class ServerDetailWindow : Window
     // Копировать текст в буфер обмена
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {        
-        Clipboard.SetText(_selectedServer.Ip);
+        Clipboard.SetText($"client.connect {_selectedServer.Ip}:{_selectedServer.Port}");
     }
         
     private void CloseButton_Click(object sender, MouseButtonEventArgs e)

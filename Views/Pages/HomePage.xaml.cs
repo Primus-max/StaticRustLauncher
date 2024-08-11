@@ -10,17 +10,20 @@ public partial class HomePage : Page
         InitializeComponent();
     }
 
-
     private void OpenDescriptionServer_Click(object sender, SelectionChangedEventArgs e)
     {
         if (DataContext is HomeViewModel viewModel)
         {
-            var selectedNews = viewModel.SelectedServer;
-            if (selectedNews != null)
+            var selectedServer = viewModel.SelectedServer;
+
+            if (selectedServer != null)
             {
-                var newsDetailsWindow = new ServerDetailWindow(selectedNews);
-                WindowHelper.OpenWindowWithBlur(newsDetailsWindow);
+                var serverDetailsWindow = new ServerDetailWindow(selectedServer);
+                WindowHelper.OpenWindowWithBlur(serverDetailsWindow);
+
+                // Обнуление выбранного элемента
+                ServersList.SelectedItem = null;
             }
-        }       
+        }
     }
 }
