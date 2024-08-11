@@ -125,7 +125,8 @@
                                             </Canvas>
                                             <TextBlock Style="{StaticResource TagGrayTextBlockStyle}">
                                                 <Run Text="{Binding Players}" />
-                                                <Run Text="онлайн" />
+                                                <Run Text=" / " />
+                                                <Run Text="{Binding MaxPlayers}" />
                                             </TextBlock>
                                         </StackPanel>
                                     </Border>
