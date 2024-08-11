@@ -22,6 +22,8 @@ public partial class HostingPage : Page
             {
                 var newsDetailsWindow = new HostsWindow(selectedHosting);
                 WindowHelper.OpenWindowWithBlur(newsDetailsWindow);
+
+                HostingsList.SelectedItem = null;
             }
         }
     }

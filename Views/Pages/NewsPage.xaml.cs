@@ -19,6 +19,8 @@ public partial class NewsPage : Page
             {
                 var newsDetailsWindow = new NewsDetailWindow(selectedNews);
                 WindowHelper.OpenWindowWithBlur(newsDetailsWindow);
+
+                NewsList.SelectedItem = null;
             }
         }
     }
