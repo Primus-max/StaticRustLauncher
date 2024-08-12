@@ -15,8 +15,11 @@ class HostsViewModel : BaseViewModel
         set => Set(ref _selectedHosting, value);
     }
 
-    public HostsViewModel()=>            
-        Task.Run(() => LoadHostsAsync());  
+    public HostsViewModel()
+    {
+        Task.Run(() => LoadHostsAsync());
+    }
+
 
     async Task LoadHostsAsync()
     {
@@ -25,11 +28,11 @@ class HostsViewModel : BaseViewModel
             using HttpClient httpClient = new();
             var hostingService = new HostingService(httpClient);
             var hosts = await hostingService.GetDataAsync("http://194.147.90.218/launcher/hostings");
-            Hosts = new ObservableCollection<Hosting>(hosts);
+            Hosts = new ObservableCollection<Hosting>(hosts.OrderByDescending(host => host.Status == 0));
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            var asdf = ex;
+            // Логирование
         }
     }
 

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows.Navigation;
+﻿using System.Windows.Navigation;
 
 namespace StaticRustLauncher.Views.Windows;
 
@@ -25,16 +24,16 @@ public partial class ServerDetailWindow : Window
         {
             FileName = e.Uri.AbsoluteUri,
             UseShellExecute = true
-        });        
+        });
         e.Handled = true;
     }
 
     // Копировать текст в буфер обмена
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-    {        
+    {
         Clipboard.SetText($"client.connect {_selectedServer.Ip}:{_selectedServer.Port}");
     }
-        
+
     private void CloseButton_Click(object sender, MouseButtonEventArgs e)
     {
         this.Close();

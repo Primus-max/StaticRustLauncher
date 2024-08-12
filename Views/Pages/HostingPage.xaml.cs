@@ -1,4 +1,6 @@
-﻿namespace StaticRustLauncher.Views.Pages;
+﻿using System.Diagnostics;
+
+namespace StaticRustLauncher.Views.Pages;
 
 /// <summary>
 /// Логика взаимодействия для HostingPage.xaml
@@ -25,6 +27,30 @@ public partial class HostingPage : Page
 
                 HostingsList.SelectedItem = null;
             }
+        }
+    }
+    private void VisitHost_Click(object sender, RoutedEventArgs e)
+    {        
+        var button = sender as Button;
+        try
+        {
+            if (button?.DataContext is Hosting hosting)
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = hosting.Url,
+                    UseShellExecute = true
+                });
+            }
+
+        }
+        catch (Exception)
+        {
+            // TODO Логирование
+        }
+        finally
+        {
+            e.Handled = true;
         }
     }
 }

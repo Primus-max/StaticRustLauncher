@@ -1,8 +1,4 @@
-﻿using StaticRustLauncher.DependencyProperties;
-
-using System.Windows.Controls;
-
-namespace StaticRustLauncher.Views.Windows;
+﻿namespace StaticRustLauncher.Views.Windows;
 
 /// <summary>
 /// Главное окно приложения
@@ -27,7 +23,28 @@ public partial class MainWindow : Window
     // Перетаскивание
     private void Window_DragMove(object sender, MouseButtonEventArgs e)
     {
-        if (e.ChangedButton == MouseButton.Left)        
-            this.DragMove();        
+        if (e.ChangedButton == MouseButton.Left)
+            this.DragMove();
+    }
+
+    private void AddServer_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://discord.gg/fptjdUJK2S",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception)
+        {
+
+            // TODO Логирование
+        }
+        finally
+        {
+            e.Handled = true;
+        }
     }
 }

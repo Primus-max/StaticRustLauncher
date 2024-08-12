@@ -143,7 +143,7 @@
                             <!--#endregion-->
 
                             <!--#region Вторая строка-->
-                            <StackPanel
+                            <!--<StackPanel
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 VerticalAlignment="Center">
@@ -154,6 +154,24 @@
                                     LineHeight="22">
                                     <Run Text="{Binding Description}" />
                                 </TextBlock>
+                            </StackPanel>-->
+                            <!--#endregion-->
+                            <!--#region Вторая строка вторая колонка-->
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0,3,0,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
+                                <Button
+                                    Width="120"
+                                    Height="27"
+                                    Panel.ZIndex="1000"
+                                    Click="VisitHost_Click"
+                                    Content="Посетить"
+                                    FontFamily="{DynamicResource FontRegular}"
+                                    FontSize="12"
+                                    Style="{StaticResource OrangeButton}" />
                             </StackPanel>
                             <!--#endregion-->
                         </Grid>
@@ -161,6 +179,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
     </Grid>
 </Page>

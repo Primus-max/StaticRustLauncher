@@ -28,8 +28,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="220" />
                     <RowDefinition Height="29" />
-                    <RowDefinition Height="100" />
-                    <RowDefinition Height="195" />
+                    <RowDefinition Height="156" />
+                    <RowDefinition Height="139" />
                     <RowDefinition Height="99" />
                 </Grid.RowDefinitions>
 
@@ -57,7 +57,7 @@
                     </TextBlock>
                 </StackPanel>
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
-                    <StackPanel Width="600" Height="102">
+                    <StackPanel Width="600">
                         <TextBlock
                             Padding="10"
                             FontFamily="{DynamicResource FontRegular}"
@@ -129,7 +129,7 @@
                     </StackPanel>
 
                     <!--  Telegram  -->
-                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                    <!--<StackPanel Margin="0,0,0,6" Orientation="Horizontal">
                         <Image
                             Width="28"
                             Height="28"
@@ -153,10 +153,10 @@
                                     Text="{Binding URLs[0].Telegram}" />
                             </Hyperlink>
                         </TextBlock>
-                    </StackPanel>
+                    </StackPanel>-->
 
                     <!--  Steam  -->
-                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                    <!--<StackPanel Margin="0,0,0,6" Orientation="Horizontal">
                         <Image
                             Width="28"
                             Height="28"
@@ -180,7 +180,7 @@
                                     Text="{Binding URLs[0].Steam}" />
                             </Hyperlink>
                         </TextBlock>
-                    </StackPanel>
+                    </StackPanel>-->
 
                     <!--  Site  -->
                     <StackPanel Margin="0,0,0,6" Orientation="Horizontal">

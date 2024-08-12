@@ -45,10 +45,9 @@ public class HomeViewModel : BaseViewModel
         private set => Set(ref _serversOnline, value);
     }
 
-    public HomeViewModel()
-    {
+    public HomeViewModel() =>
         Task.Run(() => LoadServersAsync());
-    }
+
 
     private async Task LoadServersAsync()
     {
@@ -57,7 +56,11 @@ public class HomeViewModel : BaseViewModel
             using HttpClient httpClient = new();
             var serverService = new ServerService(httpClient);
             var servers = await serverService.GetDataAsync("http://194.147.90.218/launcher/serversinfo");
-            ServersCollection = new ObservableCollection<Server>(servers);
+
+            ServersCollection = new ObservableCollection<Server>(
+                servers.OrderByDescending(server => server.Status == "premium")
+                .ThenByDescending(server => server.Status == "vip")
+            );
         }
         catch (Exception ex)
         {

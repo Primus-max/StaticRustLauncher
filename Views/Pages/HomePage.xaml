@@ -23,6 +23,7 @@
     <Page.Resources>
         <converters:ServerTypeToBackgroundConverter x:Key="ServerTypeToBackgroundConverter" />
         <converters:ServerTypeTagToStyleConverter x:Key="ServerTypeTagToStyleConverter" />
+        <converters:TagsToDescriptionConverter x:Key="TagsToDescriptionConverter" />
         <converters:TagVersionConverter x:Key="VirsionServer" />
     </Page.Resources>
 
@@ -186,7 +187,7 @@
                                     FontFamily="{DynamicResource FontRegular}"
                                     FontSize="18"
                                     Foreground="{StaticResource DefaultTextColorBrush}"
-                                    Text="Европа Еженедельно Вайп 7 дней" />
+                                    Text="{Binding Tags, Converter={StaticResource TagsToDescriptionConverter}}" />
                             </StackPanel>
 
                             <!--#endregion-->

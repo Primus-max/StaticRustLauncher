@@ -10,4 +10,6 @@ public partial class PlayNowWindow : Window
         InitializeComponent();
         DataContext = new GameModeViewModel();
     }
+
+    private void CloseButton_Click (object sender, EventArgs e) => this.Close();
 }

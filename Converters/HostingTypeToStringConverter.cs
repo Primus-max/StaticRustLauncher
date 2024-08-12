@@ -1,5 +1,7 @@
 ﻿namespace StaticRustLauncher.Converters;
-
+/// <summary>
+/// Преобразования
+/// </summary>
 public class HostingTypeToStringConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

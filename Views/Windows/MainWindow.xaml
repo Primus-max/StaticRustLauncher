@@ -224,6 +224,7 @@
                                 <Button
                                     Width="172"
                                     Margin="0,82,82,0"
+                                    Click="AddServer_Click"
                                     Style="{StaticResource OrangeButton}">
                                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                         <Image

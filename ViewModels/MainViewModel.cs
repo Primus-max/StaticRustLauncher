@@ -82,6 +82,7 @@ public class MainViewModel : BaseViewModel
             case "Hosts":
                 {
                     Frame.Navigate(new HostingPage());
+                    HideStatisticsPanel();
                     CurrentPanel = new UserControl();
                     break;
                 }

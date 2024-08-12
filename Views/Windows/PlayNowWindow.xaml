@@ -85,7 +85,22 @@
                         <Run Text="ActivityAC" />
                     </TextBlock>
                 </Button>
-
+                <!--  Закрытие  -->
+                <Canvas>
+                    <TextBlock
+                        Canvas.Left="224"
+                        Canvas.Top="-20"
+                        Width="30"
+                        Height="30"
+                        Panel.ZIndex="100"
+                        Cursor="Hand"
+                        FontSize="26"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        MouseLeftButtonDown="CloseButton_Click"
+                        Text="×"
+                        TextAlignment="Center" />
+                </Canvas>
             </Grid>
         </Border>
     </Grid>
