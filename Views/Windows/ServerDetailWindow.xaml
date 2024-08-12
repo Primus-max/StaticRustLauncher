@@ -213,14 +213,13 @@
                 <!--  Подключиться  -->
                 <StackPanel
                     Grid.Row="4"
-                    Width="530"
+                    Width="310"
                     Height="44"
                     Margin="0,11,0,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Orientation="Horizontal">
                     <Border
-                        Width="310"
                         Height="44"
                         Margin="0,0,20,0"
                         Background="#131313"
@@ -261,7 +260,7 @@
                                 MouseDown="Border_MouseLeftButtonDown" />
                         </Grid>
                     </Border>
-                    <Button
+                    <!--<Button
                         Width="196"
                         Height="44"
                         Background="#5FA932"
@@ -271,7 +270,7 @@
                         FontFamily="{StaticResource FontMedium}"
                         FontSize="16"
                         Foreground="{StaticResource DefaultTextColorBrush}"
-                        Style="{StaticResource ConnectButton}" />
+                        Style="{StaticResource ConnectButton}" />-->
                 </StackPanel>
             </Grid>
         </Border>
