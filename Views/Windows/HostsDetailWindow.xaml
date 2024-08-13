@@ -56,7 +56,7 @@
                 <!--  Краткое описание  -->
                 <ScrollViewer
                     Grid.Row="2"
-                    Width="500"
+                    Height="350"
                     VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <TextBlock
