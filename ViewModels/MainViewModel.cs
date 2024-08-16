@@ -9,12 +9,15 @@ public class MainViewModel : BaseViewModel
     public ICommand LoginCommand { get; } = null!;
     #endregion
 
+    #region Приватные поля
     private Frame Frame { get; } = null!;
     private UserControl _currentPanel = null!;
     private UserControl _statisticsPanel = null!;
-    private string? _activeButton;
-    private StatisticsData _statisticsData = null!;
-   
+    private string? _activeButton = null!;
+    private StatisticsData _statisticsData = null!;   
+    #endregion
+
+    #region Публичные поля
     public UserControl CurrentPanel
     {
         get => _currentPanel;
@@ -30,12 +33,12 @@ public class MainViewModel : BaseViewModel
         get => _activeButton;
         set => Set(ref _activeButton, value);
     }
-
     public StatisticsData StatisticsData
     {
         get => _statisticsData;
         set => Set(ref _statisticsData, value);
-    }
+    }    
+    #endregion
 
     public MainViewModel(Frame frame)
     {
@@ -47,14 +50,13 @@ public class MainViewModel : BaseViewModel
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
         ShowAvailableNewVersionPanel();
-        ShowStatisticsPanel();
+        ShowStatisticsPanel();       
 
-
-        StatisticsData = new StatisticsData
-        {
-            UsersOnline = 150,
-            ServersCount = 25
-        };
+        //StatisticsData = new StatisticsData
+        //{
+        //    UsersOnline = 150,
+        //    ServersCount = 25
+        //};
     }
 
 
