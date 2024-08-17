@@ -49,16 +49,18 @@ public class MainViewModel : BaseViewModel
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
-        ShowAvailableNewVersionPanel();
-        ShowStatisticsPanel();       
-
-        //StatisticsData = new StatisticsData
-        //{
-        //    UsersOnline = 150,
-        //    ServersCount = 25
-        //};
+        
+        ShowStatisticsPanel();
+        Task.Run(async () => await InitPanelAsync());
     }
 
+    private async Task InitPanelAsync()
+    {
+        if (await UpdateCheckerService.IsUpdateAvailableAsync())        
+            Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
+        else
+            Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+    }
 
     private void OnNavigate(object viewName)
     {
@@ -114,7 +116,6 @@ public class MainViewModel : BaseViewModel
         ConfirmExitWindow confirmExitWindow = new();
         WindowHelper.OpenWindowWithBlur(confirmExitWindow);
     }
-
 
     private void OnMinimizeAppCommandExecuted(object parameter) =>
         Application.Current.MainWindow.WindowState = WindowState.Minimized;
