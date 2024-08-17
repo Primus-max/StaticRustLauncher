@@ -36,7 +36,7 @@
                         LineHeight="25">
                         <Run FontFamily="{StaticResource FontMedium}" Text="Вышло обновление для игры" />
                         <LineBreak />
-                        <Run FontFamily="{StaticResource FontRegular}" Text="2.4.12" />
+                        <Run x:Name="NewVersionText" FontFamily="{StaticResource FontRegular}" />
                     </TextBlock>
                 </StackPanel>
 
@@ -49,7 +49,7 @@
                     <Button
                         Width="151"
                         Height="44"
-                        Click="DownloadNewVirsion_Click"
+                        Click="DownloadNewVersion_Click"
                         Content="Загрузить"
                         Style="{StaticResource OutlineButton}" />
                 </StackPanel>

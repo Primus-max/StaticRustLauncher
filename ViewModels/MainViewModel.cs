@@ -7,6 +7,7 @@ public class MainViewModel : BaseViewModel
     public ICommand CloseAppCommand { get; } = null!;
     public ICommand MinimizeAppCommand { get; } = null!;
     public ICommand LoginCommand { get; } = null!;
+    public ICommand SteamNickNameCommand { get; } = null!;
     #endregion
 
     #region Приватные поля
@@ -56,6 +57,7 @@ public class MainViewModel : BaseViewModel
         CloseAppCommand = new LambdaCommand(OnCloseAppCommandExecuted);
         MinimizeAppCommand = new LambdaCommand(OnMinimizeAppCommandExecuted);
         LoginCommand = new LambdaCommand(OnLoginOpenWindow);
+        SteamNickNameCommand = new LambdaCommand(OnSteamNickName);
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
@@ -154,6 +156,11 @@ public class MainViewModel : BaseViewModel
         };
 
         WindowHelper.OpenWindowWithBlur(loginWindow);
+    }
+
+    private void OnSteamNickName(object parameter) 
+    {
+        MessageBox.Show("Что про никнейм в стиме");
     }
     #endregion
 }

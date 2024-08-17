@@ -175,6 +175,7 @@
                         x:Name="UserCabinetButton"
                         Width="162"
                         Height="40"
+                        Command="{Binding SteamNickNameCommand}"
                         Content="Steam_nickname"
                         FontSize="14"
                         Style="{StaticResource OutlineButton}"
