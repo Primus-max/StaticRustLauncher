@@ -53,12 +53,10 @@
                         FontFamily="{DynamicResource FontRegular}"
                         FontSize="12"
                         Foreground="{x:Null}"
+                        ItemsSource="{Binding Languages}"
                         SelectedItem="{Binding SelectedLang}"
-                        Style="{StaticResource ComboBoxStyle}">
-                        <ComboBoxItem Content="Русский" IsSelected="True" />
-                        <ComboBoxItem Content="English" />
-                        <ComboBoxItem Content="Deutsch" />
-                    </ComboBox>
+                        Style="{StaticResource ComboBoxStyle}" />
+
                 </StackPanel>
                 <!--  Вторая строка  -->
                 <StackPanel
@@ -86,12 +84,10 @@
                         FontFamily="{DynamicResource FontRegular}"
                         FontSize="12"
                         Foreground="{StaticResource DefaultTextColorBrush}"
+                        ItemsSource="{Binding GameVersions}"
                         SelectedItem="{Binding GameVersion}"
-                        Style="{StaticResource ComboBoxStyle}">
-                        <ComboBoxItem Content="V 2564" IsSelected="True" />
-                        <ComboBoxItem Content="V 2654" />
-                        <ComboBoxItem Content="V 5264" />
-                    </ComboBox>
+                        Style="{StaticResource ComboBoxStyle}" />
+
                 </StackPanel>
                 <!--  Третья строка  -->
                 <StackPanel

@@ -2,34 +2,27 @@
 
 public class Languages
 {
+    private static readonly string _filePath = "languages.json";
+    public static ObservableCollection<string> LanguageList { get; private set; } = [];
 
-    private static List<string>? _languageList;
-
-    public static List<string> LanguageList
-    {
-        get
-        {
-            if (_languageList == null)
-            {
-                LoadLanguages();
-            }
-            return _languageList ?? [];
-        }
-    }
-
+    static Languages() =>    
+        LoadLanguages();
+    
     private static void LoadLanguages()
-    {
-        string filePath = "languages.json";
-        if (File.Exists(filePath))
+    {        
+        if (File.Exists(_filePath))
         {
             try
             {
-                string json = File.ReadAllText(filePath);
-                _languageList = JsonSerializer.Deserialize<List<string>>(json);
+                string json = File.ReadAllText(_filePath);
+                var languages = JsonSerializer.Deserialize<List<string>>(json);
+                if (languages != null)                
+                    LanguageList = new ObservableCollection<string>(languages);
+                
             }
             catch (Exception)
             {
-               
+                
             }
         }
     }

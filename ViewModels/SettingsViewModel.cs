@@ -13,6 +13,9 @@ public class SettingsViewModel : BaseViewModel
     private string? _dirLauncher = null!;
     private string? _dirGame = null!;
 
+    public ObservableCollection<string> Languages => Models.Languages.LanguageList;
+    public ObservableCollection<string> GameVersions => Models.GameVersions.VersionList;
+
     public string? SelectedLang
     {
         get => _selectedLang;
