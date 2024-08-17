@@ -7,36 +7,32 @@ public class SettingsViewModel : BaseViewModel
 {
     public ICommand? OpenFileDialogCommand { get; }
     public ICommand? SaveSettingsCommand { get; }
-        
+
     private string? _selectedLang = null!;
     private string? _gameVersion = null!;
     private string? _dirLauncher = null!;
-    private string? _dirGame = null!;     
+    private string? _dirGame = null!;
 
     public string? SelectedLang
     {
         get => _selectedLang;
         set => Set(ref _selectedLang, value);
     }
-
     public string? GameVersion
     {
         get => _gameVersion;
         set => Set(ref _gameVersion, value);
     }
-
     public string? DirLauncher
     {
         get => _dirLauncher;
         set => Set(ref _dirLauncher, value);
     }
-
     public string? DirGame
     {
         get => _dirGame;
         set => Set(ref _dirGame, value);
     }
-
 
     public SettingsViewModel()
     {
@@ -78,5 +74,4 @@ public class SettingsViewModel : BaseViewModel
         }
 
     }
-
 }

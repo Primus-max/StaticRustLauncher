@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Text.Json;
-
-namespace StaticRustLauncher.Models;
+﻿namespace StaticRustLauncher.Models;
 
 public static class SettingsApp
 {
