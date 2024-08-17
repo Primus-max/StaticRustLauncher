@@ -10,22 +10,22 @@ public class UpdateCheckerService
     /// Проверяет, доступна ли новая версия игры.
     /// </summary>
     /// <returns>True, если доступна новая версия; иначе, false.</returns>
-    public static async Task<bool> IsUpdateAvailableAsync()
+    public static async Task<(bool, string)> IsUpdateAvailableAsync()
     {
         string? latestVersion = await GetLatestVersionAsync();
         if (latestVersion == null)        
-            return false;        
+            return (false , latestVersion);        
 
         string? currentVersion = GetCurrentVersion();
         if (currentVersion == null || 
             !latestVersion.Equals(currentVersion, StringComparison.OrdinalIgnoreCase))       
-            return true;         
+            return (true, latestVersion);         
 
-        return false; 
+        return (true, latestVersion); 
     }
 
     
-    private static async Task<string?> GetLatestVersionAsync()
+    public static async Task<string?> GetLatestVersionAsync()
     {
         try
         {

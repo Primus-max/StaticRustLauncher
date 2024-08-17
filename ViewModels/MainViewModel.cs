@@ -14,7 +14,10 @@ public class MainViewModel : BaseViewModel
     private UserControl _currentPanel = null!;
     private UserControl _statisticsPanel = null!;
     private string? _activeButton = null!;
-    private StatisticsData _statisticsData = null!;   
+    private StatisticsData _statisticsData = null!;
+    private string? _actualVersionClient = null!;
+    private string? _currentVersionClient = null!;
+    private bool _availableNewVersionClient = false;
     #endregion
 
     #region Публичные поля
@@ -37,7 +40,14 @@ public class MainViewModel : BaseViewModel
     {
         get => _statisticsData;
         set => Set(ref _statisticsData, value);
-    }    
+    }
+    public string? ActualVersionClient
+    {
+        get => _actualVersionClient;
+        set => Set(ref _actualVersionClient, value);
+    }
+    public string? CurrentVersionClient => GameVersions.CurrentVersionClient;
+
     #endregion
 
     public MainViewModel(Frame frame)
@@ -49,19 +59,21 @@ public class MainViewModel : BaseViewModel
 
         Frame = frame;
         Frame.Navigate(new HomePage()); // Инициализация начальной страницы
-        
+
         ShowStatisticsPanel();
         Task.Run(async () => await InitPanelAsync());
     }
 
     private async Task InitPanelAsync()
     {
-        if (await UpdateCheckerService.IsUpdateAvailableAsync())        
-            Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
-        else
-            Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+        var actualVersionTulip = await UpdateCheckerService.IsUpdateAvailableAsync();
+        ActualVersionClient = actualVersionTulip.Item2 ?? string.Empty;
+        _availableNewVersionClient = actualVersionTulip.Item1;
+
+        SetPanelGame();
     }
 
+    // Навигация
     private void OnNavigate(object viewName)
     {
         if (viewName is string destination)
@@ -72,7 +84,7 @@ public class MainViewModel : BaseViewModel
             case "Home":
                 {
                     Frame.Navigate(new HomePage());
-                    ShowPlayNowPanel();
+                    SetPanelGame();
                     ShowStatisticsPanel();
                     break;
                 }
@@ -102,6 +114,16 @@ public class MainViewModel : BaseViewModel
         }
     }
 
+    // Показывает нужную панель для режимы игры
+    private void SetPanelGame()
+    {
+        if (_availableNewVersionClient)
+            Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
+        else
+            Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+    }
+
+    #region Панели (играть/скачать/статистика)
     private void ShowAvailableNewVersionPanel() => CurrentPanel = new AvailableNewVersionControl();
     private void ShowLoadingPanel() => CurrentPanel = new LoadingPanelControl();
     private void ShowInstallGamePanel() => CurrentPanel = new InstallGameControl();
@@ -110,6 +132,9 @@ public class MainViewModel : BaseViewModel
 
     private void ShowStatisticsPanel() => StatisticsPanel = new StatisticsControl();
     private void HideStatisticsPanel() => StatisticsPanel = null!;
+
+    #endregion
+
     #region Методы команд
     private void OnCloseAppCommandExecuted(object parameter)
     {

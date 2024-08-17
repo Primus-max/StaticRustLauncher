@@ -48,4 +48,6 @@ public class GameVersions
 
         }
     }
+
+    public static string? CurrentVersionClient => VersionList.Count > 0 ? VersionList[0] : string.Empty;
 }

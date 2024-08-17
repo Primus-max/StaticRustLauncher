@@ -49,6 +49,7 @@
                     <Button
                         Width="151"
                         Height="44"
+                        Click="DownloadNewVirsion_Click"
                         Content="Загрузить"
                         Style="{StaticResource OutlineButton}" />
                 </StackPanel>

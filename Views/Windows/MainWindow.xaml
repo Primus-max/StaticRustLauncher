@@ -284,7 +284,8 @@
                             FontFamily="{StaticResource FontBold}"
                             FontSize="16"
                             LineHeight="20">
-                            <Run Foreground="{StaticResource AccentBrush}" Text="1.2.13" />
+                            <Run Foreground="{StaticResource AccentBrush}" Text="V " />
+                            <Run Foreground="{StaticResource AccentBrush}" Text="{Binding CurrentVersionClient, Mode=OneWay}" />
                         </TextBlock>
 
                         <!--  Актуальная версия  -->
@@ -305,7 +306,8 @@
                             FontFamily="{StaticResource FontBold}"
                             FontSize="16"
                             LineHeight="20">
-                            <Run Foreground="{StaticResource AccentBrush}" Text="1.4.17" />
+                            <Run Foreground="{StaticResource AccentBrush}" Text="V" />
+                            <Run Foreground="{StaticResource AccentBrush}" Text="{Binding ActualVersionClient}" />
                         </TextBlock>
 
                         <!--  Права защищены  -->

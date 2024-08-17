@@ -9,4 +9,9 @@ public partial class AvailableNewVersionControl : UserControl
     {
         InitializeComponent();
     }
+
+    public void DownloadNewVirsion_Click(object sender, EventArgs e)
+    {
+        MessageBox.Show("Скачивание новой версии началось");
+    }
 }
