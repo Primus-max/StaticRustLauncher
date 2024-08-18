@@ -275,7 +275,7 @@
                             FontFamily="{StaticResource FontBold}"
                             FontSize="16"
                             LineHeight="20">
-                            <Run Foreground="{StaticResource TextBrush}" Text="Версия клиента" />
+                            <Run Foreground="{StaticResource TextBrush}" Text="Текущая версия" />
                         </TextBlock>
                         <TextBlock
                             Grid.Row="0"
@@ -286,7 +286,7 @@
                             FontSize="16"
                             LineHeight="20">
                             <Run Foreground="{StaticResource AccentBrush}" Text="V " />
-                            <Run Foreground="{StaticResource AccentBrush}" Text="{Binding CurrentVersionClient, Mode=OneWay}" />
+                            <Run Foreground="{StaticResource AccentBrush}" Text="{Binding CurrentVersion, Mode=OneWay}" />
                         </TextBlock>
 
                         <!--  Актуальная версия  -->
@@ -308,7 +308,7 @@
                             FontSize="16"
                             LineHeight="20">
                             <Run Foreground="{StaticResource AccentBrush}" Text="V" />
-                            <Run Foreground="{StaticResource AccentBrush}" Text="{Binding ActualVersionClient}" />
+                            <Run Foreground="{StaticResource AccentBrush}" Text="{Binding ActualVersion}" />
                         </TextBlock>
 
                         <!--  Права защищены  -->

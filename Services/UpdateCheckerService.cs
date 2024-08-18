@@ -3,8 +3,7 @@
 public class UpdateCheckerService
 {
     private static readonly HttpClient httpClient = new();
-    private const string VersionUrl = "http://194.147.90.218/client/version";
-    private const string LocalVersionFile = "game_v.json";
+    private const string VersionUrl = "http://194.147.90.218/client/version";    
 
     /// <summary>
     /// Проверяет, доступна ли новая версия игры.
@@ -40,13 +39,16 @@ public class UpdateCheckerService
     
     private static string? GetCurrentVersion()
     {
+        SettingsApp.Load();
+        string localVersionFile = SettingsApp.DirGame;
+
         try
         {
-            if (File.Exists(LocalVersionFile))
+            if (File.Exists(localVersionFile))
             {
-                string json = File.ReadAllText(LocalVersionFile);
+                string json = File.ReadAllText(localVersionFile);
                 var versions = JsonSerializer.Deserialize<List<string>>(json);
-                return versions?.Count > 0 ? versions[0] : null; // Предполагаем, что первая версия - текущая
+                return versions?.Count > 0 ? versions[0] : null; 
             }
             return null;
         }

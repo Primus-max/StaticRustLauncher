@@ -16,8 +16,8 @@ public class MainViewModel : BaseViewModel
     private UserControl _statisticsPanel = null!;
     private string? _activeButton = null!;
     private StatisticsData _statisticsData = null!;
-    private string? _actualVersionClient = null!;
-    private string? _currentVersionClient = null!;
+    private string? _actualVersion = null!;
+    private string? _currentVersion = null!;
     private bool _availableNewVersionClient = false;
     #endregion
 
@@ -42,12 +42,12 @@ public class MainViewModel : BaseViewModel
         get => _statisticsData;
         set => Set(ref _statisticsData, value);
     }
-    public string? ActualVersionClient
+    public string? ActualVersion
     {
-        get => _actualVersionClient;
-        set => Set(ref _actualVersionClient, value);
+        get => _actualVersion;
+        set => Set(ref _actualVersion, value);
     }
-    public string? CurrentVersionClient => GameVersions.CurrentVersionClient;
+    public string? CurrentVersion => GameVersions.CurrentVersion;
 
     #endregion
 
@@ -69,7 +69,7 @@ public class MainViewModel : BaseViewModel
     private async Task InitPanelAsync()
     {
         var actualVersionTulip = await UpdateCheckerService.IsUpdateAvailableAsync();
-        ActualVersionClient = actualVersionTulip.Item2 ?? string.Empty;
+        ActualVersion = actualVersionTulip.Item2 ?? string.Empty;
         _availableNewVersionClient = actualVersionTulip.Item1;
 
         SetPanelGame();

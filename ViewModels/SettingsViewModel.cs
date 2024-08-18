@@ -1,6 +1,4 @@
-﻿
-using Microsoft.Win32;
-
+﻿using System.Windows.Forms;
 namespace StaticRustLauncher.ViewModels;
 
 public class SettingsViewModel : BaseViewModel
@@ -14,7 +12,7 @@ public class SettingsViewModel : BaseViewModel
     private string? _dirGame = null!;
 
     public ObservableCollection<string> Languages => Models.Languages.LanguageList;
-    public ObservableCollection<string> GameVersions => Models.GameVersions.VersionList;
+    public ObservableCollection<string> GameVersions => ["3455", "3344", "2333"];
 
     public string? SelectedLang
     {
@@ -61,20 +59,23 @@ public class SettingsViewModel : BaseViewModel
 
     private void OnOpenFileDialog(object commandName)
     {
-        OpenFileDialog openFile = new();
-        if (openFile is null || openFile.ShowDialog() != true) return;
+        using var folderDialog = new FolderBrowserDialog();
+        folderDialog.Description = "Выберите папку"; // Описание в диалоге
+        DialogResult result = folderDialog.ShowDialog();
 
-        switch (commandName)
+        if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
         {
-            case "Launcher":
-                DirLauncher = openFile.FileName;
-                break;
-            case "Game":
-                DirGame = openFile.FileName;
-                break;
-            default:
-                break;
+            switch (commandName)
+            {
+                case "Launcher":
+                    DirLauncher = folderDialog.SelectedPath;
+                    break;
+                case "Game":
+                    DirGame = folderDialog.SelectedPath;
+                    break;
+                default:
+                    break;
+            }
         }
-
     }
 }
