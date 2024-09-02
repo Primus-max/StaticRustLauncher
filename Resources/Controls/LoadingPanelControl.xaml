@@ -47,11 +47,11 @@
                             <Run
                                 FontFamily="{StaticResource FontMedium}"
                                 FontSize="20"
-                                Text="Загрузка обновления для игры" />
+                                Text="Загрузка обновления для версии игры: " />
                             <Run
                                 FontFamily="{StaticResource FontRegular}"
                                 FontSize="16"
-                                Text="     2.4.12" />
+                                Text="{Binding CurrentVersion, Mode=OneWay}" />
                         </TextBlock>
                     </StackPanel>
 
@@ -62,8 +62,10 @@
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource FontMedium}"
                         FontSize="16"
-                        Foreground="{StaticResource DefaultTextColorBrush}"
-                        Text="34%" />
+                        Foreground="{StaticResource DefaultTextColorBrush}">
+                        <Run Text="{Binding Percents}" />
+                        <Run Text="%" />
+                    </TextBlock>
 
                     <!--  Кнопка Отмена  -->
                     <Button
@@ -80,6 +82,7 @@
 
             <!--  Progress Bar  -->
             <ProgressBar
+                x:Name="ProgressDownloadFiles"
                 Grid.Row="1"
                 Height="6"
                 Margin="16,0,16,0"

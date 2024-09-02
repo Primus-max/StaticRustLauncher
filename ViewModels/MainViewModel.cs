@@ -1,4 +1,9 @@
-﻿namespace StaticRustLauncher.ViewModels;
+﻿
+using StaticRustLauncher.EventHandlers;
+
+using System.Windows.Threading;
+
+namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -19,6 +24,7 @@ public class MainViewModel : BaseViewModel
     private string? _actualVersion = null!;
     private string? _currentVersion = null!;
     private bool _availableNewVersionClient = false;
+    private bool _isDownloading = false;
     #endregion
 
     #region Публичные поля
@@ -53,6 +59,10 @@ public class MainViewModel : BaseViewModel
 
     public MainViewModel(Frame frame)
     {
+        EventBus.DownloadStarted += OnDownloadStarted;
+        EventBus.DownloadCompleted += OnDownloadCompleted;
+        EventBus.UpdateAvailable += OnUpdateAvailable;
+
         NavigationCommand = new LambdaCommand(OnNavigate);
         CloseAppCommand = new LambdaCommand(OnCloseAppCommandExecuted);
         MinimizeAppCommand = new LambdaCommand(OnMinimizeAppCommandExecuted);
@@ -60,11 +70,12 @@ public class MainViewModel : BaseViewModel
         SteamNickNameCommand = new LambdaCommand(OnSteamNickName);
 
         Frame = frame;
-        Frame.Navigate(new HomePage()); // Инициализация начальной страницы
+        Frame.Navigate(new HomePage()); // Инициализация начальной страницы      
 
         ShowStatisticsPanel();
         Task.Run(async () => await InitPanelAsync());
-    }
+        UpdateCheckerService.StartAutoCheck();
+    }   
 
     private async Task InitPanelAsync()
     {
@@ -119,11 +130,38 @@ public class MainViewModel : BaseViewModel
     // Показывает нужную панель для режимы игры
     private void SetPanelGame()
     {
-        if (_availableNewVersionClient)
+        if (_availableNewVersionClient && !_isDownloading)
             Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
+        else if(_isDownloading)
+            Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
         else
             Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
     }
+
+    #region Действия на подписки событий
+    private void OnDownloadStarted() 
+    {
+        ShowLoadingPanel();
+        _isDownloading = true;
+    }
+
+    private void OnDownloadCompleted()
+    {
+        Application.Current.Dispatcher.Invoke(() =>
+        {            
+            ShowPlayNowPanel();
+        });
+    }
+
+    private void OnUpdateAvailable()
+    {
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            ShowAvailableNewVersionPanel();
+        });
+    }
+    #endregion
+
 
     #region Панели (играть/скачать/статистика)
     private void ShowAvailableNewVersionPanel() => CurrentPanel = new AvailableNewVersionControl();

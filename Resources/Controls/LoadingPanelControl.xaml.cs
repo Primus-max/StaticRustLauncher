@@ -1,28 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using StaticRustLauncher.EventHandlers;
 
-namespace StaticRustLauncher.Resources.Controls
+namespace StaticRustLauncher.Resources.Controls;
+
+/// <summary>
+/// Логика взаимодействия для LoadingPanelControl.xaml
+/// </summary>
+public partial class LoadingPanelControl : UserControl, INotifyPropertyChanged
 {
-    /// <summary>
-    /// Логика взаимодействия для LoadingPanelControl.xaml
-    /// </summary>
-    public partial class LoadingPanelControl : UserControl
+    private string _percents = "0";    
+    public string? CurrentVersion => GameVersions.CurrentVersion;
+    public string Percents
     {
-        public LoadingPanelControl()
+        get => _percents;
+        set
         {
-            InitializeComponent();
+            if (_percents != value)
+            {
+                _percents = value;
+                OnPropertyChanged(); // Уведомление об изменении свойства
+            }
         }
+    }
+    public LoadingPanelControl()
+    {
+        InitializeComponent();
+        EventBus.DownloadProgressChanged += OnDownloadProgressChanged;
+        DataContext = this;
+    }
+
+    private void OnDownloadProgressChanged(int progress)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            ProgressDownloadFiles.Value = progress;
+            ProgressDownloadFiles.IsIndeterminate = progress == 0 || progress == 100;  
+            Percents = progress.ToString();
+        });
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
