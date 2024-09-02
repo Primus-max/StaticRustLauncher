@@ -21,6 +21,7 @@ public partial class LoadingPanelControl : UserControl, INotifyPropertyChanged
             }
         }
     }
+
     public LoadingPanelControl()
     {
         InitializeComponent();
@@ -44,4 +45,8 @@ public partial class LoadingPanelControl : UserControl, INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    private void OnCancelUpdatingGame_Click(object sender, RoutedEventArgs e)
+        => EventBus.OnCancelDownloading();
+    
 }

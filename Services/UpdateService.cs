@@ -18,6 +18,7 @@ internal class UpdateService
     long _totalFileSize = 0;// Подсчитываем общий размер файлов
     long _totalBytesDownloaded = 0; // Общее количество скачанных байтов
     int _tryCountRetryDownload = 0;
+    private bool _isCancellationRequested = false;
 
     public UpdateService(string host, int port, string username, string password)
     {
@@ -25,6 +26,14 @@ internal class UpdateService
         _port = port;
         _username = username;
         _password = password;
+
+        EventBus.CancelDownloading += OnCancelDownloading;
+    }
+
+    private void OnCancelDownloading()
+    {
+        _isCancellationRequested = false;
+        EventBus.OnDownloadCompleted();
     }
 
     public void Check(string remoteDirectoryPath, string destLocalPath)
@@ -42,8 +51,8 @@ internal class UpdateService
 
             sftpClient.Disconnect();
 
-            //MessageBox.Show("Загрузка завершена, наслаждайтесь игрой.");
             Dispatcher.CurrentDispatcher.Invoke(new Action(() => EventBus.OnDownloadCompleted()));
+            MessageBox.Show("Загрузка завершена, наслаждайтесь игрой.");            
         }
         catch (Exception ex)
         {
@@ -60,7 +69,7 @@ internal class UpdateService
         using (var reader = new StreamReader(remoteFileStream))
         {
             string line;
-            while ((line = reader.ReadLine()) != null)
+            while ((line = reader.ReadLine()) != null && !_isCancellationRequested)
             {
                 var parts = line.Split(' ');
                 if (parts.Length == 2)
@@ -85,6 +94,9 @@ internal class UpdateService
         {
             for (int i = 0; i < files.Count; i++)
             {
+                if (_isCancellationRequested)
+                    return;
+
                 var file = files[i];
                 if (file.Name == "." || file.Name == "..")
                     continue;
@@ -116,6 +128,9 @@ internal class UpdateService
 
                             while (!isFileDownloaded && attempt < _maxRetryAttempts)
                             {
+                                if (_isCancellationRequested)
+                                    return;
+
                                 attempt++;
 
                                 try
@@ -147,7 +162,6 @@ internal class UpdateService
         }
     }
 
-
     private void DownloadFile(SftpClient sftpClient, string remoteFilePath, string localFilePath, long totalFileSize, ref long totalBytesDownloaded)
     {
         try
@@ -163,13 +177,16 @@ internal class UpdateService
 
             while ((bytesRead = remoteFileStream.Read(buffer, 0, buffer.Length)) > 0)
             {
+                if (_isCancellationRequested)
+                    return;
+
                 fileStream.Write(buffer, 0, bytesRead);
                 fileBytesRead += bytesRead; // Увеличиваем счетчик текущего файла
                 totalBytesDownloaded += bytesRead; // Увеличиваем общий счетчик загруженных байтов
-                                
+
                 double overallProgress = (double)totalBytesDownloaded / totalFileSize * 100;
-                int roundedProgress = (int)Math.Round(overallProgress); 
-                                
+                int roundedProgress = (int)Math.Round(overallProgress);
+
                 EventBus.NotifyDownloadProgressChanged(roundedProgress);
             }
 
@@ -183,8 +200,6 @@ internal class UpdateService
             throw;
         }
     }
-
-
 
     private long CalculateTotalSize(List<ISftpFile> files, SftpClient sftpClient)
     {
@@ -203,10 +218,8 @@ internal class UpdateService
         return totalSize;
     }
 
-
-
     private string ComputeFileHash(string filePath)
-    {        
+    {
         using var md5 = MD5.Create();
         using var stream = File.OpenRead(filePath);
         byte[] fileMD5 = md5.ComputeHash(stream);
