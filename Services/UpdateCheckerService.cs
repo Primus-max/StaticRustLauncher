@@ -7,7 +7,7 @@ public class UpdateCheckerService
     private static readonly HttpClient httpClient = new();
     private const string VersionUrl = "http://194.147.90.218/client/version";    // http://194.147.90.218/launcher/version
     private static Timer? _timer;
-    private static readonly TimeSpan CheckInterval = TimeSpan.FromMinutes(30);
+    private static readonly TimeSpan CheckInterval = TimeSpan.FromMinutes(10);
        
 
     /// <summary>
@@ -27,7 +27,9 @@ public class UpdateCheckerService
             : ((bool, string))(true, latestVersion);
     }
 
-   
+   /// <summary>
+   /// Запускается каждое указанное время для проверки и установки обновлений
+   /// </summary>
     public static void StartAutoCheck()
     {
         _timer = new Timer(async _ => await CheckForUpdateAsync(), null, 0, (int)CheckInterval.TotalMilliseconds);

@@ -29,10 +29,12 @@ public partial class LoadingPanelControl : UserControl, INotifyPropertyChanged
         DataContext = this;
     }
 
-    private void OnDownloadProgressChanged(int progress)
+    private void OnDownloadProgressChanged(double progress)
     {
         Dispatcher.Invoke(() =>
         {
+            progress = progress > 100 ? 100 : progress;
+
             ProgressDownloadFiles.Value = progress;
             ProgressDownloadFiles.IsIndeterminate = progress == 0 || progress == 100;  
             Percents = progress.ToString();

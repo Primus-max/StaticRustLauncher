@@ -19,6 +19,7 @@ internal class UpdateService
     long _totalBytesDownloaded = 0; // Общее количество скачанных байтов
     int _tryCountRetryDownload = 0;
     private bool _isCancellationRequested = false;
+    private List<ISftpFile> _files = [];
 
     public UpdateService(string host, int port, string username, string password)
     {
@@ -32,7 +33,7 @@ internal class UpdateService
 
     private void OnCancelDownloading()
     {
-        _isCancellationRequested = false;
+        _isCancellationRequested = true;
         EventBus.OnDownloadCompleted();
     }
 
@@ -46,13 +47,22 @@ internal class UpdateService
             // Загрузка и парсинг hashList.txt
             var hashList = GetHashList(sftpClient, remoteDirectoryPath);
 
+            // Преобразование IEnumerable в List для использования индекса
+             _files = sftpClient.ListDirectory(remoteDirectoryPath).ToList();
+            _totalFileSize = CalculateTotalSize(_files, sftpClient);
             // Скачивание файлов с проверкой хешей
             DownloadDirectory(sftpClient, remoteDirectoryPath, destLocalPath, hashList);
 
             sftpClient.Disconnect();
 
             Dispatcher.CurrentDispatcher.Invoke(new Action(() => EventBus.OnDownloadCompleted()));
-            MessageBox.Show("Загрузка завершена, наслаждайтесь игрой.");            
+            
+            string message = _isCancellationRequested
+                ? "Загрузка обновления отменена пользователем"
+                : "Загрузка завершена, наслаждайтесь игрой.";
+
+            MessageBox.Show(message);
+            _isCancellationRequested = false;
         }
         catch (Exception ex)
         {
@@ -86,67 +96,78 @@ internal class UpdateService
 
     private void DownloadDirectory(SftpClient sftpClient, string remoteDirectoryPath, string destLocalPath, Dictionary<string, string> hashList)
     {
-        // Преобразование IEnumerable в List для использования индекса
-        List<ISftpFile> files = sftpClient.ListDirectory(remoteDirectoryPath).ToList();
-        _totalFileSize = CalculateTotalSize(files, sftpClient);
-
         try
         {
-            for (int i = 0; i < files.Count; i++)
+            // Очередь директорий для обработки
+            var directoriesQueue = new Queue<(string remoteDir, string localDir)>();
+            directoriesQueue.Enqueue((remoteDirectoryPath, destLocalPath));
+
+            while (directoriesQueue.Count > 0)
             {
-                if (_isCancellationRequested)
-                    return;
+                var (currentRemoteDir, currentLocalDir) = directoriesQueue.Dequeue();
+                var files = sftpClient.ListDirectory(currentRemoteDir);
 
-                var file = files[i];
-                if (file.Name == "." || file.Name == "..")
-                    continue;
-
-                string localPath = Path.Combine(destLocalPath, file.Name);
-                string relativePath = localPath.Replace(SettingsApp.DirGame, "").TrimStart(Path.DirectorySeparatorChar);
-
-
-                if (file.IsDirectory)
+                foreach (var file in files)
                 {
-                    Directory.CreateDirectory(localPath);
-                    DownloadDirectory(sftpClient, file.FullName, localPath, hashList);
-                }
-                else if (file.IsRegularFile)
-                {
-                    if (!hashList.TryGetValue(relativePath, out string remoteFileHash))
+                    if (_isCancellationRequested)
+                        return;
+
+                    if (file.Name == "." || file.Name == "..")
+                        continue;
+
+                    // Определяем локальный и относительный путь
+                    string relativePath = Path.GetRelativePath(remoteDirectoryPath, Path.Combine(currentRemoteDir, file.Name));
+                    string localPath = Path.Combine(destLocalPath, relativePath);
+                    Console.WriteLine(localPath);
+                    if (file.IsDirectory)
                     {
-                        // Скачиваем файл, если его хеш не найден                        
-                        DownloadFile(sftpClient, file.FullName, localPath, _totalFileSize, ref _totalBytesDownloaded);
-                    }
-                    else
-                    {
-                        bool fileExistsAndValid = File.Exists(localPath) && ComputeFileHash(localPath) == remoteFileHash;
-                        Console.WriteLine($"Hash файла на сервере {remoteFileHash}");
-                        if (!fileExistsAndValid)
+                        // Создаем локальную директорию, если ее нет
+                        if (!Directory.Exists(localPath))
                         {
-                            bool isFileDownloaded = false;
-                            int attempt = 0;
+                            Directory.CreateDirectory(localPath);
+                        }
 
-                            while (!isFileDownloaded && attempt < _maxRetryAttempts)
+                        // Добавляем поддиректорию в очередь для дальнейшей обработки
+                        directoriesQueue.Enqueue((file.FullName, localPath));
+                    }
+                    else if (file.IsRegularFile)
+                    {
+                        if (!hashList.TryGetValue(relativePath, out string remoteFileHash))
+                        {
+                            // Скачиваем файл, если его хеш не найден                        
+                            DownloadFile(sftpClient, file.FullName, localPath, _totalFileSize);
+                        }
+                        else
+                        {
+                            bool fileExistsAndValid = File.Exists(localPath) && ComputeFileHash(localPath) == remoteFileHash;
+                            Console.WriteLine($"Hash файла на сервере {remoteFileHash}");
+                            if (!fileExistsAndValid)
                             {
-                                if (_isCancellationRequested)
-                                    return;
+                                bool isFileDownloaded = false;
+                                int attempt = 0;
 
-                                attempt++;
-
-                                try
+                                while (!isFileDownloaded && attempt < _maxRetryAttempts)
                                 {
-                                    DownloadFile(sftpClient, file.FullName, localPath, _totalFileSize, ref _totalBytesDownloaded);
-                                    isFileDownloaded = ComputeFileHash(localPath) == remoteFileHash;
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine($"Ошибка при скачивании файла {file.Name}: {ex.Message}");
-                                }
-                            }
+                                    if (_isCancellationRequested)
+                                        return;
 
-                            if (!isFileDownloaded)
-                            {
-                                Console.WriteLine($"Не удалось корректно скачать файл {file.Name} после {attempt} попыток.");
+                                    attempt++;
+
+                                    try
+                                    {
+                                        DownloadFile(sftpClient, file.FullName, localPath, _totalFileSize);
+                                        isFileDownloaded = ComputeFileHash(localPath) == remoteFileHash;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"Ошибка при скачивании файла {file.Name}: {ex.Message}");
+                                    }
+                                }
+
+                                if (!isFileDownloaded)
+                                {
+                                    Console.WriteLine($"Не удалось корректно скачать файл {file.Name} после {attempt} попыток.");
+                                }
                             }
                         }
                     }
@@ -162,7 +183,8 @@ internal class UpdateService
         }
     }
 
-    private void DownloadFile(SftpClient sftpClient, string remoteFilePath, string localFilePath, long totalFileSize, ref long totalBytesDownloaded)
+
+    private void DownloadFile(SftpClient sftpClient, string remoteFilePath, string localFilePath, long totalFileSize)
     {
         try
         {
@@ -182,10 +204,10 @@ internal class UpdateService
 
                 fileStream.Write(buffer, 0, bytesRead);
                 fileBytesRead += bytesRead; // Увеличиваем счетчик текущего файла
-                totalBytesDownloaded += bytesRead; // Увеличиваем общий счетчик загруженных байтов
+                _totalBytesDownloaded += bytesRead; // Увеличиваем общий счетчик загруженных байтов
 
-                double overallProgress = (double)totalBytesDownloaded / totalFileSize * 100;
-                int roundedProgress = (int)Math.Round(overallProgress);
+                double overallProgress = (double)_totalBytesDownloaded / totalFileSize * 100.0;
+                double roundedProgress = Math.Round(overallProgress, 2);
 
                 EventBus.NotifyDownloadProgressChanged(roundedProgress);
             }
@@ -201,18 +223,26 @@ internal class UpdateService
         }
     }
 
+
     private long CalculateTotalSize(List<ISftpFile> files, SftpClient sftpClient)
     {
         long totalSize = 0;
         foreach (var file in files)
         {
-            if (file.IsRegularFile)
+            try
             {
-                totalSize += file.Attributes.Size;
+                if (file.IsRegularFile)
+                {
+                    totalSize += file.Attributes.Size;
+                }
+                else if (file.IsDirectory && file.Name != "." && file.Name != "..")
+                {
+                    totalSize += CalculateTotalSize(sftpClient.ListDirectory(file.FullName).ToList(), sftpClient);
+                }
             }
-            else if (file.IsDirectory && file.Name != "." && file.Name != "..")
+            catch (Exception)
             {
-                totalSize += CalculateTotalSize(sftpClient.ListDirectory(file.FullName).ToList(), sftpClient);
+                continue;
             }
         }
         return totalSize;

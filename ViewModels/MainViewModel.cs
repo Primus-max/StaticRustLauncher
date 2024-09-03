@@ -1,8 +1,6 @@
 ﻿
 using StaticRustLauncher.EventHandlers;
 
-using System.Windows.Threading;
-
 namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
@@ -75,14 +73,11 @@ public class MainViewModel : BaseViewModel
         ShowStatisticsPanel();
         Task.Run(async () => await InitPanelAsync());
         UpdateCheckerService.StartAutoCheck();
-    }   
+    }
 
     private async Task InitPanelAsync()
-    {
-        var actualVersionTulip = await UpdateCheckerService.IsUpdateAvailableAsync();
-        ActualVersion = actualVersionTulip.Item2 ?? string.Empty;
-        _availableNewVersionClient = actualVersionTulip.Item1;
-
+    {        
+        await CheckNewVersionGame();
         SetPanelGame();
     }
 
@@ -132,14 +127,21 @@ public class MainViewModel : BaseViewModel
     {
         if (_availableNewVersionClient && !_isDownloading)
             Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
-        else if(_isDownloading)
+        else if (_isDownloading)
             Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
         else
             Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
     }
 
+    private async Task CheckNewVersionGame()
+    {
+        var actualVersionTulip = await UpdateCheckerService.IsUpdateAvailableAsync();
+        ActualVersion = actualVersionTulip.Item2 ?? string.Empty;
+        _availableNewVersionClient = actualVersionTulip.Item1;
+    }
+
     #region Действия на подписки событий
-    private void OnDownloadStarted() 
+    private void OnDownloadStarted()
     {
         ShowLoadingPanel();
         _isDownloading = true;
@@ -147,9 +149,10 @@ public class MainViewModel : BaseViewModel
 
     private void OnDownloadCompleted()
     {
-        Application.Current.Dispatcher.Invoke(() =>
-        {            
-            ShowPlayNowPanel();
+        Application.Current.Dispatcher.Invoke(async () =>
+        {
+            _isDownloading = false;
+            await InitPanelAsync();
         });
     }
 
@@ -157,7 +160,8 @@ public class MainViewModel : BaseViewModel
     {
         Application.Current.Dispatcher.Invoke(() =>
         {
-            ShowAvailableNewVersionPanel();
+            if (!_isDownloading)
+                ShowAvailableNewVersionPanel();
         });
     }
     #endregion
@@ -196,7 +200,7 @@ public class MainViewModel : BaseViewModel
         WindowHelper.OpenWindowWithBlur(loginWindow);
     }
 
-    private void OnSteamNickName(object parameter) 
+    private void OnSteamNickName(object parameter)
     {
         MessageBox.Show("Что про никнейм в стиме");
     }
