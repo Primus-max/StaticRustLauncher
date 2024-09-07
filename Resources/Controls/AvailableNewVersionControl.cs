@@ -39,6 +39,8 @@ public partial class AvailableNewVersionControl : System.Windows.Controls.UserCo
         string installPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SettingsApp.DirGame, "Actual");
 
         UpdateService updateService = new();
+        SettingsApp.GameVersion = NewVersionText.Text;
+        SettingsApp.Save();
         Thread downloadThread = new (() =>  updateService.Check(remoteFilePath, installPath));
         downloadThread.Start();
         //updateService.Check(remoteFilePath, installPath);//updateService.Check(remoteFilePath, installPath);

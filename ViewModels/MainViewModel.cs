@@ -20,7 +20,7 @@ public class MainViewModel : BaseViewModel
     private string? _currentVersion = null!;
     private bool _availableNewVersionClient = false;
     private bool _isDownloading = false;
-    private string _currentPage = null!;
+    private string _currentPage = "Home";
     #endregion
 
     #region Публичные поля
@@ -124,12 +124,16 @@ public class MainViewModel : BaseViewModel
     // Показывает нужную панель для режимы игры
     private void SetPanelGame()
     {
-        if (_availableNewVersionClient && !_isDownloading)
+        if (_availableNewVersionClient && !_isDownloading && _currentPage == "Home")
            System.Windows.Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
-        else if (_isDownloading)
+        else if (_isDownloading && _currentPage == "Home")
             System.Windows.Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
         else
-            System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+        {
+            if(_currentPage == "Home")
+                System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+        }
+            
     }
 
     private async Task CheckNewVersionGame()

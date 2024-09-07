@@ -6,12 +6,9 @@
 public partial class LoadingPanelControl : System.Windows.Controls.UserControl, INotifyPropertyChanged
 {
     private string _percents = "0";
-    private string? _currentVersion = GameVersions.CurrentVersion;
-    public string? CurrentVersion
-    {
-        get => _currentVersion;
-        set => _currentVersion = value;
-    }
+    //private string? _currentVersion = GameVersions.CurrentVersion;
+    public string? CurrentVersion => SettingsApp.GameVersion;
+   
     public string Percents
     {
         get => _percents;

@@ -17,7 +17,7 @@ internal class UpdateService
 
     public UpdateService()
     {
-        _sftpClient = SFTPClient.Get();
+        _sftpClient = Task.Run( async()=> await SFTPClient.GetAsync()).Result ;
         EventBus.CancelDownloading += OnCancelDownloading;
     }
 
@@ -48,7 +48,6 @@ internal class UpdateService
 
             if (!Directory.Exists(destLocalPath))
                 Directory.CreateDirectory(destLocalPath);
-
 
             DownloadDirectory(_sftpClient, remoteDirectoryPath, destLocalPath, hashList);
 

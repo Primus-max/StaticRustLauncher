@@ -13,6 +13,7 @@ public class SettingsViewModel : BaseViewModel
     private string? _gameVersion = null!;
     private string? _dirLauncher = null!;
     private string? _dirGame = null!;
+    private bool _isFirstInitialize = true;
 
     public ObservableCollection<string> Languages => Models.Languages.LanguageList;
     public ObservableCollection<string> GameVersions => Task.Run(async () => await GetDevVersionsAsync()).Result;
@@ -94,15 +95,23 @@ public class SettingsViewModel : BaseViewModel
         try
         {
             var response = await httpClient.GetStringAsync(apiUrl);
-            var versionsData = JsonConvert.DeserializeObject<Dictionary<string, string>>(response);
+            var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
 
-            // Фильтрация и отделение "dev"
-            var devVersions = versionsData
-                .Where(entry => entry.Key.StartsWith("DEV", StringComparison.OrdinalIgnoreCase))
-                .Select(entry => entry.Key.Replace("DEV", string.Empty))
-                .ToList();
+            // Получаем данные из секции "clients"
+            if (data.TryGetValue("clients", out var clientsData))
+            {
+                var clients = JsonConvert.DeserializeObject<Dictionary<string, string>>(clientsData.ToString());
 
-            return new ObservableCollection<string>(devVersions);
+                // Фильтрация и отделение "DEV"
+                var devVersions = clients
+                    .Where(entry => entry.Key.StartsWith("DEV", StringComparison.OrdinalIgnoreCase))
+                    .Select(entry => entry.Key.Replace("DEV", string.Empty))
+                    .ToList();
+
+                return new ObservableCollection<string>(devVersions);
+            }
+
+            return new ObservableCollection<string>();
         }
         catch (Exception ex)
         {
@@ -112,13 +121,16 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
-    public void CheckSelectedVersionGame()
+
+    public async Task CheckSelectedVersionGame()
     {
-        var existsVersionsGame = SettingsApp.OldVersions.Keys.Contains(GameVersion);
-        if (existsVersionsGame) return;
+        //if (_isFirstInitialize) return;
+
+        //var existsVersionsGame = SettingsApp.OldVersions.Keys.Contains(GameVersion);
+        //if (existsVersionsGame) return;
 
         string remoteDirectory = SettingsApp.GamesPath;
-        using var sftpClient = SFTPClient.Get();
+        using var sftpClient = await SFTPClient.GetAsync();
         sftpClient.Connect();
 
         var selectedVersionDirectory = GetDevDirectories(sftpClient, remoteDirectory)
@@ -132,9 +144,12 @@ public class SettingsViewModel : BaseViewModel
         string destLocalPath = SettingsApp.DirGame + "\\" + selectedVersionDirectory;
 
         UpdateService updateService = new();
+        SettingsApp.GameVersion = GameVersion;
+        SettingsApp.Save();
         Thread thread = new(() => updateService.Check(pathToSelectedVersion, destLocalPath, GameVersion));
         EventBus.OnDownloadStarted();       
-        thread.Start();        
+        thread.Start();
+        //_isFirstInitialize = false;
     }
 
     private List<ISftpFile> GetDevDirectories(SftpClient sftpClient, string remoteDirectory)
@@ -155,13 +170,13 @@ public class SettingsViewModel : BaseViewModel
     private void OnCheckAllHashVersionGemas(object commandName)
     {
         EventBus.OnDownloadStarted();
-        Task.Run(() =>
+        Task.Run( async() => 
         {
             var allDirectoriesDev = Directory.GetDirectories(SettingsApp.DirGame)
                 .Where(dir => dir.Contains("dev", StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
-            using SftpClient sftpClient = SFTPClient.Get();
+            SftpClient sftpClient = await SFTPClient.GetAsync();
             try
             {
                 sftpClient.Connect();
