@@ -12,7 +12,7 @@ class ConfirmExitViewModel
     }
 
     private void OnConfirmExit(object parameter)=>
-        Application.Current.Shutdown();
+        System.Windows.Application.Current.Shutdown();
 
     private void OnCancelExit(object parameter)
     {        

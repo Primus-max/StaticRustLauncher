@@ -1,33 +1,23 @@
-﻿using Renci.SshNet;
-using Renci.SshNet.Sftp;
-
-using StaticRustLauncher.EventHandlers;
-
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Windows.Threading;
 
 namespace StaticRustLauncher.Services;
 
 internal class UpdateService
 {
-    private readonly string _host;
-    private readonly int _port;
-    private readonly string _username;
-    private readonly string _password;
+    private readonly SftpClient _sftpClient;
+
     private const int _maxRetryAttempts = 5; // Кол-во попыток скачивания
     long _totalFileSize = 0;// Подсчитываем общий размер файлов
     long _totalBytesDownloaded = 0; // Общее количество скачанных байтов
     int _tryCountRetryDownload = 0;
     private bool _isCancellationRequested = false;
     private List<ISftpFile> _files = [];
+    private string _remoteRootPath = "/storage/user2120/data";
 
-    public UpdateService(string host, int port, string username, string password)
+    public UpdateService()
     {
-        _host = host;
-        _port = port;
-        _username = username;
-        _password = password;
-
+        _sftpClient = SFTPClient.Get();
         EventBus.CancelDownloading += OnCancelDownloading;
     }
 
@@ -37,36 +27,48 @@ internal class UpdateService
         EventBus.OnDownloadCompleted();
     }
 
-    public void Check(string remoteDirectoryPath, string destLocalPath)
+    public void Check(string remoteDirectoryPath, string destLocalPath, string gameVersion = null!)
     {
         try
         {
-            using var sftpClient = new SftpClient(_host, _port, _username, _password);
-            sftpClient.Connect();
+            if (_tryCountRetryDownload == _maxRetryAttempts)
+            {
+                System.Windows.MessageBox.Show("После нескольких попыток не удалось скачать обновления для игры, обратитесь к разработчикам");
+                return;
+            }
+
+            _sftpClient.Connect();
 
             // Загрузка и парсинг hashList.txt
-            var hashList = GetHashList(sftpClient, remoteDirectoryPath);
+            var hashList = GetHashList(_sftpClient, remoteDirectoryPath);
 
             // Преобразование IEnumerable в List для использования индекса
-             _files = sftpClient.ListDirectory(remoteDirectoryPath).ToList();
-            _totalFileSize = CalculateTotalSize(_files, sftpClient);
-            // Скачивание файлов с проверкой хешей
-            DownloadDirectory(sftpClient, remoteDirectoryPath, destLocalPath, hashList);
+            _files = _sftpClient.ListDirectory(remoteDirectoryPath).ToList();
+            _totalFileSize = CalculateTotalSize(_files, _sftpClient);
 
-            sftpClient.Disconnect();
+            if (!Directory.Exists(destLocalPath))
+                Directory.CreateDirectory(destLocalPath);
+
+
+            DownloadDirectory(_sftpClient, remoteDirectoryPath, destLocalPath, hashList);
+
+            _sftpClient.Disconnect();
 
             Dispatcher.CurrentDispatcher.Invoke(new Action(() => EventBus.OnDownloadCompleted()));
-            
+
             string message = _isCancellationRequested
                 ? "Загрузка обновления отменена пользователем"
                 : "Загрузка завершена, наслаждайтесь игрой.";
 
-            MessageBox.Show(message);
+            System.Windows.MessageBox.Show(message);
             _isCancellationRequested = false;
+
+            if (!string.IsNullOrEmpty(gameVersion))
+                SettingsApp.AddGameVersion(gameVersion, destLocalPath);
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Не удалось скачать файлы, попробуйте запустить ещё раз: {ex.Message}");
+            Log.Error(ex.Message);
         }
     }
 
@@ -75,9 +77,10 @@ internal class UpdateService
         var hashList = new Dictionary<string, string>();
         string remoteHashListPath = Path.Combine(remoteDirectoryPath, "hashList.txt").Replace('\\', '/');
 
-        using (var remoteFileStream = sftpClient.OpenRead(remoteHashListPath))
-        using (var reader = new StreamReader(remoteFileStream))
+        try
         {
+            using var remoteFileStream = sftpClient.OpenRead(remoteHashListPath);
+            using var reader = new StreamReader(remoteFileStream);
             string line;
             while ((line = reader.ReadLine()) != null && !_isCancellationRequested)
             {
@@ -89,6 +92,10 @@ internal class UpdateService
                     hashList[filePath] = fileHash;
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex.Message);
         }
 
         return hashList;
@@ -160,7 +167,7 @@ internal class UpdateService
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine($"Ошибка при скачивании файла {file.Name}: {ex.Message}");
+                                        Log.Error(ex.Message);
                                     }
                                 }
 
@@ -174,7 +181,7 @@ internal class UpdateService
                 }
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             Check(remoteDirectoryPath, destLocalPath);
             _tryCountRetryDownload++;
@@ -216,10 +223,7 @@ internal class UpdateService
         }
         catch (Exception ex)
         {
-            // Логирование ошибки
-            Console.WriteLine($"Произошла ошибка при скачивании файла {remoteFilePath}: {ex.Message}");
-            MessageBox.Show($"Произошла не запланированная ошибка {ex.Message}");
-            throw;
+            Log.Error(ex.Message);
         }
     }
 
@@ -240,8 +244,9 @@ internal class UpdateService
                     totalSize += CalculateTotalSize(sftpClient.ListDirectory(file.FullName).ToList(), sftpClient);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex.Message);
                 continue;
             }
         }

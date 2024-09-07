@@ -18,7 +18,7 @@ class LoginViewModel
         window?.Close();
 
         // Дополнительная логика для главного окна
-        if (Application.Current.MainWindow is MainWindow mainWindow)        
+        if (System.Windows.Application.Current.MainWindow is MainWindow mainWindow)        
             mainWindow.ShowPostLoginButtons(isLogin);       
     }
 }

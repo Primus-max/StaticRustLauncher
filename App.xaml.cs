@@ -1,19 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-using StaticRustLauncher.Infrastructure;
+﻿
 
 namespace StaticRustLauncher;
 
 /// <summary>
 /// Главная точка входа в приложение и конфигурация
 /// </summary>
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     public IServiceProvider? ServiceProvider { get; private set; }
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
 
+        SettingsApp.Load();
         // Настройка Dependency Injection
         var serviceCollection = new ServiceCollection();
 
@@ -34,12 +33,24 @@ public partial class App : Application
         //    client.DefaultRequestHeaders.Add("Accept", "application/json");
         //});
 
-        using var loggerFactory = LoggerFactory.Create(builder =>
-        {
-            builder
-                .AddFilter("Default", LogLevel.Information)
-                .AddFile("app.log");
-        });
+
+        Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Information()
+        .WriteTo.File(
+            path: "logs/log-.txt",        // Путь к файлам логов
+            rollingInterval: RollingInterval.Day,  // Ротация файлов ежедневно
+            outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}" // Шаблон вывода
+        )
+        .CreateLogger();
+
+
+
+        //using var loggerFactory = LoggerFactory.Create(builder =>
+        //{
+        //    builder
+        //        .AddFilter("Default", LogLevel.Information)
+        //        .AddFile("app.log");
+        //});
         //services.AddScoped<IDataService<NewsCollection>, NewsService>();
         //services.AddScoped<IDataService<ServerCollection>, ServersService>();
         //services.AddScoped<IDataService<ServerCollection>, ServersService>();

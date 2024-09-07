@@ -23,6 +23,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
                     <RowDefinition Height="100" />
+                    <RowDefinition Height="60" />
                     <RowDefinition Height="100" />
                     <RowDefinition />
                     <RowDefinition Height="69" />
@@ -68,7 +69,7 @@
                         <Run
                             FontFamily="{DynamicResource FontBold}"
                             FontSize="24"
-                            Text="Верссии игры" />
+                            Text="Версии игры" />
                         <LineBreak />
                         <Run
                             FontFamily="{DynamicResource FontRegular}"
@@ -86,12 +87,28 @@
                         Foreground="{StaticResource DefaultTextColorBrush}"
                         ItemsSource="{Binding GameVersions}"
                         SelectedItem="{Binding GameVersion}"
+                        SelectionChanged="SelectedVersionGame"
                         Style="{StaticResource ComboBoxStyle}" />
 
                 </StackPanel>
                 <!--  Третья строка  -->
                 <StackPanel
                     Grid.Row="2"
+                    Margin="0,0,13,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                    <Button
+                        Width="148"
+                        Height="40"
+                        Margin="30,0,0,0"
+                        Command="{Binding CheckAllHashVersionGames}"
+                        CommandParameter="Launcher"
+                        Content="Проверить"
+                        Style="{StaticResource GrayOutlineButton}" />
+                </StackPanel>
+                <!--  Четвертая строка  -->
+                <StackPanel
+                    Grid.Row="3"
                     Width="807"
                     HorizontalAlignment="Left">
                     <TextBlock
@@ -135,7 +152,7 @@
                 </StackPanel>
                 <!--  Четвёртая строка  -->
                 <StackPanel
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Width="807"
                     HorizontalAlignment="Left">
                     <TextBlock
@@ -177,7 +194,7 @@
                 </StackPanel>
 
                 <StackPanel
-                    Grid.Row="4"
+                    Grid.Row="5"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center">
                     <Button

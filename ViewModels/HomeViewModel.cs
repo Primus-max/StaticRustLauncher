@@ -60,6 +60,7 @@ public class HomeViewModel : BaseViewModel
             ServersCollection = new ObservableCollection<Server>(
                 servers.OrderByDescending(server => server.Status == "premium")
                 .ThenByDescending(server => server.Status == "vip")
+                .ThenByDescending(server => server.Players) 
             );
         }
         catch (Exception ex)

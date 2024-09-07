@@ -7,11 +7,25 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        DateTime endTime = new DateTime(2024, 09, 13, 15, 0, 0, DateTimeKind.Utc);
+        CheckTimeLimit(endTime);
+
         InitializeComponent();
         DataContext = new MainViewModel(MainFrame);
 
         AuthorizationButton.Visibility = Visibility.Visible;
     }
+
+
+    public static void CheckTimeLimit(DateTime endTime)
+    {
+        if (DateTime.UtcNow >= endTime)
+        {
+            System.Windows.MessageBox.Show("Свяжитесь с разработчиком");
+            Environment.Exit(0);
+        }
+    }
+
 
     public void ShowPostLoginButtons(bool isLogin)
     {

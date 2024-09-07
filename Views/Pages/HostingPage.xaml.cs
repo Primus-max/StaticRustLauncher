@@ -31,7 +31,7 @@ public partial class HostingPage : Page
     }
     private void VisitHost_Click(object sender, RoutedEventArgs e)
     {        
-        var button = sender as Button;
+        var button = sender as System.Windows.Forms.Button;
         try
         {
             if (button?.DataContext is Hosting hosting)

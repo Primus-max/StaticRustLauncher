@@ -1,14 +1,17 @@
-﻿using StaticRustLauncher.EventHandlers;
-
-namespace StaticRustLauncher.Resources.Controls;
+﻿namespace StaticRustLauncher.Resources.Controls;
 
 /// <summary>
 /// Логика взаимодействия для LoadingPanelControl.xaml
 /// </summary>
-public partial class LoadingPanelControl : UserControl, INotifyPropertyChanged
+public partial class LoadingPanelControl : System.Windows.Controls.UserControl, INotifyPropertyChanged
 {
-    private string _percents = "0";    
-    public string? CurrentVersion => GameVersions.CurrentVersion;
+    private string _percents = "0";
+    private string? _currentVersion = GameVersions.CurrentVersion;
+    public string? CurrentVersion
+    {
+        get => _currentVersion;
+        set => _currentVersion = value;
+    }
     public string Percents
     {
         get => _percents;
@@ -26,7 +29,7 @@ public partial class LoadingPanelControl : UserControl, INotifyPropertyChanged
     {
         InitializeComponent();
         EventBus.DownloadProgressChanged += OnDownloadProgressChanged;
-        DataContext = this;
+        DataContext = this;        
     }
 
     private void OnDownloadProgressChanged(double progress)
@@ -36,7 +39,7 @@ public partial class LoadingPanelControl : UserControl, INotifyPropertyChanged
             progress = progress > 100 ? 100 : progress;
 
             ProgressDownloadFiles.Value = progress;
-            ProgressDownloadFiles.IsIndeterminate = progress == 0 || progress == 100;  
+            ProgressDownloadFiles.IsIndeterminate = progress == 0 || progress == 100;
             Percents = progress.ToString();
         });
     }
@@ -50,5 +53,5 @@ public partial class LoadingPanelControl : UserControl, INotifyPropertyChanged
 
     private void OnCancelUpdatingGame_Click(object sender, RoutedEventArgs e)
         => EventBus.OnCancelDownloading();
-    
+
 }

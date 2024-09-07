@@ -1,7 +1,4 @@
-﻿
-using StaticRustLauncher.EventHandlers;
-
-namespace StaticRustLauncher.ViewModels;
+﻿namespace StaticRustLauncher.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -15,23 +12,24 @@ public class MainViewModel : BaseViewModel
 
     #region Приватные поля
     private Frame Frame { get; } = null!;
-    private UserControl _currentPanel = null!;
-    private UserControl _statisticsPanel = null!;
+    private System.Windows.Controls.UserControl _currentPanel = null!;
+    private System.Windows.Controls.UserControl _statisticsPanel = null!;
     private string? _activeButton = null!;
     private StatisticsData _statisticsData = null!;
     private string? _actualVersion = null!;
     private string? _currentVersion = null!;
     private bool _availableNewVersionClient = false;
     private bool _isDownloading = false;
+    private string _currentPage = null!;
     #endregion
 
     #region Публичные поля
-    public UserControl CurrentPanel
+    public System.Windows.Controls.UserControl CurrentPanel
     {
         get => _currentPanel;
         set => Set(ref _currentPanel, value);
     }
-    public UserControl StatisticsPanel
+    public System.Windows.Controls.UserControl StatisticsPanel
     {
         get => _statisticsPanel;
         set => Set(ref _statisticsPanel, value);
@@ -87,7 +85,8 @@ public class MainViewModel : BaseViewModel
         if (viewName is string destination)
             ActiveButton = destination;
 
-        switch (viewName as string)
+        _currentPage = viewName as string ?? string.Empty;
+        switch (_currentPage)
         {
             case "Home":
                 {
@@ -107,7 +106,7 @@ public class MainViewModel : BaseViewModel
                 {
                     Frame.Navigate(new HostingPage());
                     HideStatisticsPanel();
-                    CurrentPanel = new UserControl();
+                    CurrentPanel = new System.Windows.Controls.UserControl();
                     break;
                 }
             case "Settings":
@@ -126,11 +125,11 @@ public class MainViewModel : BaseViewModel
     private void SetPanelGame()
     {
         if (_availableNewVersionClient && !_isDownloading)
-            Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
+           System.Windows.Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
         else if (_isDownloading)
-            Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
+            System.Windows.Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
         else
-            Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+            System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
     }
 
     private async Task CheckNewVersionGame()
@@ -149,7 +148,7 @@ public class MainViewModel : BaseViewModel
 
     private void OnDownloadCompleted()
     {
-        Application.Current.Dispatcher.Invoke(async () =>
+       System.Windows.Application.Current.Dispatcher.Invoke(async () =>
         {
             _isDownloading = false;
             await InitPanelAsync();
@@ -158,7 +157,7 @@ public class MainViewModel : BaseViewModel
 
     private void OnUpdateAvailable()
     {
-        Application.Current.Dispatcher.Invoke(() =>
+        System.Windows.Application.Current.Dispatcher.Invoke(() =>
         {
             if (!_isDownloading)
                 ShowAvailableNewVersionPanel();
@@ -166,10 +165,15 @@ public class MainViewModel : BaseViewModel
     }
     #endregion
 
-
     #region Панели (играть/скачать/статистика)
     private void ShowAvailableNewVersionPanel() => CurrentPanel = new AvailableNewVersionControl();
-    private void ShowLoadingPanel() => CurrentPanel = new LoadingPanelControl();
+    private void ShowLoadingPanel()
+    {        
+        if (IsHomePageActive())
+        {            
+            CurrentPanel = new LoadingPanelControl();
+        }
+    }
     private void ShowInstallGamePanel() => CurrentPanel = new InstallGameControl();
     private void ShowPlayNowPanel() => CurrentPanel = new PlayNowControl();
     private void HideGamePanel() => CurrentPanel = null!;
@@ -187,14 +191,14 @@ public class MainViewModel : BaseViewModel
     }
 
     private void OnMinimizeAppCommandExecuted(object parameter) =>
-        Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        System.Windows.Application.Current.MainWindow.WindowState = WindowState.Minimized;
 
     private void OnLoginOpenWindow(object parameter)
     {
         // Окно владельцем для центрирования
         var loginWindow = new LoginWindow
         {
-            Owner = Application.Current.MainWindow
+            Owner = System.Windows.Application.Current.MainWindow
         };
 
         WindowHelper.OpenWindowWithBlur(loginWindow);
@@ -202,7 +206,10 @@ public class MainViewModel : BaseViewModel
 
     private void OnSteamNickName(object parameter)
     {
-        MessageBox.Show("Что про никнейм в стиме");
+       System.Windows.MessageBox.Show("Что про никнейм в стиме");
     }
     #endregion
+
+    private bool IsHomePageActive() =>
+        _currentPage is "Home";
 }

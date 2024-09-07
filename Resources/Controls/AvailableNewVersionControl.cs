@@ -1,11 +1,11 @@
-﻿using StaticRustLauncher.EventHandlers;
+﻿
 
 namespace StaticRustLauncher.Resources.Controls;
 
 /// <summary>
 /// Логика взаимодействия для AvalibleNewVirsionControl.xaml
 /// </summary>
-public partial class AvailableNewVersionControl : UserControl
+public partial class AvailableNewVersionControl : System.Windows.Controls.UserControl
 {
 
     public event Action DownloadStarted;
@@ -33,19 +33,14 @@ public partial class AvailableNewVersionControl : UserControl
 
     public void DownloadNewVersion_Click(object sender, EventArgs e)
     {
-        EventBus.OnDownloadStarted();
+        EventBus.OnDownloadStarted();           
 
-        string host = "sftp.hoster.by";
-        int port = 22;
-        string username = "user2120";
-        string password = "uT3cB1xE1r";
+        string remoteFilePath = SettingsApp.GamesPath + "/" + "Actual";       
+        string installPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SettingsApp.DirGame, "Actual");
 
-        string remoteFilePath = "/storage/user2120/data/Actual";       
-        string installPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SettingsApp.DirGame);
-
-        UpdateService updateService = new(host, port, username, password);
+        UpdateService updateService = new();
         Thread downloadThread = new (() =>  updateService.Check(remoteFilePath, installPath));
         downloadThread.Start();
-        //updateService.Check(remoteFilePath, installPath);
+        //updateService.Check(remoteFilePath, installPath);//updateService.Check(remoteFilePath, installPath);
     }
 }

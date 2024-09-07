@@ -6,7 +6,7 @@ public class GameVersions
     {
         get
         {
-            SettingsApp.Load();
+            //SettingsApp.Load();
             string filePath = $"{SettingsApp.DirGame}\\version.txt" ;
             if (File.Exists(filePath))
             {

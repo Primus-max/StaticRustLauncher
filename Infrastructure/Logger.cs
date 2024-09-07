@@ -1,63 +1,59 @@
-﻿
+﻿//namespace StaticRustLauncher.Infrastructure;
 
-using System.IO;
+//public static class FileLoggerExtensions
+//{
+//    public static ILoggingBuilder AddFile(this ILoggingBuilder builder, string filePath)
+//    {
+//        builder.AddProvider(new FileLoggerProvider(filePath));
+//        return builder;
+//    }
+//}
 
-namespace StaticRustLauncher.Infrastructure;
+//public class FileLoggerProvider : ILoggerProvider
+//{
+//    private readonly string _filePath;
 
-public static class FileLoggerExtensions
-{
-    public static ILoggingBuilder AddFile(this ILoggingBuilder builder, string filePath)
-    {
-        builder.AddProvider(new FileLoggerProvider(filePath));
-        return builder;
-    }
-}
+//    public FileLoggerProvider(string filePath)
+//    {
+//        _filePath = filePath;
+//    }
 
-public class FileLoggerProvider : ILoggerProvider
-{
-    private readonly string _filePath;
+//    public ILogger CreateLogger(string categoryName)
+//    {
+//        return new FileLogger(_filePath);
+//    }
 
-    public FileLoggerProvider(string filePath)
-    {
-        _filePath = filePath;
-    }
+//    public void Dispose() { }
+//}
 
-    public ILogger CreateLogger(string categoryName)
-    {
-        return new FileLogger(_filePath);
-    }
+//public class FileLogger : ILogger
+//{
+//    private readonly string _filePath;
+//    private static readonly object _lock = new();
 
-    public void Dispose() { }
-}
+//    public FileLogger(string filePath)
+//    {
+//        _filePath = filePath;
+//    }
 
-public class FileLogger : ILogger
-{
-    private readonly string _filePath;
-    private static readonly object _lock = new();
+//    public IDisposable BeginScope<TState>(TState state) => null;
 
-    public FileLogger(string filePath)
-    {
-        _filePath = filePath;
-    }
+//    public bool IsEnabled(LogLevel logLevel)
+//    {
+//        return true;
+//    }
 
-    public IDisposable BeginScope<TState>(TState state) => null;
+//    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+//    {
+//        if (!IsEnabled(logLevel))
+//        {
+//            return;
+//        }
 
-    public bool IsEnabled(LogLevel logLevel)
-    {
-        return true;
-    }
-
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-    {
-        if (!IsEnabled(logLevel))
-        {
-            return;
-        }
-
-        string message = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} [{logLevel}] {formatter(state, exception)}";
-        lock (_lock)
-        {
-            File.AppendAllText(_filePath, message + Environment.NewLine);
-        }
-    }
-}
+//        string message = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} [{logLevel}] {formatter(state, exception)}";
+//        lock (_lock)
+//        {
+//            File.AppendAllText(_filePath, message + Environment.NewLine);
+//        }
+//    }
+//}

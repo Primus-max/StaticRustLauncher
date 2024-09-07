@@ -3,7 +3,7 @@
 /// <summary>
 /// Логика взаимодействия для UsersOnlineControl.xaml
 /// </summary>
-public partial class UsersOnlineControl : UserControl
+public partial class UsersOnlineControl : System.Windows.Controls.UserControl
 {
     public static readonly DependencyProperty UsersOnlineProperty =
        DependencyProperty.Register("UsersOnline", typeof(int), typeof(UsersOnlineControl), new PropertyMetadata(0));

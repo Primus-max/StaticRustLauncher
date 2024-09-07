@@ -1,12 +1,10 @@
-﻿using StaticRustLauncher.EventHandlers;
-
-namespace StaticRustLauncher.Services;
+﻿namespace StaticRustLauncher.Services;
 
 public class UpdateCheckerService
 {
     private static readonly HttpClient httpClient = new();
     private const string VersionUrl = "http://194.147.90.218/client/version";    // http://194.147.90.218/launcher/version
-    private static Timer? _timer;
+    private static System.Threading.Timer? _timer;
     private static readonly TimeSpan CheckInterval = TimeSpan.FromMinutes(10);
        
 
@@ -32,7 +30,7 @@ public class UpdateCheckerService
    /// </summary>
     public static void StartAutoCheck()
     {
-        _timer = new Timer(async _ => await CheckForUpdateAsync(), null, 0, (int)CheckInterval.TotalMilliseconds);
+        _timer = new System.Threading.Timer(async _ => await CheckForUpdateAsync(), null, 0, (int)CheckInterval.TotalMilliseconds);
     }
 
    
@@ -57,7 +55,7 @@ public class UpdateCheckerService
 
     private static string? GetCurrentVersion()
     {
-        SettingsApp.Load();
+        //SettingsApp.Load();
         string localVersionFile = SettingsApp.DirGame + "\\version.txt";
 
         try

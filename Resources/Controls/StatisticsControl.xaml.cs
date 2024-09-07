@@ -3,7 +3,7 @@
 /// <summary>
 /// Логика взаимодействия для StatisticsControl.xaml
 /// </summary>
-public partial class StatisticsControl : UserControl
+public partial class StatisticsControl : System.Windows.Controls.UserControl
 {
 
     public static readonly DependencyProperty UsersOnlineProperty =

@@ -3,7 +3,7 @@
 /// <summary>
 /// Логика взаимодействия для ServersCountControl.xaml
 /// </summary>
-public partial class ServersCountControl : UserControl
+public partial class ServersCountControl : System.Windows.Controls. UserControl
 {
     public static readonly DependencyProperty ServersCountProperty =
         DependencyProperty.Register("ServersCount", typeof(int), typeof(ServersCountControl), new PropertyMetadata(0));

@@ -11,4 +11,9 @@ public partial class SettingsPage : Page
         DataContext = new SettingsViewModel();
     }
 
+    private void SelectedVersionGame(object sender, SelectionChangedEventArgs e)
+    {
+        var viewModel = (SettingsViewModel)DataContext;
+        viewModel.CheckSelectedVersionGame();
+    }
 }
