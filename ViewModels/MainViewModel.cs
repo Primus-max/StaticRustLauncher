@@ -121,19 +121,19 @@ public class MainViewModel : BaseViewModel
         }
     }
 
-    // Показывает нужную панель для режимы игры
+    // Показывает нужную панель для режима игры
     private void SetPanelGame()
     {
-        if (_availableNewVersionClient && !_isDownloading && _currentPage == "Home")
-           System.Windows.Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
-        else if (_isDownloading && _currentPage == "Home")
-            System.Windows.Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
-        else
-        {
-            if(_currentPage == "Home")
-                System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
-        }
-            
+        System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+        // if (_availableNewVersionClient && !_isDownloading && _currentPage == "Home")
+        //    System.Windows.Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
+        // else if (_isDownloading && _currentPage == "Home")
+        //     System.Windows.Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
+        // else
+        // {
+        //     if(_currentPage == "Home")
+        //         System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+        // }
     }
 
     private async Task CheckNewVersionGame()

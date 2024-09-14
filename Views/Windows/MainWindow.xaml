@@ -10,7 +10,7 @@
     xmlns:selector="clr-namespace:StaticRustLauncher.Utils.Selectors"
     Title="STATIC RUST"
     Width="1200"
-    Height="800"
+    Height="788"
     Background="#FF111111"
     MouseLeftButtonDown="Window_DragMove"
     ResizeMode="NoResize"
@@ -29,7 +29,8 @@
         <!--  Боковое меню  -->
         <Border
             Height="1080"
-            Padding="20"
+            Padding="15"
+            Margin="0 0 20 0"
             VerticalAlignment="Top">
             <StackPanel>
                 <!--  Секция 1: Меню  -->
@@ -328,7 +329,7 @@
             </StackPanel>
         </Border>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -357,7 +358,7 @@
                     Grid.Row="0"
                     Width="860"
                     Height="40"
-                    Margin="0,20,0,0"
+                    Margin="0,15,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Background="{StaticResource BackgroundPanelBrush}"
