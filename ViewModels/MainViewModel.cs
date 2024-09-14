@@ -3,14 +3,17 @@
 public class MainViewModel : BaseViewModel
 {
     #region Команды
+
     public ICommand NavigationCommand { get; } = null!;
     public ICommand CloseAppCommand { get; } = null!;
     public ICommand MinimizeAppCommand { get; } = null!;
     public ICommand LoginCommand { get; } = null!;
     public ICommand SteamNickNameCommand { get; } = null!;
+
     #endregion
 
     #region Приватные поля
+
     private Frame Frame { get; } = null!;
     private System.Windows.Controls.UserControl _currentPanel = null!;
     private System.Windows.Controls.UserControl _statisticsPanel = null!;
@@ -21,34 +24,41 @@ public class MainViewModel : BaseViewModel
     private bool _availableNewVersionClient = false;
     private bool _isDownloading = false;
     private string _currentPage = "Home";
+
     #endregion
 
     #region Публичные поля
+
     public System.Windows.Controls.UserControl CurrentPanel
     {
         get => _currentPanel;
         set => Set(ref _currentPanel, value);
     }
+
     public System.Windows.Controls.UserControl StatisticsPanel
     {
         get => _statisticsPanel;
         set => Set(ref _statisticsPanel, value);
     }
+
     public string? ActiveButton
     {
         get => _activeButton;
         set => Set(ref _activeButton, value);
     }
+
     public StatisticsData StatisticsData
     {
         get => _statisticsData;
         set => Set(ref _statisticsData, value);
     }
+
     public string? ActualVersion
     {
         get => _actualVersion;
         set => Set(ref _actualVersion, value);
     }
+
     public string? CurrentVersion => GameVersions.CurrentVersion;
 
     #endregion
@@ -74,7 +84,7 @@ public class MainViewModel : BaseViewModel
     }
 
     private async Task InitPanelAsync()
-    {        
+    {
         await CheckNewVersionGame();
         SetPanelGame();
     }
@@ -89,33 +99,33 @@ public class MainViewModel : BaseViewModel
         switch (_currentPage)
         {
             case "Home":
-                {
-                    Frame.Navigate(new HomePage());
-                    SetPanelGame();
-                    ShowStatisticsPanel();
-                    break;
-                }
+            {
+                Frame.Navigate(new HomePage());
+                SetPanelGame();
+                ShowStatisticsPanel();
+                break;
+            }
             case "News":
-                {
-                    Frame.Navigate(new NewsPage());
-                    HideGamePanel();
-                    HideStatisticsPanel();
-                    break;
-                }
+            {
+                Frame.Navigate(new NewsPage());
+                HideGamePanel();
+                HideStatisticsPanel();
+                break;
+            }
             case "Hosts":
-                {
-                    Frame.Navigate(new HostingPage());
-                    HideStatisticsPanel();
-                    CurrentPanel = new System.Windows.Controls.UserControl();
-                    break;
-                }
+            {
+                Frame.Navigate(new HostingPage());
+                HideStatisticsPanel();
+                CurrentPanel = new System.Windows.Controls.UserControl();
+                break;
+            }
             case "Settings":
-                {
-                    Frame.Navigate(new SettingsPage());
-                    HideGamePanel();
-                    HideStatisticsPanel();
-                    break;
-                }
+            {
+                Frame.Navigate(new SettingsPage());
+                HideGamePanel();
+                HideStatisticsPanel();
+                break;
+            }
             default:
                 break;
         }
@@ -124,16 +134,15 @@ public class MainViewModel : BaseViewModel
     // Показывает нужную панель для режима игры
     private void SetPanelGame()
     {
-        System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
-        // if (_availableNewVersionClient && !_isDownloading && _currentPage == "Home")
-        //    System.Windows.Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
-        // else if (_isDownloading && _currentPage == "Home")
-        //     System.Windows.Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
-        // else
-        // {
-        //     if(_currentPage == "Home")
-        //         System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
-        // }
+        if (_availableNewVersionClient && !_isDownloading && _currentPage == "Home")
+            System.Windows.Application.Current.Dispatcher.Invoke(() => ShowAvailableNewVersionPanel());
+        else if (_isDownloading && _currentPage == "Home")
+            System.Windows.Application.Current.Dispatcher.Invoke(() => ShowLoadingPanel());
+        else
+        {
+            if (_currentPage == "Home")
+                System.Windows.Application.Current.Dispatcher.Invoke(() => ShowPlayNowPanel());
+        }
     }
 
     private async Task CheckNewVersionGame()
@@ -144,6 +153,7 @@ public class MainViewModel : BaseViewModel
     }
 
     #region Действия на подписки событий
+
     private void OnDownloadStarted()
     {
         ShowLoadingPanel();
@@ -152,7 +162,7 @@ public class MainViewModel : BaseViewModel
 
     private void OnDownloadCompleted()
     {
-       System.Windows.Application.Current.Dispatcher.Invoke(async () =>
+        System.Windows.Application.Current.Dispatcher.Invoke(async () =>
         {
             _isDownloading = false;
             await InitPanelAsync();
@@ -163,21 +173,23 @@ public class MainViewModel : BaseViewModel
     {
         System.Windows.Application.Current.Dispatcher.Invoke(() =>
         {
-            if (!_isDownloading)
-                ShowAvailableNewVersionPanel();
+            if (_isDownloading) return;
+            ShowAvailableNewVersionPanel();
         });
     }
+
     #endregion
 
     #region Панели (играть/скачать/статистика)
+
     private void ShowAvailableNewVersionPanel() => CurrentPanel = new AvailableNewVersionControl();
+
     private void ShowLoadingPanel()
-    {        
-        if (IsHomePageActive())
-        {            
-            CurrentPanel = new LoadingPanelControl();
-        }
+    {
+        if (!IsHomePageActive()) return;
+        CurrentPanel = new LoadingPanelControl();
     }
+
     private void ShowInstallGamePanel() => CurrentPanel = new InstallGameControl();
     private void ShowPlayNowPanel() => CurrentPanel = new PlayNowControl();
     private void HideGamePanel() => CurrentPanel = null!;
@@ -188,6 +200,7 @@ public class MainViewModel : BaseViewModel
     #endregion
 
     #region Методы команд
+
     private void OnCloseAppCommandExecuted(object parameter)
     {
         ConfirmExitWindow confirmExitWindow = new();
@@ -210,8 +223,9 @@ public class MainViewModel : BaseViewModel
 
     private void OnSteamNickName(object parameter)
     {
-       System.Windows.MessageBox.Show("Что про никнейм в стиме");
+        System.Windows.MessageBox.Show("Что про никнейм в стиме");
     }
+
     #endregion
 
     private bool IsHomePageActive() =>

@@ -1,4 +1,6 @@
-﻿namespace StaticRustLauncher.Views.Windows;
+﻿using Application = System.Windows.Application;
+
+namespace StaticRustLauncher.Views.Windows;
 
 /// <summary>
 /// Главное окно приложения
@@ -61,4 +63,17 @@ public partial class MainWindow : Window
             e.Handled = true;
         }
     }
+
+    // private void MainWindow_OnMouseDown(object sender, MouseButtonEventArgs e)
+    // {
+    //     var activeWindow = Application.Current.Windows
+    //         .OfType<Window>()
+    //         .FirstOrDefault(w => w.IsActive && w != Application.Current.MainWindow);
+    //
+    //     if (activeWindow != null)
+    //     {
+    //         // Закрываем активное всплывающее окно при клике на задний фон
+    //         activeWindow.Close();
+    //     }
+    // }
 }
