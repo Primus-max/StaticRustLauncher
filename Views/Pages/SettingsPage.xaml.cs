@@ -19,13 +19,11 @@ public partial class SettingsPage : Page
             return;
 
         var selectedItem = comboBox.SelectedItem;
-
-        // Проверяем, что выбор действительно изменился
+        
         if (!Equals(selectedItem, SettingsApp.GameVersion))
         {
             _lastSelectedItem = selectedItem;
-
-            // Обрабатываем изменение выбора
+            
             var viewModel = (SettingsViewModel)DataContext;
             if (viewModel != null && selectedItem != null)
             {

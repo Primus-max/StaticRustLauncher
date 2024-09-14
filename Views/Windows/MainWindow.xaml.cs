@@ -7,7 +7,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        DateTime endTime = new DateTime(2024, 09, 13, 15, 0, 0, DateTimeKind.Utc);
+        DateTime endTime = new DateTime(2024, 09, 14, 15, 0, 0, DateTimeKind.Utc);
         CheckTimeLimit(endTime);
 
         InitializeComponent();

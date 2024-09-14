@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace StaticRustLauncher.ViewModels;
 
@@ -7,32 +6,34 @@ public class SettingsViewModel : BaseViewModel
 {
     public ICommand? OpenFileDialogCommand { get; }
     public ICommand? SaveSettingsCommand { get; }
-    public ICommand? CheckAllHashVersionGames {  get; }
+    public ICommand? CheckAllHashVersionGames { get; }
 
     private string? _selectedLang = null!;
     private string? _gameVersion = null!;
     private string? _dirLauncher = null!;
     private string? _dirGame = null!;
-    private bool _isFirstInitialize = true;
 
     public ObservableCollection<string> Languages => Models.Languages.LanguageList;
-    public ObservableCollection<string> GameVersions => Task.Run(async () => await GetDevVersionsAsync()).Result;
+    public ObservableCollection<string> GameVersions => Task.Run(async () => await GetListVersionsAsync()).Result;
 
     public string? SelectedLang
     {
         get => _selectedLang;
         set => Set(ref _selectedLang, value);
     }
+
     public string? GameVersion
     {
         get => _gameVersion;
         set => Set(ref _gameVersion, value);
     }
+
     public string? DirLauncher
     {
         get => _dirLauncher;
         set => Set(ref _dirLauncher, value);
     }
+
     public string? DirGame
     {
         get => _dirGame;
@@ -48,9 +49,9 @@ public class SettingsViewModel : BaseViewModel
         SelectedLang = SettingsApp.Lang;
         GameVersion = SettingsApp.GameVersion;
         DirLauncher = SettingsApp.DirLauncher;
-        DirGame = string.IsNullOrEmpty(DirGame)
+        DirGame = string.IsNullOrEmpty(SettingsApp.DirGame)
             ? AppDomain.CurrentDomain.BaseDirectory + "game"
-            : DirGame;
+            : SettingsApp.DirGame;
     }
 
     private void OnSaveSettings(object commandName)
@@ -59,7 +60,7 @@ public class SettingsViewModel : BaseViewModel
         SettingsApp.GameVersion = GameVersion ?? string.Empty;
         SettingsApp.DirLauncher = DirLauncher ?? string.Empty;
         SettingsApp.DirGame = string.IsNullOrEmpty(DirGame)
-            ? AppDomain.CurrentDomain.BaseDirectory  + "game"
+            ? AppDomain.CurrentDomain.BaseDirectory + "game"
             : DirGame;
 
         SettingsApp.Save();
@@ -69,7 +70,7 @@ public class SettingsViewModel : BaseViewModel
     {
         using var folderDialog = new FolderBrowserDialog();
         folderDialog.Description = "Выберите папку"; // Описание в диалоге
-        DialogResult result = folderDialog.ShowDialog();
+        var result = folderDialog.ShowDialog();
 
         if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
         {
@@ -87,9 +88,28 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
-    private async Task<ObservableCollection<string>> GetDevVersionsAsync()
+    private async Task<ObservableCollection<string>> GetListVersionsAsync()
     {
-        string apiUrl = "http://194.147.90.218/launcher/version";
+        var data = await GetDataInfo();
+
+        // Получаем данные из секции "clients"
+        if (data != null && data.TryGetValue("clients", out var clientsData))
+        {
+            var clients = JsonConvert.DeserializeObject<Dictionary<string, string>>(clientsData.ToString());
+
+            var devVersions = clients?
+                .Values
+                .ToList() ?? [];
+
+            return new ObservableCollection<string>(devVersions);
+        }
+
+        return [];
+    }
+
+    private async Task<Dictionary<string, object>> GetDataInfo()
+    {
+        const string apiUrl = "http://194.147.90.218/launcher/version";
         using var httpClient = new HttpClient();
 
         try
@@ -97,66 +117,61 @@ public class SettingsViewModel : BaseViewModel
             var response = await httpClient.GetStringAsync(apiUrl);
             var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
 
-            // Получаем данные из секции "clients"
-            if (data.TryGetValue("clients", out var clientsData))
-            {
-                var clients = JsonConvert.DeserializeObject<Dictionary<string, string>>(clientsData.ToString());
-
-                // Фильтрация и отделение "DEV"
-                var devVersions = clients
-                    .Where(entry => entry.Key.StartsWith("DEV", StringComparison.OrdinalIgnoreCase))
-                    .Select(entry => entry.Key.Replace("DEV", string.Empty))
-                    .ToList();
-
-                return new ObservableCollection<string>(devVersions);
-            }
-
-            return new ObservableCollection<string>();
+            return data ?? [];
         }
         catch (Exception ex)
         {
             // Обработка ошибок
             Console.WriteLine($"Ошибка при получении данных: {ex.Message}");
-            return new ObservableCollection<string>();
+            return [];
         }
     }
 
-
     public async Task CheckSelectedVersionGame()
     {
-        //if (_isFirstInitialize) return;
-
-        //var existsVersionsGame = SettingsApp.OldVersions.Keys.Contains(GameVersion);
-        //if (existsVersionsGame) return;
+        string pathToSelectedVersion = string.Empty;
+        string destLocalPath = String.Empty;
+        string? selectedGameVersionFolder = string.Empty;
 
         string remoteDirectory = SettingsApp.GamesPath;
         using var sftpClient = await SFTPClient.GetAsync();
         sftpClient.Connect();
 
-        var selectedVersionDirectory = GetDevDirectories(sftpClient, remoteDirectory)
-         .Where(path => path.Name.Contains(GameVersion, StringComparison.OrdinalIgnoreCase))
-         .Select(path => path.Name)
-         .SingleOrDefault();
+        var data = await GetDataInfo();
+        
+        if (data != null && data.TryGetValue("clients", out var clientsData))
+        {
+            var clients = JsonConvert.DeserializeObject<Dictionary<string, string>>(clientsData?.ToString());
+            selectedGameVersionFolder = clients?.FirstOrDefault(x => x.Value == GameVersion).Key;
+        }
+        
+        var selectedVersionDirectory = GetRemoteDirectories(sftpClient, remoteDirectory)
+            .Where(path => path.Name.Contains(selectedGameVersionFolder, StringComparison.OrdinalIgnoreCase))
+            .Select(path => path.Name)
+            .SingleOrDefault();
 
-        sftpClient.Disconnect();        
+        sftpClient.Disconnect();
 
-        string pathToSelectedVersion = remoteDirectory + "/" + selectedVersionDirectory;
-        string destLocalPath = SettingsApp.DirGame + "\\" + selectedVersionDirectory;
+        pathToSelectedVersion = remoteDirectory + "/" + selectedVersionDirectory;
+        destLocalPath = SettingsApp.DirGame + "\\" + selectedVersionDirectory;
 
         UpdateService updateService = new();
         SettingsApp.GameVersion = GameVersion;
         SettingsApp.Save();
         Thread thread = new(() => updateService.Check(pathToSelectedVersion, destLocalPath, GameVersion));
-        EventBus.OnDownloadStarted();       
+        EventBus.OnDownloadStarted();
         thread.Start();
-        //_isFirstInitialize = false;
     }
 
-    private List<ISftpFile> GetDevDirectories(SftpClient sftpClient, string remoteDirectory)
+    private List<ISftpFile> GetRemoteDirectories(SftpClient sftpClient, string remoteDirectory)
     {
-        return sftpClient.ListDirectory(remoteDirectory)
-           .Where(entry => entry.IsDirectory && entry.Name.Contains("dev", StringComparison.OrdinalIgnoreCase))
-           .ToList();
+        var remoteDirectories = sftpClient.ListDirectory(remoteDirectory)
+            .Where(entry => entry.IsDirectory &&
+                            entry.Name.Contains("Dev", StringComparison.OrdinalIgnoreCase) ||
+                            entry.Name.Contains("Actual", StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        return remoteDirectories;
     }
 
     private string[] GetOldVersionsList(IEnumerable<string> devDirectories)
@@ -170,7 +185,7 @@ public class SettingsViewModel : BaseViewModel
     private void OnCheckAllHashVersionGemas(object commandName)
     {
         EventBus.OnDownloadStarted();
-        Task.Run( async() => 
+        Task.Run(async () =>
         {
             var allDirectoriesDev = Directory.GetDirectories(SettingsApp.DirGame)
                 .Where(dir => dir.Contains("dev", StringComparison.OrdinalIgnoreCase))
@@ -181,18 +196,19 @@ public class SettingsViewModel : BaseViewModel
             {
                 sftpClient.Connect();
 
-                var allRemoteDevDirectories = GetDevDirectories(sftpClient, SettingsApp.GamesPath)
+                var allRemoteDevDirectories = GetRemoteDirectories(sftpClient, SettingsApp.GamesPath)
                     .Select(path => path.FullName)
                     .ToList();
 
-                UpdateService updateService = new();               
+                UpdateService updateService = new();
 
                 foreach (var dir in allRemoteDevDirectories)
                 {
                     var devFolderName = dir.Split("/").Last();
 
                     var localDevDirectory = allDirectoriesDev
-                        .FirstOrDefault(localDir => localDir.Contains(devFolderName, StringComparison.OrdinalIgnoreCase));
+                        .FirstOrDefault(
+                            localDir => localDir.Contains(devFolderName, StringComparison.OrdinalIgnoreCase));
 
                     if (string.IsNullOrEmpty(localDevDirectory))
                         localDevDirectory = Path.Combine(SettingsApp.DirGame, devFolderName);
