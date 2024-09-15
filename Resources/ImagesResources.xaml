@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="4Dot" UriSource="/Resources/Images/Buttons/4dot.png" />
+    <BitmapImage x:Key="V" UriSource="/Resources/Images/Buttons/v.png" />
+    <BitmapImage x:Key="ScreenZigZag" UriSource="/Resources/Images/Buttons/screen-zig-zag.png" />
+    <BitmapImage x:Key="ScreenEmpty" UriSource="/Resources/Images/Buttons/screnn-empty.png" />
+    <BitmapImage x:Key="Settings" UriSource="/Resources/Images/Buttons/settings.png" />
+    <BitmapImage x:Key="AddServerBack" UriSource="/Resources/Images/b-section.png" />
+    <BitmapImage x:Key="AddServerIcon" UriSource="/Resources/Images/Buttons/add-server.png" />
+    <BitmapImage x:Key="Users" UriSource="/Resources/Images/Buttons/users.png" />
+    <BitmapImage x:Key="ServerModalBack" UriSource="/Resources/Images/b-modal.png" />
+
+
+    <!--  СоцСети  -->
+    <BitmapImage x:Key="VkIcon" UriSource="/Resources/Images/Social/s-vk.png" />
+    <BitmapImage x:Key="TgIcon" UriSource="/Resources/Images/Social/s-tg.png" />
+    <BitmapImage x:Key="SteamIcon" UriSource="/Resources/Images/Social/steam.png" />
+    <BitmapImage x:Key="DiscordIcon" UriSource="/Resources/Images/Social/s-discord.png" />
+</ResourceDictionary>

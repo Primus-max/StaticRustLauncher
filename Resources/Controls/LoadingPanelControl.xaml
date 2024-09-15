@@ -1,0 +1,97 @@
+﻿<UserControl
+    x:Class="StaticRustLauncher.Resources.Controls.LoadingPanelControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:StaticRustLauncher.Resources.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="860"
+    Height="90"
+    Margin="0,20,0,0"
+    mc:Ignorable="d">
+
+    <Border
+        Width="860"
+        Height="90"
+        Background="#18181B"
+        CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="53*" />
+                <RowDefinition Height="37*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                Height="34"
+                Margin="16,15,16,0"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
+
+                <!--  Используем Grid для выравнивания элементов  -->
+                <Grid Width="824">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <!--  Занимает доступное пространство  -->
+                        <ColumnDefinition Width="Auto" />
+                        <!--  Ширина определяется содержимым  -->
+                        <ColumnDefinition Width="Auto" />
+                        <!--  Ширина определяется содержимым  -->
+                    </Grid.ColumnDefinitions>
+
+                    <!--  Текст с версией обновления  -->
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource DefaultTextColorBrush}">
+                            <Run
+                                FontFamily="{StaticResource FontMedium}"
+                                FontSize="20"
+                                Text="Загрузка обновления для версии игры: " />
+                            <Run
+                                FontFamily="{StaticResource FontRegular}"
+                                FontSize="16"
+                                Text="{Binding CurrentVersion, Mode=OneWay}" />
+                        </TextBlock>
+                    </StackPanel>
+
+
+                    <!--  Проценты загрузки  -->
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource FontMedium}"
+                        FontSize="16"
+                        Foreground="{StaticResource DefaultTextColorBrush}">
+                        <Run Text="{Binding Percents}" />
+                        <Run Text="%" />
+                    </TextBlock>
+
+                    <!--  Кнопка Отмена  -->
+                    <Button
+                        Grid.Column="2"
+                        Width="128"
+                        Height="34"
+                        Margin="20,0,0,0"
+                        VerticalAlignment="Center"
+                        Click="OnCancelUpdatingGame_Click"
+                        Content="Отмена"
+                        Style="{StaticResource GrayOutlineButton}" />
+                </Grid>
+            </StackPanel>
+
+
+            <!--  Progress Bar  -->
+            <ProgressBar
+                x:Name="ProgressDownloadFiles"
+                Grid.Row="1"
+                Height="6"
+                Margin="16,0,16,0"
+                VerticalAlignment="Center"
+                Background="{StaticResource BackgroundPanelBrush}"
+                Foreground="{StaticResource AccentBrush}"
+                IsIndeterminate="True" />
+
+        </Grid>
+    </Border>
+</UserControl>

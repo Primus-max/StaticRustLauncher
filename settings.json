@@ -1,0 +1,14 @@
+{
+    "lang": "Russian",
+    "gameversion": "333",
+    "dir_launcher": "",
+    "dir_game": "",
+    "host": "sftp.hoster.by",
+    "port": 22,
+    "user": "user2120",
+    "pass": "uT3cB1xE1r",
+    "gamesPath": "/storage/user2120/data",
+    "oldVersions": {
+        
+    }
+}

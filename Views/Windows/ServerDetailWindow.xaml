@@ -1,0 +1,294 @@
+﻿<Window
+    x:Class="StaticRustLauncher.Views.Windows.ServerDetailWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="650"
+    Height="640"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Border
+            Width="650"
+            Height="640"
+            Padding="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="{StaticResource ButtonBackgroundBrush}"
+            CornerRadius="30">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="220" />
+                    <RowDefinition Height="29" />
+                    <RowDefinition Height="156" />
+                    <RowDefinition Height="139" />
+                    <RowDefinition Height="99" />
+                </Grid.RowDefinitions>
+
+                <!--  Фон  -->
+                <Border Grid.Row="0" CornerRadius="15">
+                    <Image
+                        MaxWidth="600"
+                        MaxHeight="190"
+                        Source="{Binding SelectedServer.HeaderImage}" />
+                </Border>
+
+                <!--  Описание  -->
+                <StackPanel Grid.Row="1">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource FontMedium}"
+                        FontSize="22"
+                        Foreground="{StaticResource DefaultTextColorBrush}">
+                        <Run Text="{Binding SelectedServer.Hostname}" />
+                        <Run Text="|" />
+                        <Run Text="{Binding SelectedServer.ServerCategory}" />
+                        <Run Text="|" />
+                        <Run Text="{Binding SelectedServer.Map}" />
+                    </TextBlock>
+                </StackPanel>
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Width="600">
+                        <TextBlock
+                            Padding="10"
+                            FontFamily="{DynamicResource FontRegular}"
+                            FontSize="14"
+                            Foreground="{StaticResource DefaultTextColorBrush}"
+                            LineHeight="17"
+                            Text="{Binding SelectedServer.Description}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </ScrollViewer>
+                <!--  Ссылки  -->
+                <StackPanel
+                    Grid.Row="3"
+                    Margin="0,20,0,0"
+                    Orientation="Vertical">
+
+                    <!--  VK  -->
+                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                        <Image
+                            Width="28"
+                            Height="28"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="{StaticResource VkIcon}" />
+                        <TextBlock VerticalAlignment="Center">
+                            <Run
+                                FontFamily="{StaticResource FontMedium}"
+                                FontSize="18"
+                                Foreground="{StaticResource DefaultTextColorBrush}"
+                                Text="VK проекта: " />
+                            <Hyperlink
+                                NavigateUri="{Binding URLs[0].VK}"
+                                RequestNavigate="Hyperlink_RequestNavigate"
+                                TextDecorations="None">
+                                <Run
+                                    FontFamily="{StaticResource FontRegular}"
+                                    FontSize="18"
+                                    Foreground="{StaticResource AccentBrush}"
+                                    Text="{Binding URLs[0].VK}" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!--  Discord  -->
+                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                        <Image
+                            Width="28"
+                            Height="28"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="{StaticResource DiscordIcon}" />
+                        <TextBlock VerticalAlignment="Center">
+                            <Run
+                                FontFamily="{StaticResource FontMedium}"
+                                FontSize="18"
+                                Foreground="{StaticResource DefaultTextColorBrush}"
+                                Text="Discord проекта: " />
+                            <Hyperlink
+                                NavigateUri="{Binding URLs[0].Discord}"
+                                RequestNavigate="Hyperlink_RequestNavigate"
+                                TextDecorations="None">
+                                <Run
+                                    FontFamily="{StaticResource FontRegular}"
+                                    FontSize="18"
+                                    Foreground="{StaticResource AccentBrush}"
+                                    Text="{Binding URLs[0].Discord}" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!--  Telegram  -->
+                    <!--<StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                        <Image
+                            Width="28"
+                            Height="28"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="{StaticResource TgIcon}" />
+                        <TextBlock VerticalAlignment="Center">
+                            <Run
+                                FontFamily="{StaticResource FontMedium}"
+                                FontSize="18"
+                                Foreground="{StaticResource DefaultTextColorBrush}"
+                                Text="Telegram проекта: " />
+                            <Hyperlink
+                                NavigateUri="{Binding URLs[0].Telegram}"
+                                RequestNavigate="Hyperlink_RequestNavigate"
+                                TextDecorations="None">
+                                <Run
+                                    FontFamily="{StaticResource FontRegular}"
+                                    FontSize="18"
+                                    Foreground="{StaticResource AccentBrush}"
+                                    Text="{Binding URLs[0].Telegram}" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>-->
+
+                    <!--  Steam  -->
+                    <!--<StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                        <Image
+                            Width="28"
+                            Height="28"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="{StaticResource SteamIcon}" />
+                        <TextBlock VerticalAlignment="Center">
+                            <Run
+                                FontFamily="{StaticResource FontMedium}"
+                                FontSize="18"
+                                Foreground="{StaticResource DefaultTextColorBrush}"
+                                Text="Steam проекта: " />
+                            <Hyperlink
+                                NavigateUri="{Binding URLs[0].Steam}"
+                                RequestNavigate="Hyperlink_RequestNavigate"
+                                TextDecorations="None">
+                                <Run
+                                    FontFamily="{StaticResource FontRegular}"
+                                    FontSize="18"
+                                    Foreground="{StaticResource AccentBrush}"
+                                    Text="{Binding URLs[0].Steam}" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>-->
+
+                    <!--  Site  -->
+                    <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                        <Image
+                            Width="28"
+                            Height="28"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="{StaticResource ScreenEmpty}" />
+                        <TextBlock VerticalAlignment="Center">
+                            <Run
+                                FontFamily="{StaticResource FontMedium}"
+                                FontSize="18"
+                                Foreground="{StaticResource DefaultTextColorBrush}"
+                                Text="Сайт проекта: " />
+                            <Hyperlink
+                                NavigateUri="{Binding URLs[0].Site}"
+                                RequestNavigate="Hyperlink_RequestNavigate"
+                                TextDecorations="None">
+                                <Run
+                                    FontFamily="{StaticResource FontRegular}"
+                                    FontSize="18"
+                                    Foreground="{StaticResource AccentBrush}"
+                                    Text="{Binding URLs[0].Site}" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+
+                <!--  Подключиться  -->
+                <StackPanel
+                    Grid.Row="4"
+                    Width="310"
+                    Height="44"
+                    Margin="0,11,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+                    <Border
+                        Height="44"
+                        Margin="0,0,20,0"
+                        Background="#131313"
+                        CornerRadius="8"
+                        MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="280" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <!--  Text Block  -->
+                            <TextBlock
+                                Height="22"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="{DynamicResource FontMedium}"
+                                FontSize="16"
+                                Foreground="{StaticResource DefaultTextColorBrush}"
+                                LineHeight="18">
+                                <Run Text="client.connect" />
+                                <Run Text="{Binding SelectedServer.Ip}" />
+                                <Run Text=":" />
+                                <Run Text="{Binding SelectedServer.Port}" />
+
+                            </TextBlock>
+
+                            <!--  SVG Icon  -->
+                            <Path
+                                Grid.Column="1"
+                                Width="20"
+                                Height="20"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Cursor="Hand"
+                                Data="M13.5301 14.087C13.2027 14.1638 12.8718 14.2209 12.5393 14.2582C12.0979 15.7734 10.8731 16.9426 9.32486 17.3058C8.22091 17.5647 7.072 17.5647 5.96805 17.3058C4.34362 16.9247 3.07525 15.6564 2.69422 14.032C2.43526 12.928 2.43526 11.7791 2.69422 10.6751C3.05738 9.12692 4.22656 7.90214 5.74183 7.46074C5.77912 7.1282 5.83618 6.79733 5.91298 6.46989C6.34897 4.61122 7.80023 3.15996 9.6589 2.72398C10.932 2.42534 12.257 2.42534 13.5301 2.72398C15.3888 3.15996 16.84 4.61123 17.276 6.4699C17.5747 7.74302 17.5747 9.06797 17.276 10.3411C16.84 12.1998 15.3888 13.651 13.5301 14.087ZM9.65891 14.087C10.1881 14.2111 10.7262 14.2837 11.2659 14.3046C10.867 15.2254 10.0528 15.9185 9.05438 16.1527C8.12833 16.3699 7.16458 16.3699 6.23853 16.1527C5.05205 15.8744 4.12564 14.9479 3.84733 13.7615C3.63011 12.8354 3.63011 11.8717 3.84733 10.9456C4.08152 9.94725 4.7746 9.13301 5.69538 8.73411C5.71317 9.19262 5.76821 9.65004 5.86049 10.1018C5.87682 10.1818 5.89432 10.2615 5.91298 10.3411C6.34897 12.1998 7.80024 13.651 9.65891 14.087Z"
+                                Fill="white"
+                                MouseDown="Border_MouseLeftButtonDown" />
+                        </Grid>
+                    </Border>
+                    <!--<Button
+                        Width="196"
+                        Height="44"
+                        Background="#5FA932"
+                        Command="{Binding ConnectServerCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                        Content="Подключиться"
+                        FontFamily="{StaticResource FontMedium}"
+                        FontSize="16"
+                        Foreground="{StaticResource DefaultTextColorBrush}"
+                        Style="{StaticResource ConnectButton}" />-->
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!--  Закрытие  -->
+        <Canvas>
+            <TextBlock
+                Canvas.Left="607"
+                Canvas.Top="-1"
+                Width="30"
+                Height="30"
+                Panel.ZIndex="100"
+                Cursor="Hand"
+                FontSize="26"
+                FontWeight="Bold"
+                Foreground="White"
+                MouseLeftButtonDown="CloseButton_Click"
+                Text="×"
+                TextAlignment="Center" />
+        </Canvas>
+    </Grid>
+</Window>

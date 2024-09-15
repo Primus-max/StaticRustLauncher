@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--  Цвета  -->
+    <Color x:Key="BackgroundPanelColor">#18181B</Color>
+    <Color x:Key="ButtonBackgroundColor">#1E1E1E</Color>
+    <Color x:Key="AccentColor">#00DEEE</Color>
+    <Color x:Key="TextColor">White</Color>
+    <Color x:Key="GrayTextColor">#808080</Color>
+    <Color x:Key="DefaultTextColor">#FFFFFF</Color>
+    <Color x:Key="HoverButtonColor">#2800DEEE</Color>
+    <Color x:Key="ErrorColor">#39BD2727</Color>
+    <Color x:Key="ErrorOutlineColor">#BD2727</Color>
+    <Color x:Key="DefaultMenuButtonColor">#00d6d611</Color>
+
+    <!--  Конвертер цвета для использования в свойствах типа Brush  -->
+    <SolidColorBrush x:Key="BackgroundPanelBrush" Color="{StaticResource BackgroundPanelColor}" />
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{StaticResource ButtonBackgroundColor}" />
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="GrayTextBrush" Color="{StaticResource GrayTextColor}" />
+    <SolidColorBrush x:Key="DefaultTextColorBrush" Color="{StaticResource DefaultTextColor}" />
+    <SolidColorBrush x:Key="DefaultMenuButtonBrush" Color="{StaticResource DefaultMenuButtonColor}" />
+    <SolidColorBrush x:Key="HoverButtonColorBrush" Color="{StaticResource HoverButtonColor}" />
+    <SolidColorBrush x:Key="ErrorColorBrush" Color="{StaticResource ErrorColor}" />
+    <SolidColorBrush x:Key="ErrorOutlineColorBrush" Color="{StaticResource ErrorOutlineColor}" />
+</ResourceDictionary>

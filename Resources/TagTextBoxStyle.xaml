@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--#region Стили для серых тегов-->
+    <!--  Стили для Border  -->
+    <Style x:Key="TagGrayStyle" TargetType="Border">
+        <Setter Property="Background" Value="#92A7A7A7" />
+        <Setter Property="Padding" Value="6,4,6,4" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <!--  Стили для самого TextBox  -->
+    <Style x:Key="TagGrayTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontRegular}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{StaticResource DefaultTextColorBrush}" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region Стили для Premiun тегов-->
+    <Style x:Key="TagPremiumStyle" TargetType="Border">
+        <Setter Property="Background" Value="#4A00DEEE" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderBrush" Value="#00DEEE" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="MinWidth" Value="101" />
+        <Setter Property="Height" Value="28" />
+    </Style>
+
+
+    <!--#endregion-->
+
+    <!--#region Стили для VIP тегов-->
+    <Style x:Key="TagVipStyle" TargetType="Border">
+        <Setter Property="Background" Value="#67D08F01" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderBrush" Value="#D08F01" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="51" />
+        <Setter Property="Height" Value="28" />
+    </Style>
+
+    <!--#endregion-->
+</ResourceDictionary>
