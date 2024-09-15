@@ -11,7 +11,6 @@
                     <Grid >
                         <Rectangle Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="Transparent"/> 
                         <Rectangle
-                            
                             Margin="0 13 0 0 "
                             Width="20"
                             Height="2.7"
@@ -36,8 +35,6 @@
                         <Rectangle Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="Transparent"/>
                         <!--  Первая палочка  -->
                         <Rectangle
-                            Canvas.Left="0"
-                            Canvas.Top="8.65"
                             Width="20"
                             Height="2.7"
                             Fill="Red"
@@ -50,8 +47,6 @@
                         </Rectangle>
                         <!--  Вторая палочка  -->
                         <Rectangle
-                            Canvas.Left="0"
-                            Canvas.Top="8.65"
                             Width="20"
                             Height="2.7"
                             Fill="Red"
