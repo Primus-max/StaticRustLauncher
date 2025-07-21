@@ -109,7 +109,7 @@ public class SettingsViewModel : BaseViewModel
 
     private async Task<Dictionary<string, object>> GetDataInfo()
     {
-        const string apiUrl = "http://194.147.90.218/launcher/version";
+        const string apiUrl = "http://localhost:5208/api/version";
         using var httpClient = new HttpClient();
 
         try

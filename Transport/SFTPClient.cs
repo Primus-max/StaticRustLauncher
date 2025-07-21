@@ -6,7 +6,7 @@ public static class SFTPClient
 {
     public static async Task<SftpClient> GetAsync()
     {
-        string apiUrl = "http://194.147.90.218/launcher/version";
+        string apiUrl = "http://localhost:5208/api/version";
         using var httpClient = new HttpClient();
 
         try

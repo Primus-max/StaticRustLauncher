@@ -27,7 +27,7 @@ class HostsViewModel : BaseViewModel
         {
             using HttpClient httpClient = new();
             var hostingService = new HostingService(httpClient);
-            var hosts = await hostingService.GetDataAsync("http://194.147.90.218/launcher/hostings");
+            var hosts = await hostingService.GetDataAsync("http://localhost:5208/api/hostings");
             Hosts = new ObservableCollection<Hosting>(hosts.OrderByDescending(host => host.Status == 0));
         }
         catch (Exception)

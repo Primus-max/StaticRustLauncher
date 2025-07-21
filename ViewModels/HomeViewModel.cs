@@ -55,7 +55,7 @@ public class HomeViewModel : BaseViewModel
         {
             using HttpClient httpClient = new();
             var serverService = new ServerService(httpClient);
-            var servers = await serverService.GetDataAsync("http://194.147.90.218/launcher/serversinfo");
+            var servers = await serverService.GetDataAsync("http://localhost:5208/api/servers");
 
             ServersCollection = new ObservableCollection<Server>(
                 servers.OrderByDescending(server => server.Status == "premium")

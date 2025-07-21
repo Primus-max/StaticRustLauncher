@@ -3,7 +3,7 @@
 public class UpdateCheckerService
 {
     private static readonly HttpClient httpClient = new();
-    private const string VersionUrl = "http://194.147.90.218/client/version";    // http://194.147.90.218/launcher/version
+    private const string VersionUrl = "http://localhost:5208/api/version";   
     private static System.Threading.Timer? _timer;
     private static readonly TimeSpan CheckInterval = TimeSpan.FromMinutes(10);
        

@@ -28,7 +28,7 @@ public class NewsViewModal : BaseViewModel
         {
             using HttpClient httpClient = new();
             var newsService = new NewsService(httpClient);
-            var loadedNews = await newsService.GetDataAsync("http://194.147.90.218/launcher/news");
+            var loadedNews = await newsService.GetDataAsync("http://localhost:5208/api/news");
             NewsCollection = new ObservableCollection<NewsItem>(loadedNews);
         }
         catch (Exception ex)
