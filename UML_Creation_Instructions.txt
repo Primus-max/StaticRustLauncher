@@ -1,0 +1,186 @@
+ИНСТРУКЦИИ ПО СОЗДАНИЮ UML ДИАГРАММ
+
+=== ИНСТРУМЕНТЫ ДЛЯ СОЗДАНИЯ UML ===
+
+1. DRAW.IO (diagrams.net) - БЕСПЛАТНО
+   - Онлайн: https://app.diagrams.net/
+   - Есть десктопная версия
+   - Поддерживает экспорт в PNG, SVG, PDF
+
+2. LUCIDCHART - БЕСПЛАТНАЯ ВЕРСИЯ
+   - Онлайн: https://www.lucidchart.com/
+   - Отличные UML шаблоны
+   - Простой интерфейс
+
+3. VISUAL STUDIO - ЕСЛИ ЕСТЬ
+   - Встроенные UML диаграммы
+   - Автоматическая генерация из кода
+
+4. PLANTUML - БЕСПЛАТНО
+   - Текстовое описание диаграмм
+   - Автоматическая генерация
+
+=== ДИАГРАММА КЛАССОВ - ОСНОВНЫЕ МОДЕЛИ ===
+
+Создайте в draw.io:
+
+КЛАССЫ:
+1. BaseViewModel (абстрактный)
+   - + PropertyChanged : PropertyChangedEventHandler
+   - + Set<T>(ref T, T, string) : bool
+   - + OnPropertyChanged(string) : void
+   - + Dispose() : void
+
+2. MainViewModel (наследует BaseViewModel)
+   - + Frame : Frame
+   - + CurrentPanel : UserControl
+   - + ActiveButton : string
+   - + NavigationCommand : ICommand
+   - + CloseAppCommand : ICommand
+
+3. HomeViewModel (наследует BaseViewModel)
+   - + ServersCollection : ObservableCollection<Server>
+   - + SelectedServer : Server
+   - + UsersOnline : int
+   - + ServersOnline : int
+
+4. Server
+   - + Hostname : string
+   - + Map : string
+   - + Players : int
+   - + MaxPlayers : int
+   - + Status : string
+   - + URL : List<URL>
+
+5. URL
+   - + VK : string
+   - + Discord : string
+   - + Telegram : string
+   - + Steam : string
+
+СВЯЗИ:
+- MainViewModel наследует BaseViewModel
+- HomeViewModel наследует BaseViewModel
+- Server содержит List<URL>
+
+=== ДИАГРАММА КЛАССОВ - СЕРВИСЫ ===
+
+КЛАССЫ:
+1. IDataService<T> (интерфейс)
+   - + GetDataAsync(string) : Task<List<T>>
+
+2. DataService<T> (реализует IDataService<T>)
+   - - httpClient : HttpClient
+   - + GetDataAsync(string) : Task<List<T>>
+
+3. ServerService (наследует DataService<Server>)
+   - + GetServers() : Task<List<Server>>
+
+4. UpdateService
+   - - sftpClient : SftpClient
+   - - totalFileSize : long
+   - + Check(string, string, string) : void
+   - - DownloadFile(...) : void
+   - - ComputeFileHash(string) : string
+
+5. EventBus (статический класс)
+   - + DownloadProgressChanged : Action<double>
+   - + UpdateAvailable : Action
+   - + DownloadStarted : Action
+   - + DownloadCompleted : Action
+
+СВЯЗИ:
+- ServerService наследует DataService<Server>
+- DataService<T> реализует IDataService<T>
+
+=== ДИАГРАММА ПОСЛЕДОВАТЕЛЬНОСТИ ===
+
+АКТОРЫ/ОБЪЕКТЫ:
+1. User
+2. MainViewModel
+3. UpdateService
+4. SFTP Server
+
+ПОСЛЕДОВАТЕЛЬНОСТЬ:
+1. User -> MainViewModel: Check Update
+2. MainViewModel -> UpdateService: Start Check
+3. UpdateService -> SFTP Server: Connect
+4. SFTP Server -> UpdateService: Connected
+5. UpdateService -> SFTP Server: Get HashList
+6. SFTP Server -> UpdateService: HashList
+7. UpdateService -> SFTP Server: List Files
+8. SFTP Server -> UpdateService: File List
+9. MainViewModel -> UpdateService: Download
+10. UpdateService -> SFTP Server: Download Files
+11. SFTP Server -> UpdateService: Files Downloaded
+12. UpdateService -> MainViewModel: Complete
+13. MainViewModel -> User: Complete
+
+=== ДИАГРАММА КОМПОНЕНТОВ ===
+
+СОЗДАЙТЕ 4 СЛОЯ:
+
+1. PRESENTATION LAYER
+   - MainWindow
+   - HomePage
+   - NewsPage
+   - SettingsPage
+   - LoginWindow
+
+2. VIEWMODEL LAYER
+   - MainViewModel
+   - HomeViewModel
+   - NewsViewModel
+   - SettingsViewModel
+   - LoginViewModel
+
+3. SERVICE LAYER
+   - UpdateService
+   - ServerService
+   - NewsService
+   - HostingService
+   - EventBus
+
+4. DATA LAYER
+   - HTTP API (localhost:5208)
+   - SFTP Server (SSH.NET)
+   - Local Files (JSON Config)
+   - Settings (settings.json)
+
+СВЯЗИ: стрелки между слоями
+
+=== ДИАГРАММА СОСТОЯНИЙ ===
+
+СОСТОЯНИЯ:
+1. [Начало]
+2. Проверка версии
+3. Есть обновление? (условие)
+4. Загрузка файлов
+5. Проверка MD5 хешей
+6. Установка завершена
+7. Готово к игре
+
+ПЕРЕХОДЫ:
+- [Начало] -> Проверка версии
+- Проверка версии -> Есть обновление?
+- Есть обновление? (Да) -> Загрузка файлов
+- Есть обновление? (Нет) -> Готово к игре
+- Загрузка файлов -> Проверка MD5 хешей
+- Проверка MD5 хешей -> Установка завершена
+- Установка завершена -> Готово к игре
+
+=== ЭКСПОРТ И ВСТАВКА В POWERPOINT ===
+
+1. Создайте диаграммы в draw.io
+2. Экспортируйте в PNG (высокое разрешение)
+3. Вставьте в PowerPoint как изображения
+4. При необходимости измените размер
+
+=== ЦВЕТОВАЯ СХЕМА ДЛЯ ДИАГРАММ ===
+
+- Классы: светло-голубой фон (#E3F2FD)
+- Интерфейсы: светло-зеленый фон (#E8F5E8)
+- Абстрактные классы: светло-желтый фон (#FFF8E1)
+- Статические классы: светло-серый фон (#F5F5F5)
+- Связи: темно-серый (#424242)
+- Текст: черный (#000000) 

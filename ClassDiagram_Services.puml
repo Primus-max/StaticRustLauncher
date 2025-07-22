@@ -1,0 +1,38 @@
+@startuml
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam classFontName Arial
+
+interface IDataService {
+  + GetDataAsync(string) : Task<List<T>>
+}
+
+class DataService {
+  - httpClient : HttpClient
+  + GetDataAsync(string) : Task<List<T>>
+}
+
+class ServerService {
+  + GetServers() : Task<List<Server>>
+}
+
+class UpdateService {
+  - sftpClient : SftpClient
+  - totalFileSize : long
+  + Check(string, string, string) : void
+  - DownloadFile(...) : void
+  - ComputeFileHash(string) : string
+}
+
+class EventBus {
+  + DownloadProgressChanged : Action<double>
+  + UpdateAvailable : Action
+  + DownloadStarted : Action
+  + DownloadCompleted : Action
+  + NotifyDownloadProgressChanged(double) : void
+}
+
+IDataService <|.. DataService
+DataService <|-- ServerService
+@enduml 

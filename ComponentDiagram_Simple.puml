@@ -1,0 +1,43 @@
+@startuml
+!theme plain
+
+package "Presentation Layer" {
+  [MainWindow]
+  [HomePage]
+  [NewsPage]
+  [SettingsPage]
+}
+
+package "ViewModel Layer" {
+  [MainViewModel]
+  [HomeViewModel]
+  [NewsViewModel]
+  [SettingsViewModel]
+}
+
+package "Service Layer" {
+  [UpdateService]
+  [ServerService]
+  [NewsService]
+  [EventBus]
+}
+
+package "Data Layer" {
+  [HTTP API]
+  [SFTP Server]
+  [Local Files]
+}
+
+[MainWindow] --> [MainViewModel]
+[HomePage] --> [HomeViewModel]
+[NewsPage] --> [NewsViewModel]
+[SettingsPage] --> [SettingsViewModel]
+
+[MainViewModel] --> [UpdateService]
+[HomeViewModel] --> [ServerService]
+[NewsViewModel] --> [NewsService]
+
+[UpdateService] --> [SFTP Server]
+[ServerService] --> [HTTP API]
+[NewsService] --> [HTTP API]
+@enduml 

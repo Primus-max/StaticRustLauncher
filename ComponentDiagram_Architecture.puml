@@ -1,0 +1,52 @@
+@startuml
+!theme plain
+skinparam componentFontSize 12
+skinparam componentFontName Arial
+
+package "Presentation Layer" {
+  component [MainWindow]
+  component [HomePage]
+  component [NewsPage]
+  component [SettingsPage]
+  component [LoginWindow]
+}
+
+package "ViewModel Layer" {
+  component [MainViewModel]
+  component [HomeViewModel]
+  component [NewsViewModel]
+  component [SettingsViewModel]
+  component [LoginViewModel]
+}
+
+package "Service Layer" {
+  component [UpdateService]
+  component [ServerService]
+  component [NewsService]
+  component [HostingService]
+  component [EventBus]
+}
+
+package "Data Layer" {
+  component [HTTP API]
+  component [SFTP Server]
+  component [Local Files]
+  component [Settings]
+}
+
+[MainWindow] --> [MainViewModel]
+[HomePage] --> [HomeViewModel]
+[NewsPage] --> [NewsViewModel]
+[SettingsPage] --> [SettingsViewModel]
+[LoginWindow] --> [LoginViewModel]
+
+[MainViewModel] --> [UpdateService]
+[HomeViewModel] --> [ServerService]
+[NewsViewModel] --> [NewsService]
+[SettingsViewModel] --> [HostingService]
+
+[UpdateService] --> [SFTP Server]
+[ServerService] --> [HTTP API]
+[NewsService] --> [HTTP API]
+[HostingService] --> [HTTP API]
+@enduml 

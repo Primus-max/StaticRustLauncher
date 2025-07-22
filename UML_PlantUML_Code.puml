@@ -1,0 +1,168 @@
+@startuml ClassDiagram_Models
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam classFontName Arial
+
+abstract class BaseViewModel {
+  + PropertyChanged : PropertyChangedEventHandler
+  + Set<T>(ref T, T, string) : bool
+  + OnPropertyChanged(string) : void
+  + Dispose() : void
+}
+
+class MainViewModel {
+  + Frame : Frame
+  + CurrentPanel : UserControl
+  + ActiveButton : string
+  + NavigationCommand : ICommand
+  + CloseAppCommand : ICommand
+}
+
+class HomeViewModel {
+  + ServersCollection : ObservableCollection<Server>
+  + SelectedServer : Server
+  + UsersOnline : int
+  + ServersOnline : int
+}
+
+class Server {
+  + Hostname : string
+  + Map : string
+  + Players : int
+  + MaxPlayers : int
+  + Status : string
+  + URL : List<URL>
+}
+
+class URL {
+  + VK : string
+  + Discord : string
+  + Telegram : string
+  + Steam : string
+}
+
+BaseViewModel <|-- MainViewModel
+BaseViewModel <|-- HomeViewModel
+Server *-- URL : contains
+@enduml
+
+@startuml ClassDiagram_Services
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam classFontName Arial
+
+interface IDataService<T> {
+  + GetDataAsync(string) : Task<List<T>>
+}
+
+class DataService<T> {
+  - httpClient : HttpClient
+  + GetDataAsync(string) : Task<List<T>>
+}
+
+class ServerService {
+  + GetServers() : Task<List<Server>>
+}
+
+class UpdateService {
+  - sftpClient : SftpClient
+  - totalFileSize : long
+  + Check(string, string, string) : void
+  - DownloadFile(...) : void
+  - ComputeFileHash(string) : string
+}
+
+class EventBus {
+  + DownloadProgressChanged : Action<double>
+  + UpdateAvailable : Action
+  + DownloadStarted : Action
+  + DownloadCompleted : Action
+  + NotifyDownloadProgressChanged(double) : void
+}
+
+IDataService<T> <|.. DataService<T>
+DataService<Server> <|-- ServerService
+@enduml
+
+@startuml SequenceDiagram_Update
+!theme plain
+skinparam sequenceFontSize 12
+skinparam sequenceFontName Arial
+
+actor User
+participant MainViewModel
+participant UpdateService
+participant "SFTP Server" as SFTP
+
+User -> MainViewModel: Check Update
+MainViewModel -> UpdateService: Start Check
+UpdateService -> SFTP: Connect
+SFTP --> UpdateService: Connected
+UpdateService -> SFTP: Get HashList
+SFTP --> UpdateService: HashList
+UpdateService -> SFTP: List Files
+SFTP --> UpdateService: File List
+MainViewModel -> UpdateService: Download
+UpdateService -> SFTP: Download Files
+SFTP --> UpdateService: Files Downloaded
+UpdateService --> MainViewModel: Complete
+MainViewModel --> User: Complete
+@enduml
+
+@startuml ComponentDiagram_Architecture
+!theme plain
+skinparam componentFontSize 12
+skinparam componentFontName Arial
+
+package "Presentation Layer" {
+  [MainWindow]
+  [HomePage]
+  [NewsPage]
+  [SettingsPage]
+  [LoginWindow]
+}
+
+package "ViewModel Layer" {
+  [MainViewModel]
+  [HomeViewModel]
+  [NewsViewModel]
+  [SettingsViewModel]
+  [LoginViewModel]
+}
+
+package "Service Layer" {
+  [UpdateService]
+  [ServerService]
+  [NewsService]
+  [HostingService]
+  [EventBus]
+}
+
+package "Data Layer" {
+  [HTTP API]
+  [SFTP Server]
+  [Local Files]
+  [Settings]
+}
+
+Presentation Layer --> ViewModel Layer
+ViewModel Layer --> Service Layer
+Service Layer --> Data Layer
+@enduml
+
+@startuml StateDiagram_UpdateProcess
+!theme plain
+skinparam stateFontSize 12
+skinparam stateFontName Arial
+
+[*] --> Проверка_версии
+Проверка_версии --> Есть_обновление
+Есть_обновление --> Загрузка_файлов : Да
+Есть_обновление --> Готово_к_игре : Нет
+Загрузка_файлов --> Проверка_MD5
+Проверка_MD5 --> Установка_завершена
+Установка_завершена --> Готово_к_игре
+Готово_к_игре --> [*]
+@enduml 

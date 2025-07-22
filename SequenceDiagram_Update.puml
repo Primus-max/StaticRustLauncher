@@ -1,0 +1,24 @@
+@startuml
+!theme plain
+skinparam sequenceFontSize 12
+skinparam sequenceFontName Arial
+
+actor User
+participant MainViewModel
+participant UpdateService
+participant "SFTP Server" as SFTP
+
+User -> MainViewModel: Check Update
+MainViewModel -> UpdateService: Start Check
+UpdateService -> SFTP: Connect
+SFTP --> UpdateService: Connected
+UpdateService -> SFTP: Get HashList
+SFTP --> UpdateService: HashList
+UpdateService -> SFTP: List Files
+SFTP --> UpdateService: File List
+MainViewModel -> UpdateService: Download
+UpdateService -> SFTP: Download Files
+SFTP --> UpdateService: Files Downloaded
+UpdateService --> MainViewModel: Complete
+MainViewModel --> User: Complete
+@enduml 

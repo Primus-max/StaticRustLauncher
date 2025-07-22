@@ -1,0 +1,48 @@
+@startuml
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam classFontName Arial
+
+abstract class BaseViewModel {
+  + PropertyChanged : PropertyChangedEventHandler
+  + Set<T>(ref T, T, string) : bool
+  + OnPropertyChanged(string) : void
+  + Dispose() : void
+}
+
+class MainViewModel {
+  + Frame : Frame
+  + CurrentPanel : UserControl
+  + ActiveButton : string
+  + NavigationCommand : ICommand
+  + CloseAppCommand : ICommand
+}
+
+class HomeViewModel {
+  + ServersCollection : ObservableCollection<Server>
+  + SelectedServer : Server
+  + UsersOnline : int
+  + ServersOnline : int
+}
+
+class Server {
+  + Hostname : string
+  + Map : string
+  + Players : int
+  + MaxPlayers : int
+  + Status : string
+  + URL : List<URL>
+}
+
+class URL {
+  + VK : string
+  + Discord : string
+  + Telegram : string
+  + Steam : string
+}
+
+BaseViewModel <|-- MainViewModel
+BaseViewModel <|-- HomeViewModel
+Server *-- URL : contains
+@enduml 
